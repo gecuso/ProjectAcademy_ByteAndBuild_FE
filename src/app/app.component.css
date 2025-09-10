@@ -1,0 +1,44 @@
+.container {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.small-image {
+  width: 150px;
+  height: auto;
+  margin-bottom: 20px;
+}
+
+.search-bar {
+  padding: 10px 10px 10px 35px; /* spazio per l’icona interna */
+  width: 100%;                  /* prendi tutto lo spazio disponibile */
+  max-width: 400px;             /* ma non andare oltre */
+  font-size: 16px;
+  margin-bottom: 0;
+  border: 1px solid #ccc;
+  border-radius: 50px;
+  flex-shrink: 1;
+  background: url('https://cdn-icons-png.flaticon.com/512/622/622669.png') no-repeat 10px center;
+  background-size: 16px 16px;
+}
+
+
+.nav-links a {
+  margin: 0 15px;
+  text-decoration: none;
+  color: #1976d2;
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.nav-links a:hover {
+  text-decoration: underline;
+}
+
+.custom-navbar {
+  background-color: #115999 !important;
+  color: white;
+}
+
+
+

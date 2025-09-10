@@ -1,0 +1,49 @@
+<nav class="navbar navbar-dark shadow-sm px-3 py-2 flex-column align-items-start custom-navbar">
+
+  <div class="container-fluid flex-column">
+
+    <!-- Riga 1: logo + search bar -->
+    <div class="d-flex w-100 align-items-center mb-2">
+      <!-- Logo -->
+      <a class="navbar-brand me-3" routerLink="/">
+        <img src="logo.png" alt="Home" width="200">
+      </a>
+
+      <!-- Barra di ricerca -->
+      <form style="width: 900px;">
+        <input class="form-control rounded-pill" type="search" placeholder="Cosa cerchi?" [(ngModel)]="searchTerm" name="search">
+      </form>
+
+    </div>
+
+    <!-- Riga 2: menu + pagine, allineati a sinistra -->
+    <div class="d-flex align-items-center gap-3 w-100">
+      <button mat-button [matMenuTriggerFor]="menu">
+        <mat-icon>menu</mat-icon> Menu
+      </button>
+
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item>Item 1</button>
+        <button mat-menu-item>Item 2</button>
+      </mat-menu>
+
+      <ul class="navbar-nav d-flex flex-row gap-3 mb-0">
+        <li class="nav-item">
+          <a class="nav-link px-2" routerLink="/pagina1">Pagina 1</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link px-2" routerLink="/pagina2">Pagina 2</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link px-2" routerLink="/pagina3">Pagina 3</a>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+</nav>
+
+
+
+<router-outlet></router-outlet>
+
