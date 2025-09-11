@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Persone - Due per riga</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+    }
+    .container {
+      max-width: 900px;
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      justify-content: center;
+    }
+    .person {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      width: calc(50% - 15px); /* Due per riga con gap */
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+      box-sizing: border-box;
+    }
+    .person img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #115999;
+    }
+    .person h2 {
+      margin: 0;
+      font-size: 1.5rem;
+      color: #115999;
+    }
+    .person p {
+      margin: 0;
+      color: #555;
+      font-size: 1rem;
+      max-width: 100%;
+    }
+
+    /* Responsive per schermi piccoli */
+    @media (max-width: 600px) {
+      .person {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h2 align="center">CHI SIAMO</h2>
+  <div class="container">
+
+    <div class="person">
+      <img src="https://www.comuni-italiani.it/001/082/stemma.gif" alt="Mattia Borca" />
+      <h2>Mattia Borca</h2>
+      <p></p>
+    </div>
+
+    <div class="person">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThtUctN8eD3rQ9RvW5ntrKTjSdAPDAhgPLoA&s" alt="Roberto Bruno" />
+      <h2>Roberto Bruno</h2>
+      <p></p>
+    </div>
+
+    <div class="person">
+      <img src="https://gifdb.com/images/thumbnail/i-love-mastrolindo-mr-clean-meme-26gxupnh1nfeb287.gif" alt="Matias Cojan" />
+      <h2>Matias Cojan</h2>
+      <p></p>
+    </div>
+
+    <div class="person">
+      <img src="https://lh4.googleusercontent.com/proxy/P57S_MPN-o1QvvpZGAdzZATV-057NDN-3kn4GFHGdYaqdi4HW8sCyTIhvfxemp_gPx65hRitTxn6mXQgjcdHYGyls-2bniOKRG33bUtpDJFErcjOE0Pi3XjrPyRoPtmbIcA" alt="Francesco Napolitano" />
+      <h2>Francesco Napolitano</h2>
+      <p></p>
+    </div>
+
+    <div class="person">
+      <img src="https://statics.cedscdn.it/photos/MED_HIGH/37/64/4853764_1517_francesco_totti_20.jpg" alt="Simone Grisorio" />
+      <h2>Simone Grisorio</h2>
+      <p></p>
+    </div>
+
+  </div>
+
+</body>
+</html>
+
+

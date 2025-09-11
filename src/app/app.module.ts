@@ -10,6 +10,9 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatBadgeModule} from '@angular/material/badge';
 import { MatButtonModule } from '@angular/material/button';
+import { NavbarComponent } from './componenti/navbar/navbar.component';
+import { FooterComponent } from './componenti/footer/footer.component';
+import { ChisiamoComponent } from './componenti/footer/chisiamo/chisiamo.component';
 
 
 
@@ -17,7 +20,10 @@ import { MatButtonModule } from '@angular/material/button';
   declarations: [
     AppComponent,
     ComponentiComponent,
-    HomeComponent
+    HomeComponent,
+    NavbarComponent,
+    FooterComponent,
+    ChisiamoComponent
   ],
   imports: [
     BrowserModule,
