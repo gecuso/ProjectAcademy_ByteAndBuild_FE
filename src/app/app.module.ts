@@ -21,8 +21,7 @@ import {MatRadioModule} from '@angular/material/radio';
 import {MatSliderModule} from '@angular/material/slider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-
-
+import { ProfileComponent } from './componenti/profile/profile.component';
 
 
 
@@ -36,7 +35,8 @@ import { MatInputModule } from '@angular/material/input';
     ChisiamoComponent,
     CarrelloComponent,
     LaptopComponent,
-    NotfoundComponent
+    NotfoundComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

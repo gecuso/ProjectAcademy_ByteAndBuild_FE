@@ -6,6 +6,7 @@ import { CarrelloComponent } from './componenti/carrello/carrello.component';
 import { LaptopComponent } from './componenti/laptop/laptop.component';
 import { NotfoundComponent } from './componenti/notfound/notfound.component';
 
+import { ProfileComponent } from './componenti/profile/profile.component';
 
 
 const routes: Routes = [
@@ -15,6 +16,7 @@ const routes: Routes = [
   {path: 'carrello', component:CarrelloComponent},
   {path: 'laptop', component:LaptopComponent},
   {path:'404', component:NotfoundComponent},
+  {path:'profile', component:ProfileComponent},
   {path:'**', redirectTo:'404'}
 ];
 
@@ -22,4 +24,5 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
+
 export class AppRoutingModule { }
