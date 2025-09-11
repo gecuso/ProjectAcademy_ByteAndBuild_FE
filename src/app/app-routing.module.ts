@@ -2,14 +2,21 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './componenti/home/home.component';
 import { ChisiamoComponent } from './componenti/footer/chisiamo/chisiamo.component';
-
+import { CarrelloComponent } from './componenti/carrello/carrello.component';
+import { LaptopComponent } from './componenti/laptop/laptop.component';
+import { NotfoundComponent } from './componenti/notfound/notfound.component';
 
 
 
 const routes: Routes = [
   {path:'', pathMatch:'full', redirectTo:'home'},
   {path:'home', component:HomeComponent},
-  {path:'chisiamo', component:ChisiamoComponent}];
+  {path:'chisiamo', component:ChisiamoComponent},
+  {path: 'carrello', component:CarrelloComponent},
+  {path: 'laptop', component:LaptopComponent},
+  {path:'404', component:NotfoundComponent},
+  {path:'**', redirectTo:'404'}
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
