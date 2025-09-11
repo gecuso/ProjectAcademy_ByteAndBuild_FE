@@ -13,6 +13,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { NavbarComponent } from './componenti/navbar/navbar.component';
 import { FooterComponent } from './componenti/footer/footer.component';
 import { ChisiamoComponent } from './componenti/footer/chisiamo/chisiamo.component';
+import { ProfileComponent } from './componenti/profile/profile.component';
 
 
 
@@ -23,7 +24,8 @@ import { ChisiamoComponent } from './componenti/footer/chisiamo/chisiamo.compone
     HomeComponent,
     NavbarComponent,
     FooterComponent,
-    ChisiamoComponent
+    ChisiamoComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
