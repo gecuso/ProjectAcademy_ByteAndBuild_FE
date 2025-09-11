@@ -1,0 +1,22 @@
+.not-found-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: 80vh; 
+  padding: 1rem;
+}
+
+.not-found-image {
+  max-width: 450px;
+  width: 100%;
+  height: auto;
+  margin-bottom: 20px;
+}
+
+.not-found-text {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #333;
+}

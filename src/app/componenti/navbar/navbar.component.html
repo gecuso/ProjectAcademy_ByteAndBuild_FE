@@ -1,81 +1,66 @@
-<nav class="navbar navbar-dark shadow-sm px-3 py-2 flex-column align-items-start custom-navbar">
-  <div class="container-fluid flex-column">
+<nav class="navbar navbar-dark shadow-sm px-3 py-2 custom-navbar">
+  <div class="container d-flex flex-column align-items-start">
 
-    <!-- logo + search bar -->
-    <div class="d-flex w-100 align-items-center mb-2">
+
+    <!-- ROW: Logo + Search + Icone -->
+    <div class="d-flex align-items-center justify-content-between w-100 flex-wrap mb-2">
+      
       <!-- Logo -->
-      <a class="navbar-brand me-3" routerLink="/">
-        <img src="logo.png" alt="Home" width="250">
+      <a class="navbar-brand me-3" routerLink="/home">
+        <img src="logo.png" alt="Home" class="logo-img">
       </a>
 
-   <form style="width: 900px; position: relative;">
-        <input class="form-control rounded-pill" type="search" placeholder="Cosa cerchi?" [(ngModel)]="searchTerm" name="search" style="padding-left: 40px;">
-        <i class="bi bi-search position-absolute" style="top: 50%; left: 12px; transform: translateY(-50%); color: gray; pointer-events: none;"></i>
-   </form>
+      <!-- Search bar (al centro, cresce) -->
+      <form class="flex-grow-1 mx-3 position-relative" style="max-width: 900px;">
+        <input class="form-control rounded-pill" type="search" placeholder="Cosa cerchi?"
+               [(ngModel)]="searchTerm" name="search" style="padding-left: 40px;">
+        <i class="bi bi-search position-absolute search-icon"></i>
+      </form>
 
-    <!-- Icone vicino alla searchbar -->
-    <div class="ms-3 d-flex align-items-center gap-3">
-      <a href="/chisiamo">
-        <i class="bi bi-person fs-4" style="cursor: pointer; color: white;" title="Utente"></i>
-      </a>
-      <a href="/chisiamo">
-        <i class="bi bi-cart fs-4" style="cursor: pointer; color: white;" title="Carrello"></i>
-      </a>
+      <!-- Icone -->
+      <div class="d-flex align-items-center gap-3">
+        <a routerLink="/chisiamo" title="Utente">
+          <i class="bi bi-person fs-4 icon-white"></i>
+        </a>
+        <a routerLink="/carrello" title="Carrello">
+          <i class="bi bi-cart fs-4 icon-white"></i>
+        </a>
+      </div>
     </div>
 
-    </div>
-
-    <!-- menu + pagine, allineati a sinistra -->
-    <div class="d-flex align-items-center gap-3 w-100">
+    <!-- ROW: Menu categorie e link -->
+    <div class="d-flex align-items-center gap-3 w-100 flex-wrap">
+      
+      <!-- Bottone categorie -->
       <button mat-button [matMenuTriggerFor]="menu">
         <mat-icon>menu</mat-icon> Categorie
       </button>
 
+      <!-- MatMenu -->
       <mat-menu #menu="matMenu">
-        <button mat-menu-item>Schede grafiche</button>
-        <button mat-menu-item>Item 2</button>
+        <button mat-menu-item *ngFor="let voce of categorie" [routerLink]="voce.link">
+          {{ voce.nome }}
+        </button>
       </mat-menu>
-      
 
-      <ul class="navbar-nav d-flex flex-row gap-3 mb-0">
-        <li class="nav-item">
-          <a class="nav-link px-2" routerLink="/pagina1">Pc gaming</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link px-2" routerLink="/pagina2">Mouse</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link px-2" routerLink="/pagina3">Tastiere</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link px-2" routerLink="/pagina3">Laptop</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link px-2" routerLink="/pagina3">Cuffie</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link px-2">|</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link px-2" routerLink="/chisiamo">Chi siamo</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link px-2" routerLink="/home">Lavora con noi</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link px-2" routerLink="/chisiamo">placeholder</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link px-2" routerLink="/home">placeholder</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link px-2" routerLink="/chisiamo">placeholder</a>
-        </li>
-       
+
+      <!-- Link pagine -->
+      <ul class="navbar-nav d-flex flex-row flex-wrap gap-3 mb-0">
+        <li class="nav-item"><a class="nav-link px-2" routerLink="/pagina1">Pc gaming</a></li>
+        <li class="nav-item"><a class="nav-link px-2" routerLink="/pagina2">Mouse</a></li>
+        <li class="nav-item"><a class="nav-link px-2" routerLink="/pagina3">Tastiere</a></li>
+        <li class="nav-item"><a class="nav-link px-2" routerLink="/pagina3">Laptop</a></li>
+        <li class="nav-item"><a class="nav-link px-2" routerLink="/pagina3">Cuffie</a></li>
+        <li class="nav-item"><span class="nav-link px-2">|</span></li>
+        <li class="nav-item"><a class="nav-link px-2" routerLink="/chisiamo">Chi siamo</a></li>
+        <li class="nav-item"><a class="nav-link px-2" routerLink="/home">Lavora con noi</a></li>
+        <li class="nav-item"><a class="nav-link px-2" href="https://www.nvidia.com/it-it/">Nvidia</a></li>
+        <li class="nav-item"><a class="nav-link px-2" href="https://www.intel.com/content/www/us/en/homepage.html">Intel</a></li>
+        <li class="nav-item"><a class="nav-link px-2" routerLink="/chisiamo">Placeholder</a></li>
       </ul>
     </div>
-
   </div>
 </nav>
+
 
 <!--npm install bootstrap-icons per icone bootstrap-->

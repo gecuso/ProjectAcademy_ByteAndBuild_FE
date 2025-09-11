@@ -1,6 +1,37 @@
-footer {
-  bottom: 0;
-  left: 0;
-  width: 100%;
+.footer-content {
+  /* layout fluido */
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: flex-start;
+
+  .footer-block {
+    min-width: 150px;
+  flex: 1 1 150px;
+  }
+
+  .footer-logo {
+    max-width: 250px;
+    height: auto;
+  }
+
+  a {
+    font-size: 0.95rem;
+    transition: color 0.2s;
+    &:hover {
+      color: #ccc;
+    }
+  }
+}
+
+/* opzionale: adattamento per monitor più piccoli (non mobile) */
+@media (max-width: 1400px) {
+  .footer-content {
+    gap: 1rem;
+
+    .footer-block {
+      flex: 1 1 200px;
+    }
+  }
 }
 

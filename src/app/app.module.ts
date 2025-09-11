@@ -13,6 +13,16 @@ import { MatButtonModule } from '@angular/material/button';
 import { NavbarComponent } from './componenti/navbar/navbar.component';
 import { FooterComponent } from './componenti/footer/footer.component';
 import { ChisiamoComponent } from './componenti/footer/chisiamo/chisiamo.component';
+import { CarrelloComponent } from './componenti/carrello/carrello.component';
+import { LaptopComponent } from './componenti/laptop/laptop.component';
+import {MatCardModule} from '@angular/material/card';
+import { NotfoundComponent } from './componenti/notfound/notfound.component';
+import {MatRadioModule} from '@angular/material/radio';
+import {MatSliderModule} from '@angular/material/slider';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+
+
 
 
 
@@ -23,7 +33,10 @@ import { ChisiamoComponent } from './componenti/footer/chisiamo/chisiamo.compone
     HomeComponent,
     NavbarComponent,
     FooterComponent,
-    ChisiamoComponent
+    ChisiamoComponent,
+    CarrelloComponent,
+    LaptopComponent,
+    NotfoundComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +45,12 @@ import { ChisiamoComponent } from './componenti/footer/chisiamo/chisiamo.compone
     MatIconModule,
     MatMenuModule,
     MatBadgeModule,
-    MatButtonModule
+    MatButtonModule,
+    MatCardModule,
+    MatRadioModule,
+    MatSliderModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]
