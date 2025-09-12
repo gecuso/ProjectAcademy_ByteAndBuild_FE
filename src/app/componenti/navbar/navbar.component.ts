@@ -10,6 +10,7 @@ export class NavbarComponent {
   title = 'Byte&Build';
   searchTerm: string = ''; // definisci la proprietà
   categorie = [
+    { nome: 'Tutti i prodotti', link: '/laptop' },
     { nome: 'Laptop', link: '/laptop' },
     { nome: 'Monitor', link: '/laptop' },
     { nome: 'Case', link: '/laptop' },
