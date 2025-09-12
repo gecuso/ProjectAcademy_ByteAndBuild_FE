@@ -1,19 +1,24 @@
 <nav class="navbar navbar-dark shadow-sm px-3 py-2 custom-navbar">
   <div class="container d-flex flex-column align-items-start">
-
-
     <!-- ROW: Logo + Search + Icone -->
-    <div class="d-flex align-items-center justify-content-between w-100 flex-wrap mb-2">
-      
+    <div
+      class="d-flex align-items-center justify-content-between w-100 flex-wrap mb-2"
+    >
       <!-- Logo -->
       <a class="navbar-brand me-3" routerLink="/home">
-        <img src="logo.png" alt="Home" class="logo-img">
+        <img src="logo.png" alt="Home" class="logo-img" />
       </a>
 
       <!-- Search bar (al centro, cresce) -->
-      <form class="flex-grow-1 mx-3 position-relative" style="max-width: 900px;">
-        <input class="form-control rounded-pill" type="search" placeholder="Cosa cerchi?"
-               [(ngModel)]="searchTerm" name="search" style="padding-left: 40px;">
+      <form class="flex-grow-1 mx-3 position-relative" style="max-width: 900px">
+        <input
+          class="form-control rounded-pill"
+          type="search"
+          placeholder="Cosa cerchi?"
+          [(ngModel)]="searchTerm"
+          name="search"
+          style="padding-left: 40px"
+        />
         <i class="bi bi-search position-absolute search-icon"></i>
       </form>
 
@@ -30,7 +35,6 @@
 
     <!-- ROW: Menu categorie e link -->
     <div class="d-flex align-items-center gap-3 w-100 flex-wrap">
-      
       <!-- Bottone categorie -->
       <button mat-button [matMenuTriggerFor]="menu">
         <mat-icon>menu</mat-icon> Categorie
@@ -38,29 +42,69 @@
 
       <!-- MatMenu -->
       <mat-menu #menu="matMenu">
-        <button mat-menu-item *ngFor="let voce of categorie" [routerLink]="voce.link">
+        <button
+          mat-menu-item
+          *ngFor="let voce of categorie"
+          [routerLink]="voce.link"
+        >
           {{ voce.nome }}
         </button>
       </mat-menu>
 
-
       <!-- Link pagine -->
       <ul class="navbar-nav d-flex flex-row flex-wrap gap-3 mb-0">
-        <li class="nav-item"><a class="nav-link px-2" routerLink="/pagina1">Pc gaming</a></li>
-        <li class="nav-item"><a class="nav-link px-2" routerLink="/pagina2">Mouse</a></li>
-        <li class="nav-item"><a class="nav-link px-2" routerLink="/pagina3">Tastiere</a></li>
-        <li class="nav-item"><a class="nav-link px-2" routerLink="/pagina3">Laptop</a></li>
-        <li class="nav-item"><a class="nav-link px-2" routerLink="/pagina3">Cuffie</a></li>
+        <li class="nav-item">
+          <a class="nav-link px-2" routerLink="/pagina1">Pc gaming</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link px-2" routerLink="/pagina2">Mouse</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link px-2" routerLink="/pagina3">Tastiere</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link px-2" routerLink="/laptop">Laptop</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link px-2" routerLink="/pagina3">Cuffie</a>
+        </li>
         <li class="nav-item"><span class="nav-link px-2">|</span></li>
-        <li class="nav-item"><a class="nav-link px-2" routerLink="/chisiamo">Chi siamo</a></li>
-        <li class="nav-item"><a class="nav-link px-2" routerLink="/home">Lavora con noi</a></li>
-        <li class="nav-item"><a class="nav-link px-2" href="https://www.nvidia.com/it-it/">Nvidia</a></li>
-        <li class="nav-item"><a class="nav-link px-2" href="https://www.intel.com/content/www/us/en/homepage.html">Intel</a></li>
-        <li class="nav-item"><a class="nav-link px-2" routerLink="/chisiamo">Placeholder</a></li>
+        <li class="nav-item">
+          <a class="nav-link px-2" routerLink="/chisiamo">Chi siamo</a>
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link px-2"
+            href="https://www.nvidia.com/it-it/"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Nvidia</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link px-2"
+            href="https://www.intel.com/content/www/us/en/homepage.html"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Intel</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link px-2"
+            href="https://it.msi.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Msi</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link px-2" routerLink="/lavoraconnoi">Lavora con noi</a>
+        </li>
       </ul>
     </div>
   </div>
 </nav>
-
 
 <!--npm install bootstrap-icons per icone bootstrap-->

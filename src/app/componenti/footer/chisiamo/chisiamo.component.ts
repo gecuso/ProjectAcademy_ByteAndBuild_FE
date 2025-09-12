@@ -4,8 +4,6 @@ import { Component } from '@angular/core';
   selector: 'app-chisiamo',
   standalone: false,
   templateUrl: './chisiamo.component.html',
-  styleUrls: ['./chisiamo.component.css'] 
+  styleUrls: ['./chisiamo.component.css'],
 })
-export class ChisiamoComponent {
-
-}
+export class ChisiamoComponent {}

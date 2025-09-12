@@ -22,6 +22,8 @@ import {MatSliderModule} from '@angular/material/slider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { ProfileComponent } from './componenti/profile/profile.component';
+import { DettaglioProdottoComponent } from './componenti/dettaglio-prodotto/dettaglio-prodotto.component';
+import { LavoraConNoiComponent } from './componenti/lavora-con-noi/lavora-con-noi.component';
 
 
 
@@ -36,7 +38,9 @@ import { ProfileComponent } from './componenti/profile/profile.component';
     CarrelloComponent,
     LaptopComponent,
     NotfoundComponent,
-    ProfileComponent
+    ProfileComponent,
+    DettaglioProdottoComponent,
+    LavoraConNoiComponent
   ],
   imports: [
     BrowserModule,

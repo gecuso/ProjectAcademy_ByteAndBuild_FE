@@ -1,0 +1,67 @@
+.custom-btn {
+  background-color: #115999;
+  color: white;
+  border: none;
+}
+
+.custom-btn:hover {
+  background-color: #063a68;
+}
+
+h2 {
+  font-weight: bold;
+}
+
+img {
+  object-fit: cover;
+  max-height: 400px;
+}
+
+.prezzo-custom {
+  font-size: 1.5rem;
+}
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1050;
+}
+
+.modal-content {
+  max-width: 400px;
+  width: 90%;
+  background: white;
+}
+
+.custom-btn {
+  background-color: #115999;
+  color: white;
+  border: none;
+  border-radius: 0.25rem; /* arrotondamento simile a bootstrap */
+  padding: 0.375rem 0.75rem; /* se vuoi un padding simile ai btn bootstrap */
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.custom-btn:hover {
+  background-color: #063a68;
+}
+.secondary-btn {
+  background-color: #6c757d;
+  color: white;
+  border: none;
+  border-radius: 0.25rem;
+  padding: 0.375rem 0.75rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.secondary-btn:hover {
+  background-color: #5a6268;
+}

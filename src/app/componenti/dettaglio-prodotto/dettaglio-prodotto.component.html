@@ -1,0 +1,67 @@
+<div class="container py-4" *ngIf="prodotto">
+  <div class="row g-4 align-items-start">
+    <!-- Immagine a sinistra -->
+    <div class="col-md-5">
+      <img
+        [src]="prodotto.immagine"
+        [alt]="prodotto.titolo"
+        class="img-fluid rounded shadow-sm w-100"
+      />
+    </div>
+
+    <!-- Dati prodotto a destra -->
+    <div class="col-md-7 ps-md-5">
+      <h2 class="mb-3">{{ prodotto.titolo }}</h2>
+      <p>
+        <strong>Specifiche tecniche:</strong><br />- Marca: {{ prodotto.marca
+        }}<br />- {{ prodotto.descrizione }}
+      </p>
+      <p>Disponibilità: {{ prodotto.disponibilita }}</p>
+
+      <h4 class="fw-bold prezzo-custom">
+        {{ prodotto.prezzo | currency : "EUR" }}
+      </h4>
+      <!-- Quantità + Bottone -->
+      <div class="d-flex align-items-center gap-3 mt-3">
+        <input
+          type="number"
+          class="form-control quantity-input"
+          [(ngModel)]="quantita"
+          [min]="1"
+          [max]="prodotto.disponibilita"
+          [disabled]="prodotto.disponibilita === 0"
+          style="width: 100px"
+        />
+
+        <button
+          class="btn custom-btn"
+          [disabled]="prodotto.disponibilita === 0 || quantita < 1"
+          (click)="aggiungiAlCarrello()"
+        >
+          {{
+            prodotto.disponibilita === 0
+              ? "Non disponibile"
+              : "Aggiungi al carrello"
+          }}
+        </button>
+      </div>
+    </div>
+  </div>
+  <!-- MODALE -->
+  <div class="modal" *ngIf="showModal">
+    <div class="modal-content p-4 rounded shadow-sm bg-white text-center">
+      <p class="mb-4 fs-5">
+        Prodotto aggiunto al carrello!<br />Vuoi continuare con gli acquisti o
+        andare al carrello?
+      </p>
+      <div class="d-flex justify-content-center gap-3">
+        <button class="secondary-btn" (click)="continuaAcquisti()">
+          Continua con gli Acquisti
+        </button>
+        <button class="custom-btn" (click)="vaiAlCarrello()">
+          Vai al Carrello
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
