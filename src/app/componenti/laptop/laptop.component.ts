@@ -9,7 +9,7 @@ import { Component } from '@angular/core';
 })
 export class LaptopComponent {
   
-  marcaSelezionata: string = '';
+  marcaSelezionata: string = 'Tutte';
   marche: string[] = ['Tutte', 'HP', 'Lenovo', 'Apple'];
 
   prodotti = [
