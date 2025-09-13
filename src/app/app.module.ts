@@ -24,6 +24,7 @@ import { MatInputModule } from '@angular/material/input';
 import { ProfileComponent } from './componenti/profile/profile.component';
 import { DettaglioProdottoComponent } from './componenti/dettaglio-prodotto/dettaglio-prodotto.component';
 import { LavoraConNoiComponent } from './componenti/lavora-con-noi/lavora-con-noi.component';
+import { ProdottiComponentComponent } from './componenti/prodotti-component/prodotti-component.component';
 
 
 
@@ -40,7 +41,8 @@ import { LavoraConNoiComponent } from './componenti/lavora-con-noi/lavora-con-no
     NotfoundComponent,
     ProfileComponent,
     DettaglioProdottoComponent,
-    LavoraConNoiComponent
+    LavoraConNoiComponent,
+    ProdottiComponentComponent
   ],
   imports: [
     BrowserModule,
