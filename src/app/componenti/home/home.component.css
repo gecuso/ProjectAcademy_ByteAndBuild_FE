@@ -102,7 +102,7 @@ a img[mat-card-image] {
   margin-top: auto;
 }
 
-/* Stile per le card nella home, meno alte */
+/* Stile per le card nella home */
 .card-home mat-card {
   height: auto; /* card si adatta all’altezza */
   display: flex;
@@ -131,6 +131,6 @@ a img[mat-card-image] {
 
 .carousel-control-prev,
 .carousel-control-next {
-  width: 3rem; /* esempio di larghezza minore */
+  width: 3rem; 
   z-index: 5;
 }
