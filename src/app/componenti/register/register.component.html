@@ -1,0 +1,32 @@
+<div class="container text-center my-5 py-5 ">
+    <h1>Registrazione</h1>
+    <form #signupForm="ngForm" (ngSubmit)="onSubmit(signupForm)" class="d-flex flex-column align-items-center p-3">
+        <mat-form-field class="w-25">
+            <mat-label>Username</mat-label>
+            <input matInput type="text" name="username" ngModel required>
+        </mat-form-field>
+
+        <mat-form-field class="w-25">
+            <mat-label>Email</mat-label>
+            <input matInput type="email" name="email" ngModel required>
+        </mat-form-field>
+
+
+        <mat-form-field class="w-25">
+            <mat-label>Password</mat-label>
+            <input matInput type="password" name="password" ngModel required>
+        </mat-form-field>
+
+        <mat-form-field class="w-25">
+            <mat-label>Conferma Password</mat-label>
+            <input matInput type="password" name="confirm" ngModel required>
+        </mat-form-field>
+
+        <p *ngIf="!rc">{{msg}}</p>
+
+        <div>
+            <button mat-raised-button color="primary" type="submit" [disabled]="!signupForm.valid">Registra</button>
+        </div>
+
+    </form>
+</div>

@@ -9,10 +9,14 @@ import { NotfoundComponent } from './componenti/notfound/notfound.component';
 import { DettaglioProdottoComponent } from './componenti/dettaglio-prodotto/dettaglio-prodotto.component';
 import { ProfileComponent } from './componenti/profile/profile.component';
 import { DettagliUtenteComponent } from './componenti/dettagli-utente/dettagli-utente.component';
+import { RegisterComponent } from './componenti/register/register.component';
+import { LoginComponent } from './login/login.component';
 
 
 const routes: Routes = [
   {path:'', pathMatch:'full', redirectTo:'home'},
+  {path: 'register' , component:RegisterComponent},
+  {path: 'login' , component:LoginComponent},
   {path:'home', component:HomeComponent},
   {path:'chisiamo', component:ChisiamoComponent},
   {path:'lavoraconnoi', component:LavoraConNoiComponent},

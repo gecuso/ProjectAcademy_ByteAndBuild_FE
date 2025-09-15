@@ -22,6 +22,8 @@ import {MatSliderModule} from '@angular/material/slider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { ProfileComponent } from './componenti/profile/profile.component';
+import { RegisterComponent } from './componenti/register/register.component';
+import { LoginComponent } from './login/login.component';
 import { DettaglioProdottoComponent } from './componenti/dettaglio-prodotto/dettaglio-prodotto.component';
 import { LavoraConNoiComponent } from './componenti/lavora-con-noi/lavora-con-noi.component';
 import { ProdottiComponentComponent } from './componenti/prodotti-component/prodotti-component.component';
@@ -46,6 +48,8 @@ import { MatOptionModule } from '@angular/material/core';
     LaptopComponent,
     NotfoundComponent,
     ProfileComponent,
+    RegisterComponent,
+    LoginComponent,
     DettaglioProdottoComponent,
     LavoraConNoiComponent,
     ProdottiComponentComponent,
