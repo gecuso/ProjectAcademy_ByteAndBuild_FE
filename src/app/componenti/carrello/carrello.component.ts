@@ -4,8 +4,6 @@ import { Component } from '@angular/core';
   selector: 'app-carrello',
   standalone: false,
   templateUrl: './carrello.component.html',
-  styleUrl: './carrello.component.css'
+  styleUrl: './carrello.component.css',
 })
-export class CarrelloComponent {
-
-}
+export class CarrelloComponent {}

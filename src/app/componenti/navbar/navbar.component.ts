@@ -4,12 +4,13 @@ import { Component } from '@angular/core';
   selector: 'app-navbar',
   standalone: false,
   templateUrl: './navbar.component.html',
-  styleUrl: './navbar.component.css'
+  styleUrl: './navbar.component.css',
 })
 export class NavbarComponent {
-    title = 'Byte&Build';
-    searchTerm: string = '';  // definisci la proprietà
-    categorie = [
+  title = 'Byte&Build';
+  searchTerm: string = ''; // definisci la proprietà
+  categorie = [
+    { nome: 'Tutti i prodotti', link: '/laptop' },
     { nome: 'Laptop', link: '/laptop' },
     { nome: 'Monitor', link: '/laptop' },
     { nome: 'Case', link: '/laptop' },
@@ -18,8 +19,5 @@ export class NavbarComponent {
     { nome: 'Schede madri', link: '//laptop' },
     { nome: 'placeholder', link: '/laptop' },
     { nome: 'placeholder', link: '/laptop' },
-  
-    ];
-
-
+  ];
 }

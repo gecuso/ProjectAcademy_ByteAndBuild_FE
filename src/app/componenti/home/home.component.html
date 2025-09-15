@@ -67,17 +67,23 @@
   </button>
 </div>
 <div class="container-sm text-center my-5">
-  <div class="row row-cols-2 row-cols-lg-4">
+  <div class="row row-cols-2 row-cols-lg-4 g-4">
     <div class="col">
-      <div class="card" style="width: 18rem">
+      <div class="card h-100">
         <img
           src="https://cdn.pixabay.com/photo/2017/04/10/07/57/processor-2217771_1280.jpg"
           class="card-img-top img-chose"
           alt="cpu image"
         />
         <div class="card-body">
-          <P class="h4 text-primary">CPU GAMING</P>
-          <p class="card-text mt-3">Scopri di più</p>
+          <P class="h4 text-primary custom-write">CPU GAMING</P>
+          <a
+            [routerLink]="['/laptop']"
+            routerLinkActive="router-link-active"
+            class="card-text mt-3 text-decoration-none text-dark fw-semibold"
+          >
+            Scopri di più
+          </a>
         </div>
       </div>
     </div>
@@ -89,8 +95,14 @@
           alt="mouse gaming"
         />
         <div class="card-body">
-          <P class="h4 text-primary">MOUSE GAMING</P>
-          <p class="card-text mt-3">Scopri di più</p>
+          <P class="h4 text-primary custom-write">MOUSE GAMING</P>
+          <a
+            [routerLink]="['/laptop']"
+            routerLinkActive="router-link-active"
+            class="card-text mt-3 text-decoration-none text-dark fw-semibold"
+          >
+            Scopri di più
+          </a>
         </div>
       </div>
     </div>
@@ -102,8 +114,14 @@
           alt="mouse gaming"
         />
         <div class="card-body">
-          <P class="h4 text-primary">CUFFIE GAMING</P>
-          <p class="card-text mt-3">Scopri di più</p>
+          <P class="h4 text-primary custom-write">CUFFIE GAMING</P>
+          <a
+            [routerLink]="['/laptop']"
+            routerLinkActive="router-link-active"
+            class="card-text mt-3 text-decoration-none text-dark fw-semibold"
+          >
+            Scopri di più
+          </a>
         </div>
       </div>
     </div>
@@ -115,8 +133,14 @@
           alt="mouse gaming"
         />
         <div class="card-body">
-          <P class="h4 text-primary">PROCESSORI GAMING</P>
-          <p class="card-text mt-3">Scopri di più</p>
+          <P class="h4 text-primary custom-write">PROCESSORI GAMING</P>
+          <a
+            [routerLink]="['/laptop']"
+            routerLinkActive="router-link-active"
+            class="card-text mt-3 text-decoration-none text-dark fw-semibold"
+          >
+            Scopri di più
+          </a>
         </div>
       </div>
     </div>
@@ -127,9 +151,9 @@
     <h2 class="mb-5">
       <span class="text-primary">PC GAMING</span> IN PROMOZIONE
     </h2>
-    <p class="fw-bold">
+    <a class="fw-bold" routerLink="/laptop">
       Vai Alla Categoria <i class="bi bi-arrow-right ms-1"></i>
-    </p>
+    </a>
   </div>
   <div class="container text-center">
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-2">
@@ -277,9 +301,9 @@
 <div class="section-three">
   <div class="d-flex justify-content-between align-items-center mx-5">
     <h2 class="mb-5"><span class="text-primary">ULTIMI</span> ARRIVI</h2>
-    <p class="fw-bold">
+    <a class="fw-bold" routerLink="/laptop">
       Tutti i prodotti <i class="bi bi-arrow-right ms-1"></i>
-    </p>
+    </a>
   </div>
   <div id="carouselExample" class="carousel slide">
       <div class="carousel-indicators ">
@@ -609,7 +633,7 @@
       data-bs-target="#carouselExample"
       data-bs-slide="next"
     >
-      <span class="carousel-control-next-icon text-primary" aria-hidden="true"></span>
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
       <span class="visually-hidden">Next</span>
     </button>
   </div>

@@ -1,0 +1,18 @@
+.btn-custom {
+  background-color: #115999;
+  color: white;
+  border: none;
+  border-radius: 0.25rem;
+  padding: 0.375rem 0.75rem;
+  cursor: pointer;
+  text-decoration: none; /* per il tag <a> */
+  display: inline-block; /* per rispettare il comportamento bottone */
+  transition: background-color 0.3s ease;
+}
+
+.btn-custom:hover,
+.btn-custom:focus {
+  background-color: #063a68;
+  text-decoration: none;
+  outline: none; /* se vuoi togliere il contorno focus */
+}

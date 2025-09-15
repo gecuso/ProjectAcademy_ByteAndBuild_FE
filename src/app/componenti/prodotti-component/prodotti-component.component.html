@@ -1,0 +1,31 @@
+<h2 class="mb-4 text-capitalize">Prodotti: {{ categoria }}</h2>
+
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+  <div class="col" *ngFor="let prodotto of prodottiFiltrati">
+    <mat-card appearance="outlined">
+      <mat-card-header>
+        <a [routerLink]="['/dettaglio', prodotto.id]" class="text-decoration-none text-dark">
+          <mat-card-title>{{ prodotto.titolo }}</mat-card-title>
+        </a>
+      </mat-card-header>
+      <a [routerLink]="['/dettaglio', prodotto.id]" class="text-decoration-none text-dark">
+        <img mat-card-image [src]="prodotto.immagine" [alt]="prodotto.titolo">
+      </a>
+      <mat-card-content>
+        <p>{{ prodotto.descrizione }}</p>
+      </mat-card-content>
+      <mat-card-content>
+        <p>Disponibilità: {{ prodotto.disponibilita }}</p>
+      </mat-card-content>
+      <div class="card-footer d-flex justify-content-between align-items-center mt-auto px-3 pb-3">
+        <div class="prezzo">{{ prodotto.prezzo | currency:'EUR' }}</div>
+        <button *ngIf="prodotto.disponibilita > 0" type="button" class="btn custom-btn" [routerLink]="['/dettaglio', prodotto.id]">
+          Acquista
+        </button>
+        <button *ngIf="prodotto.disponibilita === 0" type="button" class="btn btn-secondary" disabled>
+          Non disponibile
+        </button>
+      </div>
+    </mat-card>
+  </div>
+</div>

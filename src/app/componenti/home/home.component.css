@@ -1,7 +1,6 @@
-.img-chose{
-    width: 100%;
-    height: 10em;
-    object-fit: cover;
+.img-chose {
+  height: 200px;
+  object-fit: cover;
 }
 
 .section-two{
@@ -12,8 +11,8 @@
     margin-top: 1em;
 }
 
-.section-three{
-    margin-top: 2em;
+.section-three {
+  margin-top: 2em;
 }
 
 .carosel-me{

@@ -1,0 +1,12 @@
+.lavora-box {
+  background-color: #f8f9fa;
+  max-width: 800px;
+  width: 100%;
+  border-left: 8px solid #115999;
+}
+
+.lavora-text {
+  font-size: 1.2rem;
+  color: #333;
+  line-height: 1.7;
+}
