@@ -43,7 +43,7 @@ import { ProdottiComponentComponent } from './componenti/prodotti-component/prod
     NotfoundComponent,
     ProfileComponent,
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
     DettaglioProdottoComponent,
     LavoraConNoiComponent,
     ProdottiComponentComponent
