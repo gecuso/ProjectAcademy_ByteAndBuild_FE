@@ -5,7 +5,7 @@
 }
 
 .section-two{
-    background-color: rgba(211, 211, 211, 0.486);
+    background-color: rgba(211, 211, 211, 0.199);
     display: flex;
     flex-direction: column;
     padding-top: 3em;
@@ -20,3 +20,30 @@
     padding-right: 10em;
     padding-left: 10em;
 }
+.carousel-control-prev-icon {
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='%23000' d='M11.354 1.646a.5.5 0 0 1 0 .708L6.707 7l4.647 4.646a.5.5 0 0 1-.708.708l-5-5a.5.5 0 0 1 0-.708l5-5a.5.5 0 0 1 .708 0z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 2em; /* regola la dimensione della freccia */
+}
+
+.carousel-control-next-icon {
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath transform='rotate(180 8 8)' fill='%23000' d='M11.354 1.646a.5.5 0 0 1 0 .708L6.707 7l4.647 4.646a.5.5 0 0 1-.708.708l-5-5a.5.5 0 0 1 0-.708l5-5a.5.5 0 0 1 .708 0z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 2em;
+}
+
+.carousel-indicators{
+    margin-bottom: -10px;
+}
+
+.carousel-indicators button {
+  width: 18px;
+  height: 3px;
+  border: none;               /* rimuove il bordo di default */
+  background-color: rgba(0, 0, 0, 0.767); /* colore indicatori inattivi */
+  transition: background-color .25s ease, transform .2s ease;
+}
+
+
