@@ -25,6 +25,12 @@ import { ProfileComponent } from './componenti/profile/profile.component';
 import { DettaglioProdottoComponent } from './componenti/dettaglio-prodotto/dettaglio-prodotto.component';
 import { LavoraConNoiComponent } from './componenti/lavora-con-noi/lavora-con-noi.component';
 import { ProdottiComponentComponent } from './componenti/prodotti-component/prodotti-component.component';
+import { DettagliUtenteComponent } from './componenti/dettagli-utente/dettagli-utente.component';
+import { MatSelectModule } from '@angular/material/select';
+import { MatOptionModule } from '@angular/material/core';
+
+
+
 
 
 
@@ -42,7 +48,8 @@ import { ProdottiComponentComponent } from './componenti/prodotti-component/prod
     ProfileComponent,
     DettaglioProdottoComponent,
     LavoraConNoiComponent,
-    ProdottiComponentComponent
+    ProdottiComponentComponent,
+    DettagliUtenteComponent
   ],
   imports: [
     BrowserModule,
@@ -56,7 +63,9 @@ import { ProdottiComponentComponent } from './componenti/prodotti-component/prod
     MatRadioModule,
     MatSliderModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatSelectModule,
+    MatOptionModule
   ],
   providers: [],
   bootstrap: [AppComponent]

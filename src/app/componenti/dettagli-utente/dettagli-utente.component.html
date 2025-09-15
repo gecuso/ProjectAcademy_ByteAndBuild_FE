@@ -1,0 +1,281 @@
+<div class="container py-4">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="main-container">
+        <!-- Sezione sinistra -->
+        <div class="left-section">
+          <div class="user-info-horizontal">
+            <div class="user-img">
+              <img src="icon-utente.png" alt="Home" class="logo-img" />
+            </div>
+
+            <div class="user-details">
+              <h3>I tuoi dettagli:</h3>
+              <h4>Nome Utente</h4>
+              <div class="user-details h6">
+                <div class="info-row">
+                  <span class="label">Email:</span><br />
+                  <span class="value">utente&#64;user.it</span>
+                </div>
+                <div class="info-row">
+                  <span class="label">Indirizzo di spedizione:</span><br />
+                  <span class="value"
+                    >Corso Grosseto 15, Torino (TO), 10012</span
+                  >
+                </div>
+                <div class="info-row">
+                  <span class="label">Telefono:</span><br />
+                  <span class="value">+39 1234567890</span>
+                </div>
+              </div>
+              <mat-radio-group> </mat-radio-group>
+              <div class="user-actions">
+                <button class="custom-btn" (click)="openModalUpdateUtente()">
+                  Modifica profilo
+                </button>
+                <button
+                  class="custom-btn-danger"
+                  (click)="openModalDeleteUtente()"
+                >
+                  Elimina profilo
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modale per "Modifica utente" -->
+        <div class="modal" *ngIf="showModalUpdateUtente">
+          <div class="modal-content">
+            <span class="close-btn" (click)="closeModalUpdateUtente()"
+              >&times;</span
+            >
+            <h4>Modifica utente</h4>
+
+            <h6>Nome Utente</h6>
+            <mat-form-field>
+              <mat-label>Inserire nuovo nome utente</mat-label>
+              <input matInput />
+            </mat-form-field>
+
+            <h6>Indirizzo</h6>
+            <mat-form-field>
+              <mat-label>Inserire nuovo indirizzo</mat-label>
+              <input matInput />
+            </mat-form-field>
+
+            <h6>Telefono</h6>
+            <mat-form-field>
+              <mat-label>Inserire nuovo numero di telefono</mat-label>
+              <input matInput />
+            </mat-form-field>
+
+            <div class="user-actions">
+              <button class="custom-btn">Salva modifiche</button>
+              <button
+                class="custom-btn-danger"
+                (click)="closeModalUpdateUtente()"
+              >
+                Annulla
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modale per "Elimina utente" -->
+        <div class="modal" *ngIf="showModalDeleteUtente">
+          <div class="modal-content">
+            <span class="close-btn" (click)="closeModalDeleteUtente()"
+              >&times;</span
+            >
+            <h6>Sei sicuro? L'eliminazione dell'account è permanente. <br>
+                Una volta confermata l'eliminazione, non sarà possibile recuperare i dati dell'account</h6>
+            <div class="user-actions">
+              <button class="custom-btn-danger">Conferma eliminazione account</button>
+              <button
+                class="custom-btn-danger"
+                (click)="closeModalUpdateUtente()"
+              >
+                Annulla
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- Linea verticale blu -->
+        <div class="vertical-line"></div>
+
+        <!-- Sezione destra -->
+        <div class="right-section">
+          <div class="user-actions">
+            <h4>Gestione prodotti (solo venditore)</h4>
+            <button class="custom-btn" (click)="openModalPC()">
+              Creazione PC
+            </button>
+            <button class="custom-btn" (click)="openModalAddProdotto()">
+              Aggiungi prodotto
+            </button>
+            <button class="custom-btn" (click)="openModalUpdateProdotto()">
+              Modifica prodotto
+            </button>
+            <button
+              class="custom-btn-danger"
+              (click)="openModalDeleteProdotto()"
+            >
+              Elimina prodotto
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modale per "Creazione PC" -->
+<div class="modal" *ngIf="showModalPC">
+  <div class="modal-content">
+    <span class="close-btn" (click)="closeModalPC()">&times;</span>
+    <h4>Creazione PC</h4>
+
+    <h6>Scheda Madre</h6>
+    <mat-form-field appearance="fill">
+      <mat-label>Seleziona scheda madre</mat-label>
+      <mat-select>
+        <mat-option value="1">Opzione 1</mat-option>
+        <mat-option value="2">Opzione 2</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <h6>Processore</h6>
+    <mat-form-field appearance="fill">
+      <mat-label>Seleziona processore</mat-label>
+      <mat-select>
+        <mat-option value="1">Opzione 1</mat-option>
+        <mat-option value="2">Opzione 2</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <h6>Placeholder</h6>
+    <mat-form-field appearance="fill">
+      <mat-label>Seleziona placeholder</mat-label>
+      <mat-select>
+        <mat-option value="1">Opzione 1</mat-option>
+        <mat-option value="2">Opzione 2</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <h6>Placeholder</h6>
+    <mat-form-field appearance="fill">
+      <mat-label>Seleziona placeholder</mat-label>
+      <mat-select>
+        <mat-option value="1">Opzione 1</mat-option>
+        <mat-option value="2">Opzione 2</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <h6>Placeholder</h6>
+    <mat-form-field appearance="fill">
+      <mat-label>Seleziona placeholder</mat-label>
+      <mat-select>
+        <mat-option value="1">Opzione 1</mat-option>
+        <mat-option value="2">Opzione 2</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <h6>Placeholder</h6>
+    <mat-form-field appearance="fill">
+      <mat-label>Seleziona placeholder</mat-label>
+      <mat-select>
+        <mat-option value="1">Opzione 1</mat-option>
+        <mat-option value="2">Opzione 2</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <h6>Placeholder</h6>
+    <mat-form-field appearance="fill">
+      <mat-label>Seleziona placeholder</mat-label>
+      <mat-select>
+        <mat-option value="1">Opzione 1</mat-option>
+        <mat-option value="2">Opzione 2</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <div class="user-actions">
+      <button class="custom-btn">Salva PC</button>
+      <button class="custom-btn-danger" (click)="closeModalPC()">
+        Annulla
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Modale per "Aggiungi prodotto" -->
+<div class="modal" *ngIf="showModalAddProdotto">
+  <div class="modal-content">
+    <span class="close-btn" (click)="closeModalAddProdotto()">&times;</span>
+    <h4>Aggiungi Prodotto</h4>
+
+    <h6>Placeholder</h6>
+    <mat-form-field appearance="fill">
+      <mat-label>Seleziona placeholder</mat-label>
+      <mat-select>
+        <mat-option value="1">Opzione 1</mat-option>
+        <mat-option value="2">Opzione 2</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <div class="user-actions">
+      <button class="custom-btn">Aggiungi prodotto</button>
+      <button class="custom-btn-danger" (click)="closeModalAddProdotto()">
+        Annulla
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Modale per "Modifica prodotto" -->
+<div class="modal" *ngIf="showModalUpdateProdotto">
+  <div class="modal-content">
+    <span class="close-btn" (click)="closeModalUpdateProdotto()">&times;</span>
+    <h4>Modifica Prodotto</h4>
+
+    <h6>Id Prodotto</h6>
+    <mat-form-field>
+      <mat-label>Id Prodotto</mat-label>
+      <input matInput />
+    </mat-form-field>
+    <h6>Placeholder</h6>
+    <mat-form-field appearance="fill">
+      <mat-label>Seleziona placeholder</mat-label>
+      <mat-select>
+        <mat-option value="1">Opzione 1</mat-option>
+        <mat-option value="2">Opzione 2</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <div class="user-actions">
+      <button class="custom-btn">Salva modifiche</button>
+      <button class="custom-btn-danger" (click)="closeModalUpdateProdotto()">
+        Annulla
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Modale per "Elimina prodotto" -->
+<div class="modal" *ngIf="showModalDeleteProdotto">
+  <div class="modal-content">
+    <span class="close-btn" (click)="closeModalDeleteProdotto()">&times;</span>
+    <h4>Elimina Prodotto</h4>
+
+    <h6>Id Prodotto</h6>
+    <mat-form-field>
+      <mat-label>Id Prodotto</mat-label>
+      <input matInput />
+    </mat-form-field>
+    <div class="user-actions">
+      <button class="custom-btn">Conferma</button>
+      <button class="custom-btn-danger" (click)="closeModalDeleteProdotto()">
+        Annulla
+      </button>
+    </div>
+  </div>
+</div>
