@@ -31,6 +31,7 @@ import { ProdottiComponentComponent } from './componenti/prodotti-component/prod
 import { DettagliUtenteComponent } from './componenti/dettagli-utente/dettagli-utente.component';
 import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
+import { ListaProdottiComponent } from './componenti/lista-prodotti/lista-prodotti.component';
 
 
 
@@ -54,7 +55,8 @@ import { MatOptionModule } from '@angular/material/core';
     DettaglioProdottoComponent,
     LavoraConNoiComponent,
     ProdottiComponentComponent,
-    DettagliUtenteComponent
+    DettagliUtenteComponent,
+    ListaProdottiComponent
   ],
   imports: [
     BrowserModule,
