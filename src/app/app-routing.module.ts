@@ -11,6 +11,7 @@ import { DettaglioProdottoComponent } from './componenti/dettaglio-prodotto/dett
 import { ProfileComponent } from './componenti/profile/profile.component';
 import { RegisterComponent } from './componenti/register/register.component';
 import { LoginComponent } from './login/login.component';
+import { authGuard } from './auth/auth.guard';
 
 
 const routes: Routes = [
@@ -24,7 +25,7 @@ const routes: Routes = [
   {path: 'laptop', component:LaptopComponent},
   {path:'404', component:NotfoundComponent},
   {path:'profile', component:ProfileComponent},
-  {path:'dettaglio/:id', component:DettaglioProdottoComponent},
+  {path:'dettaglio/:id', component:DettaglioProdottoComponent, canActivate:[authGuard] },
   {path:'**', redirectTo:'404'}
 ];
 
