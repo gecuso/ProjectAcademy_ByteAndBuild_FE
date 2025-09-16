@@ -12,6 +12,7 @@ import { ProfileComponent } from './componenti/profile/profile.component';
 import { RegisterComponent } from './componenti/register/register.component';
 import { LoginComponent } from './login/login.component';
 import { authGuard } from './auth/auth.guard';
+import { authAdminGuard } from './auth/auth-admin.guard';
 
 
 const routes: Routes = [
@@ -21,7 +22,7 @@ const routes: Routes = [
   {path:'home', component:HomeComponent},
   {path:'chisiamo', component:ChisiamoComponent},
   {path:'lavoraconnoi', component:LavoraConNoiComponent},
-  {path: 'carrello', component:CarrelloComponent},
+  {path: 'carrello', component:CarrelloComponent, canActivate:[authAdminGuard]},
   {path: 'laptop', component:LaptopComponent},
   {path:'404', component:NotfoundComponent},
   {path:'profile', component:ProfileComponent},
