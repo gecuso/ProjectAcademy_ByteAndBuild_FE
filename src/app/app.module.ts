@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule,  provideClientHydration,
+  withEventReplay,
+ } from '@angular/platform-browser';
 import { provideHttpClient, withFetch } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -28,7 +30,7 @@ import { LoginComponent } from './login/login.component';
 import { DettaglioProdottoComponent } from './componenti/dettaglio-prodotto/dettaglio-prodotto.component';
 import { LavoraConNoiComponent } from './componenti/lavora-con-noi/lavora-con-noi.component';
 import { ProdottiComponentComponent } from './componenti/prodotti-component/prodotti-component.component';
-
+import {MatDividerModule} from '@angular/material/divider';
 
 
 @NgModule({
@@ -61,9 +63,12 @@ import { ProdottiComponentComponent } from './componenti/prodotti-component/prod
     MatRadioModule,
     MatSliderModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatDividerModule
   ],
-  providers: [provideHttpClient(withFetch())],
+  providers: [provideHttpClient(withFetch()),
+    provideClientHydration(withEventReplay())
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

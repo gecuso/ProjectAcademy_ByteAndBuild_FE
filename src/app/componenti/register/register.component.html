@@ -25,7 +25,8 @@
         <p *ngIf="!rc">{{msg}}</p>
 
         <div>
-            <button mat-raised-button color="primary" type="submit" [disabled]="!signupForm.valid">Registra</button>
+            <button type="button" class="btn btn-outline-primary m-1" type="submit" [disabled]="!signupForm.valid">Registra</button>
+            <button type="button" class="btn btn-success" [routerLink]="['/login']" >Sei già registrato?</button>
         </div>
 
     </form>
