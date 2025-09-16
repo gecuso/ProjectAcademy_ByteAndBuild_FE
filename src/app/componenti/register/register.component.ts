@@ -19,7 +19,12 @@ export class RegisterComponent {
 
   onSubmit(signUp: NgForm) {
     console.log('Invio dati registrazione ' + signUp);
-
+    if(signUp.form.value.password == signUp.form.value.confirm)
+      this.createUser(signUp)
+    else {
+      this.rc = false
+      this.msg = "le password non corrispondono"
+    }
   }
 
   createUser(signUp:NgForm){
@@ -29,7 +34,11 @@ export class RegisterComponent {
       email: signUp.form.value.email,
       role: 'USER'
     }).subscribe((resp:any)=>{
-      this.rc = resp
+      this.rc = resp.rc
+      if(resp.rc) {
+        this.route.navigate(["/login"])
+      } else
+        this.msg= resp.msg
     })
   }
 }
