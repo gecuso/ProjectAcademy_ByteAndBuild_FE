@@ -1,62 +1,72 @@
+import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
-import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
+  private isLoggedSubject = new BehaviorSubject<boolean>(false);
+  private isAdminSubject = new BehaviorSubject<boolean>(false);
 
-  isLogged = false;
-  isAdmin = false;
+  isLogged$ = this.isLoggedSubject.asObservable();
+  isAdmin$ = this.isAdminSubject.asObservable();
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object) {
-    // piattaforId é utilizzato per sapere il tipo di piattaform dove gira l'app
-    console.log("AuthService constructor");
+    console.log('AuthService constructor');
 
-    // controllo se l'app é un browser
     if (isPlatformBrowser(this.platformId)) {
-      const isLoggedValue = localStorage.getItem("isLogged");
-      const isAdminValue = localStorage.getItem("isAdmin");
+      const isLoggedValue = localStorage.getItem('isLogged');
+      const isAdminValue = localStorage.getItem('isAdmin');
 
-      if (isLoggedValue != null && isAdminValue != null) {
-        console.log('token exist');
-        this.isLogged = isLoggedValue === '1';
-        this.isAdmin = isAdminValue === '1';
+      const isLogged = isLoggedValue === '1';
+      const isAdmin = isAdminValue === '1';
+
+      this.isLoggedSubject.next(isLogged);
+      this.isAdminSubject.next(isAdmin);
+
+      if (isLogged || isAdmin) {
+        console.log('Token found in localStorage');
       } else {
-        localStorage.setItem("isLogged", "0");
-        localStorage.setItem("isAdmin", "0");
+        localStorage.setItem('isLogged', '0');
+        localStorage.setItem('isAdmin', '0');
       }
 
-      console.log("isLogged:", this.isLogged)
-      console.log("isAdmin:", this.isAdmin)
+      console.log('isLogged:', isLogged);
+      console.log('isAdmin:', isAdmin);
     }
   }
 
-  isAuthentificated(){
-    return this.isLogged
+  isAuthentificated(): boolean {
+    return this.isLoggedSubject.getValue();
   }
 
-  isRoleAdmin(){
-    return this.isAdmin
+  isRoleAdmin(): boolean {
+    return this.isAdminSubject.getValue();
   }
 
-  setAuthentificated() {
-    localStorage.setItem("isLogged", "1");
-    localStorage.setItem("isAdmin", "0");
-    this.isLogged = true;
-    this.isAdmin = false;
+  setAuthentificated(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      localStorage.setItem('isLogged', '1');
+      localStorage.setItem('isAdmin', '0');
+    }
+    this.isLoggedSubject.next(true);
+    this.isAdminSubject.next(false);
   }
 
-  setAdmin() {
-    localStorage.setItem("isAdmin", "1");
-    this.isAdmin = true;
+  setAdmin(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      localStorage.setItem('isAdmin', '1');
+    }
+    this.isAdminSubject.next(true);
   }
 
-  resetAll() {
-    localStorage.setItem("isLogged", "0");
-    localStorage.setItem("isAdmin", "0");
-    this.isLogged = false;
-    this.isAdmin = false;
+  resetAll(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      localStorage.setItem('isLogged', '0');
+      localStorage.setItem('isAdmin', '0');
+    }
+    this.isLoggedSubject.next(false);
+    this.isAdminSubject.next(false);
   }
-
 }

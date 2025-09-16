@@ -7,8 +7,8 @@ import { CarrelloComponent } from './componenti/carrello/carrello.component';
 import { LaptopComponent } from './componenti/laptop/laptop.component';
 import { NotfoundComponent } from './componenti/notfound/notfound.component';
 import { DettaglioProdottoComponent } from './componenti/dettaglio-prodotto/dettaglio-prodotto.component';
-
 import { ProfileComponent } from './componenti/profile/profile.component';
+import { DettagliUtenteComponent } from './componenti/dettagli-utente/dettagli-utente.component';
 import { RegisterComponent } from './componenti/register/register.component';
 import { LoginComponent } from './login/login.component';
 import { authGuard } from './auth/auth.guard';
@@ -26,6 +26,7 @@ const routes: Routes = [
   {path: 'laptop', component:LaptopComponent},
   {path:'404', component:NotfoundComponent},
   {path:'profile', component:ProfileComponent},
+  {path:'dettagliUtente', component:DettagliUtenteComponent, canActivate:[authGuard]},
   {path:'dettaglio/:id', component:DettaglioProdottoComponent, canActivate:[authGuard] },
   {path:'**', redirectTo:'404'}
 ];

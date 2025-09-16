@@ -30,7 +30,13 @@ import { LoginComponent } from './login/login.component';
 import { DettaglioProdottoComponent } from './componenti/dettaglio-prodotto/dettaglio-prodotto.component';
 import { LavoraConNoiComponent } from './componenti/lavora-con-noi/lavora-con-noi.component';
 import { ProdottiComponentComponent } from './componenti/prodotti-component/prodotti-component.component';
-import {MatDividerModule} from '@angular/material/divider';
+import { DettagliUtenteComponent } from './componenti/dettagli-utente/dettagli-utente.component';
+import { MatSelectModule } from '@angular/material/select';
+import { MatOptionModule } from '@angular/material/core';
+
+
+
+
 
 
 @NgModule({
@@ -49,7 +55,8 @@ import {MatDividerModule} from '@angular/material/divider';
     LoginComponent,
     DettaglioProdottoComponent,
     LavoraConNoiComponent,
-    ProdottiComponentComponent
+    ProdottiComponentComponent,
+    DettagliUtenteComponent
   ],
   imports: [
     BrowserModule,
@@ -64,10 +71,10 @@ import {MatDividerModule} from '@angular/material/divider';
     MatSliderModule,
     MatFormFieldModule,
     MatInputModule,
-    MatDividerModule
+    MatSelectModule,
+    MatOptionModule
   ],
-  providers: [provideHttpClient(withFetch()),
-    provideClientHydration(withEventReplay())
+  providers: [provideHttpClient(withFetch())
   ],
   bootstrap: [AppComponent]
 })
