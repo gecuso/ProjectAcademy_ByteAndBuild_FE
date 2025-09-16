@@ -30,6 +30,14 @@
         <a routerLink="/carrello" title="Carrello">
           <i class="bi bi-cart fs-4 icon-white"></i>
         </a>
+        <button
+          class="btn btn-outline-light btn-sm"
+          (click)="logout()"
+          *ngIf="isLoggedIn"
+          title="Logout"
+        >
+          Logout
+        </button>
       </div>
     </div>
 

@@ -1,35 +1,72 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
+  private isLoggedSubject = new BehaviorSubject<boolean>(false);
+  private isAdminSubject = new BehaviorSubject<boolean>(false);
 
-  isLogged = false;
-  isAdmin = false;
+  isLogged$ = this.isLoggedSubject.asObservable();
+  isAdmin$ = this.isAdminSubject.asObservable();
 
-  constructor() { }
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {
+    console.log('AuthService constructor');
 
-  isAuthentificated(){
-    return this.isLogged
+    if (isPlatformBrowser(this.platformId)) {
+      const isLoggedValue = localStorage.getItem('isLogged');
+      const isAdminValue = localStorage.getItem('isAdmin');
+
+      const isLogged = isLoggedValue === '1';
+      const isAdmin = isAdminValue === '1';
+
+      this.isLoggedSubject.next(isLogged);
+      this.isAdminSubject.next(isAdmin);
+
+      if (isLogged || isAdmin) {
+        console.log('Token found in localStorage');
+      } else {
+        localStorage.setItem('isLogged', '0');
+        localStorage.setItem('isAdmin', '0');
+      }
+
+      console.log('isLogged:', isLogged);
+      console.log('isAdmin:', isAdmin);
+    }
   }
 
-  isRoleAdmin(){
-    return this.isAdmin
+  isAuthentificated(): boolean {
+    return this.isLoggedSubject.getValue();
   }
 
-  setAuthentificated(){
-    this.isLogged = true
-    this.isAdmin = false
+  isRoleAdmin(): boolean {
+    return this.isAdminSubject.getValue();
   }
 
-  setAdmin() {
-    this.isAdmin = true
+  setAuthentificated(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      localStorage.setItem('isLogged', '1');
+      localStorage.setItem('isAdmin', '0');
+    }
+    this.isLoggedSubject.next(true);
+    this.isAdminSubject.next(false);
   }
 
-  resetAll(){
-    this.isLogged = false
-    this.isAdmin = false
+  setAdmin(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      localStorage.setItem('isAdmin', '1');
+    }
+    this.isAdminSubject.next(true);
   }
 
+  resetAll(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      localStorage.setItem('isLogged', '0');
+      localStorage.setItem('isAdmin', '0');
+    }
+    this.isLoggedSubject.next(false);
+    this.isAdminSubject.next(false);
+  }
 }
