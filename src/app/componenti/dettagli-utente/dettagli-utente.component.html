@@ -11,23 +11,25 @@
 
             <div class="user-details">
               <h3>I tuoi dettagli:</h3>
-              <h4>Nome Utente</h4>
+              <h4>{{ utente?.userName }}</h4>
+
               <div class="user-details h6">
                 <div class="info-row">
                   <span class="label">Email:</span><br />
-                  <span class="value">utente&#64;user.it</span>
+                  <span class="value">{{
+                    utente?.email || "Email non disponibile"
+                  }}</span>
                 </div>
                 <div class="info-row">
                   <span class="label">Indirizzo di spedizione:</span><br />
-                  <span class="value"
-                    >Corso Grosseto 15, Torino (TO), 10012</span
-                  >
+                  <span class="value">{{ utente?.indirizzo }}</span>
                 </div>
                 <div class="info-row">
                   <span class="label">Telefono:</span><br />
-                  <span class="value">+39 1234567890</span>
+                  <span class="value">{{ utente?.telefono }}</span>
                 </div>
               </div>
+
               <mat-radio-group> </mat-radio-group>
               <div class="user-actions">
                 <button class="custom-btn" (click)="openModalUpdateUtente()">
@@ -88,26 +90,29 @@
             <span class="close-btn" (click)="closeModalDeleteUtente()"
               >&times;</span
             >
-            <h6>Sei sicuro? L'eliminazione dell'account è permanente. <br>
-                Una volta confermata l'eliminazione, non sarà possibile recuperare i dati dell'account</h6>
+            <h6>
+              Sei sicuro? L'eliminazione dell'account è permanente. <br />
+              Una volta confermata l'eliminazione, non sarà possibile recuperare
+              i dati dell'account
+            </h6>
             <div class="user-actions">
               <button class="custom-btn">Conferma eliminazione account</button>
               <button
                 class="custom-btn-danger"
-                (click)="closeModalUpdateUtente()"
+                (click)="closeModalDeleteUtente()"
               >
                 Annulla
               </button>
             </div>
           </div>
         </div>
-        <!-- Linea verticale blu -->
-        <div class="vertical-line"></div>
 
         <!-- Sezione destra -->
-        <div class="right-section">
+        <div class="right-section" *ngIf="isAdmin">
+          <!-- Linea verticale blu -->
+          <div class="vertical-line"></div>
           <div class="user-actions">
-            <h4>Gestione prodotti (solo venditore)</h4>
+            <h4>Interfaccia Amministratore</h4>
             <button class="custom-btn" (click)="openModalPC()">
               Creazione PC
             </button>

@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
+import { CategoriaService, Categoria } from '../../services/categoria.service';
 import { AuthService } from '../../auth/auth.service';
 import { Subscription } from 'rxjs';
 
@@ -13,28 +14,26 @@ export class NavbarComponent implements OnInit, OnDestroy {
   title = 'Byte&Build';
   searchTerm: string = '';
   isLoggedIn = false;
+  categorie: Categoria[] = [];
   private authSub!: Subscription;
 
-  categorie = [
-    { nome: 'Tutti i prodotti', link: '/laptop' },
-    { nome: 'Laptop', link: '/laptop' },
-    { nome: 'Monitor', link: '/laptop' },
-    { nome: 'Case', link: '/laptop' },
-    { nome: 'Mouse', link: '/laptop' },
-    { nome: 'Schede grafiche', link: '/laptop' },
-    { nome: 'Schede madri', link: '/laptop' },
-    { nome: 'placeholder', link: '/laptop' },
-    { nome: 'placeholder', link: '/laptop' },
-  ];
-
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router, private categoriaService: CategoriaService,) {}
 
   ngOnInit(): void {
-    // 🔁 Sottoscriviti al BehaviorSubject
     this.authSub = this.authService.isLogged$.subscribe((status) => {
       this.isLoggedIn = status;
     });
+    
+    this.categoriaService.getCategorie().subscribe({
+      next: (categorie) => {
+        this.categorie = categorie;
+      },
+      error: (err) => {
+        console.error('Errore nel caricamento categorie:', err);
+      }
+    });
   }
+  
 
   logout(): void {
     this.authService.resetAll();

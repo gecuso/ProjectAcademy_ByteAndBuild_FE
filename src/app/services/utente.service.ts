@@ -18,5 +18,9 @@ export class UtenteService {
   create(body:{}){
     return this.http.post(this.url + "create", body)
   }
+  
+  getById(id: number) {
+  return this.http.get(this.url + 'listById?id=' + id);
+}
 
 }

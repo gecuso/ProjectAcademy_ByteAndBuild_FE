@@ -49,13 +49,13 @@
       </button>
 
       <!-- MatMenu -->
-      <mat-menu #menu="matMenu">
+      <mat-menu #menu="matMenu" class="scrollable-menu">
         <button
           mat-menu-item
           *ngFor="let voce of categorie"
-          [routerLink]="voce.link"
+          [routerLink]="'/categoria/' + voce.id"
         >
-          {{ voce.nome }}
+          {{ voce.descrizione }}
         </button>
       </mat-menu>
 

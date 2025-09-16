@@ -76,3 +76,18 @@
     align-items: stretch;
   }
 }
+/* Forza max height + scroll nel menu */
+.mat-menu-panel.scrollable-menu .mat-menu-content {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+/* Scrollbar migliorata (opzionale) */
+.mat-menu-panel.scrollable-menu .mat-menu-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.mat-menu-panel.scrollable-menu .mat-menu-content::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 3px;
+}
