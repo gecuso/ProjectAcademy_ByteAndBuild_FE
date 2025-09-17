@@ -14,7 +14,8 @@
         <p>{{msg}}</p>
 
         <div>
-            <button mat-raised-button color="primary" type="submit" [disabled]="!signupForm.valid">Accedi</button>
+            <button type="button" class="btn btn-outline-primary m-1" type="submit" [disabled]="!signupForm.valid">Accedi</button>
+            <button type="button" class="btn custom-color text-white" [routerLink]="['/register']" >Non sei registrato?</button>
         </div>
 
     </form>
