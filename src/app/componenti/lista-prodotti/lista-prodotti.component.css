@@ -1,0 +1,49 @@
+mat-card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+
+mat-card-content {
+  /*margin-top: 0.5rem;    Spazio sopra */
+  margin-bottom: 0.5rem;
+  /* Spazio laterale */
+  
+}
+
+.example-radio-group {
+  display: flex;
+  flex-direction: column;
+  margin: 15px 0;
+  align-items: flex-start;
+}
+
+.example-radio-button {
+  margin: 5px;
+}
+mat-slider {
+  width: 150px;
+}
+.custom-btn {
+  background-color:  #115999;  
+  color: white;               /* Testo */
+  border: none;
+}
+
+.custom-btn:hover {
+  background-color:  #063a68;  
+}
+.prezzo {
+  font-weight: bold;
+  font-size: 1.1rem;
+  color: #333;
+}
+a img[mat-card-image] {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+a {
+  display: inline-block;
+}
