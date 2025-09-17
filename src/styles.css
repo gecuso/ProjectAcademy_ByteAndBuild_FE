@@ -22,3 +22,11 @@ app-root {
   /* rimuovi height: 100%; perché crea problemi */
 }
 
+.custom-color {
+  background-color: #115999;
+}
+
+.custom-color:hover {
+  background-color:  #063a68;  
+}
+

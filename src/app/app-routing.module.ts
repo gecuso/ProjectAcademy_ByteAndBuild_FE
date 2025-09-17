@@ -23,7 +23,7 @@ const routes: Routes = [
   {path:'home', component:HomeComponent},
   {path:'chisiamo', component:ChisiamoComponent},
   {path:'lavoraconnoi', component:LavoraConNoiComponent},
-  {path: 'carrello', component:CarrelloComponent, canActivate:[authAdminGuard]},
+  {path: 'carrello', component:CarrelloComponent},
   {path: 'laptop', component:LaptopComponent},
   {path:'404', component:NotfoundComponent},
   {path:'profile', component:ProfileComponent},
