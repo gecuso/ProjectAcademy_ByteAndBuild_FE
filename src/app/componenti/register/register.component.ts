@@ -32,6 +32,8 @@ export class RegisterComponent {
       userName: signUp.form.value.username,
       pwd: signUp.form.value.password,
       email: signUp.form.value.email,
+      indirizzo: signUp.form.value.indirizzo,
+      telefono: signUp.form.value.telefono,
       role: 'USER'
     }).subscribe((resp:any)=>{
       this.rc = resp.rc
