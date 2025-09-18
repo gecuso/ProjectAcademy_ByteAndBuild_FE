@@ -67,7 +67,7 @@
             </mat-card-content>
 
             <mat-card-content>
-              <p>Prodotti disponibili: {{ p.disponibilita }}</p>
+              <p>Prodotti disponibili: {{ p.quantita }}</p>
             </mat-card-content>
 
             <div
@@ -79,7 +79,7 @@
 
               <!-- Bottone Acquista se disponibile -->
               <button
-                *ngIf="p.disponibilita > 0"
+                *ngIf="p.quantita > 0"
                 type="button"
                 class="btn custom-btn"
                 [routerLink]="['/dettaglio', p.id]"
@@ -89,7 +89,7 @@
 
               <!-- Bottone Non disponibile se quantità zero -->
               <button
-                *ngIf="p.disponibilita === 0"
+                *ngIf="p.quantita === 0"
                 type="button"
                 class="btn btn-secondary"
                 disabled
