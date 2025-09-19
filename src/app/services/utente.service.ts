@@ -21,6 +21,14 @@ export class UtenteService {
   
   getById(id: number) {
   return this.http.get(this.url + 'listById?id=' + id);
-}
+  }
+
+  deleteUser(id:number){
+    return this.http.post(this.url + 'remove?id=' , { id: id })
+  }
+
+   updateUser(body:{}){
+    return this.http.put(this.url + 'update', body)
+  }
 
 }

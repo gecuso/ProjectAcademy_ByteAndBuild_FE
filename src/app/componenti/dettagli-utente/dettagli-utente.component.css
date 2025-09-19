@@ -142,3 +142,6 @@
   font-size: 28px;
   cursor: pointer;
 }
+.full-width {
+  width: 100%;
+} /*per input form update utente */

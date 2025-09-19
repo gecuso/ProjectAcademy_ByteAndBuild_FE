@@ -34,6 +34,7 @@ import { DettagliUtenteComponent } from './componenti/dettagli-utente/dettagli-u
 import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
 import { ListaProdottiComponent } from './componenti/lista-prodotti/lista-prodotti.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -74,7 +75,8 @@ import { ListaProdottiComponent } from './componenti/lista-prodotti/lista-prodot
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
-    MatOptionModule
+    MatOptionModule,
+    ReactiveFormsModule
   ],
   providers: [provideHttpClient(withFetch())
   ],
