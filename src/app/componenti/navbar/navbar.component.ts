@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { CategoriaService, Categoria } from '../../services/categoria.service';
 import { AuthService } from '../../auth/auth.service';
 import { Subscription } from 'rxjs';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-navbar',
@@ -12,10 +13,11 @@ import { Subscription } from 'rxjs';
 })
 export class NavbarComponent implements OnInit, OnDestroy {
   title = 'Byte&Build';
-  searchTerm: string = '';
+    elementoCercato= "";
   isLoggedIn = false;
   categorie: Categoria[] = [];
   private authSub!: Subscription;
+searchTerm: string = "";
 
   constructor(private authService: AuthService, private router: Router, private categoriaService: CategoriaService,) {}
 
@@ -51,5 +53,11 @@ export class NavbarComponent implements OnInit, OnDestroy {
   capitalize(text: string): string {  //funzione per mettere la prima lettera MAIUSCOLA
   if (!text) return '';
   return text.charAt(0).toUpperCase() + text.slice(1);
+  }
+
+  ricerca(param: NgForm){
+    const element = (this.elementoCercato || '').trim()
+    if(!element) return
+    this.router.navigate(['ricerca'], {queryParams: {q:element}})
   }
 }

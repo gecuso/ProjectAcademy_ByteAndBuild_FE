@@ -35,6 +35,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
 import { ListaProdottiComponent } from './componenti/lista-prodotti/lista-prodotti.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { RicercaComponent } from './componenti/ricerca/ricerca.component';
 
 
 
@@ -59,7 +60,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     LavoraConNoiComponent,
     ProdottiComponentComponent,
     DettagliUtenteComponent,
-    ListaProdottiComponent
+    ListaProdottiComponent,
+    RicercaComponent
   ],
   imports: [
     BrowserModule,

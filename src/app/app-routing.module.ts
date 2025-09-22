@@ -12,8 +12,8 @@ import { DettagliUtenteComponent } from './componenti/dettagli-utente/dettagli-u
 import { RegisterComponent } from './componenti/register/register.component';
 import { LoginComponent } from './login/login.component';
 import { authGuard } from './auth/auth.guard';
-import { authAdminGuard } from './auth/auth-admin.guard';
 import { ListaProdottiComponent } from './componenti/lista-prodotti/lista-prodotti.component';
+import { RicercaComponent } from './componenti/ricerca/ricerca.component';
 
 
 const routes: Routes = [
@@ -27,6 +27,7 @@ const routes: Routes = [
   {path: 'laptop', component:LaptopComponent},
   {path:'404', component:NotfoundComponent},
   {path:'profile', component:ProfileComponent},
+  {path:'ricerca/:descrizione', component:RicercaComponent},
   {path:'dettagliUtente', component:DettagliUtenteComponent, canActivate:[authGuard]},
   {path:'dettaglio/:id', component:DettaglioProdottoComponent, canActivate:[authGuard] },
   {path:'listaProdotti/:id', component:ListaProdottiComponent},
