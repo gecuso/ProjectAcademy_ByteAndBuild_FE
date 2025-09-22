@@ -55,9 +55,9 @@ searchTerm: string = "";
   return text.charAt(0).toUpperCase() + text.slice(1);
   }
 
-  ricerca(param: NgForm){
+  ricerca(){
     const element = (this.elementoCercato || '').trim()
-    if(!element) return
-    this.router.navigate(['ricerca'], {queryParams: {q:element}})
+    if(!element) return;
+    this.router.navigate(['/ricerca'], {queryParams: {descrizione:element}})
   }
 }

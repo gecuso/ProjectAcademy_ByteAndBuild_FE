@@ -11,13 +11,13 @@
 
       <!-- Search bar (al centro, cresce) -->
       <form class="flex-grow-1 mx-3 position-relative" style="max-width: 900px" #param="ngForm" 
-      (ngSubmit)="ricerca(param)" 
+      (ngSubmit)="ricerca()" 
         >
         <input
           class="form-control rounded-pill"
           type="search"
           placeholder="Cosa cerchi?"
-          [(ngModel)]="searchTerm"
+          [(ngModel)]="elementoCercato"
           name="search"
           style="padding-left: 40px"
         />

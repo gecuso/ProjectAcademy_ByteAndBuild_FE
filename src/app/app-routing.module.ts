@@ -27,7 +27,7 @@ const routes: Routes = [
   {path: 'laptop', component:LaptopComponent},
   {path:'404', component:NotfoundComponent},
   {path:'profile', component:ProfileComponent},
-  {path:'ricerca/:descrizione', component:RicercaComponent},
+  {path:'ricerca', component:RicercaComponent},
   {path:'dettagliUtente', component:DettagliUtenteComponent, canActivate:[authGuard]},
   {path:'dettaglio/:id', component:DettaglioProdottoComponent, canActivate:[authGuard] },
   {path:'listaProdotti/:id', component:ListaProdottiComponent},

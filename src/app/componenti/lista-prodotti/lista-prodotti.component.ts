@@ -28,7 +28,6 @@ export class ListaProdottiComponent implements OnInit {
         this.listaProdottiService.getAllByIdCategoria(id).subscribe((resp: any) => {
           console.log("Prodotti categoria:", id, resp);
           this.prodotti = resp.dati;
-          
           const marcheSet = new Set(
             this.prodotti
             .map(p => p.marca?.descrizione)  // estraggo le marche
