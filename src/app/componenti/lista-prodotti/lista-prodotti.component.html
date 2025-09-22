@@ -9,7 +9,7 @@
           [value]="marca"
           class="d-block mb-2"
         >
-          {{ marca }}
+          {{ capitalize(marca) }}
         </mat-radio-button>
       </mat-radio-group>
 
@@ -46,7 +46,7 @@
                 [routerLink]="['/dettaglio', p.id]"
                 class="text-decoration-none text-dark"
               >
-                <mat-card-title>{{ p.descrizione }}</mat-card-title>
+                <mat-card-title><h5>{{ p.descrizione }}</h5></mat-card-title>
               </a>
             </mat-card-content>
 

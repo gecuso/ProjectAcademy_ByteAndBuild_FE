@@ -12,7 +12,7 @@ mat-card-header {
 
 /* Immagine prodotto: dimensione fissa e uniforme */
 a img[mat-card-image] {
-  width: 100%;
+  width: 240px;
   height: 240px;             /* Altezza fissa per coerenza */
   object-fit: contain;       /* Adatta l’immagine senza tagliarla */
   display: block;
