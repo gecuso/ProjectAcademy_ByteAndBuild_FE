@@ -5,7 +5,6 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-
 @Component({
   selector: 'app-dettagli-utente',
   standalone: false,
@@ -15,7 +14,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class DettagliUtenteComponent implements OnInit {
   isAdmin: boolean = false;
   utente: any = null; // <-- dati dell’utente
-  
 
   constructor(
     private authService: AuthService,
@@ -24,8 +22,7 @@ export class DettagliUtenteComponent implements OnInit {
     private fb: FormBuilder
   ) {}
 
-  updateUserForm!: FormGroup
-
+  updateUserForm!: FormGroup;
 
   ngOnInit() {
     this.authService.isAdmin$.subscribe((isAdmin) => {
@@ -40,15 +37,15 @@ export class DettagliUtenteComponent implements OnInit {
             this.utente = resp.dati;
             console.log(this.utente);
             this.updateUserForm = this.fb.group({
-            userName: [this.utente.userName, Validators.required],
-            indirizzo: [this.utente.indirizzo],
-            telefono: [this.utente.telefono],
-            email: [this.utente.email],
-            pwd: [this.utente.pwd]
-          });
+              userName: [this.utente.userName, Validators.required],
+              indirizzo: [this.utente.indirizzo],
+              telefono: [this.utente.telefono],
+              email: [this.utente.email],
+              pwd: [''], // nuova password (opzionale)
+              confirmPwd: [''], // conferma (opzionale)
+            });
           } else {
             console.error('Errore API:', resp.msg);
-            
           }
         },
         error: (err: HttpErrorResponse) => {
@@ -86,37 +83,43 @@ export class DettagliUtenteComponent implements OnInit {
     }
   }
   saveUserChanges() {
-  if (this.updateUserForm.invalid) {
-    alert('Compila tutti i campi obbligatori!');
-    return;
-  }
+    const values = this.updateUserForm.value;
 
-  const updatedUser = {
-   id: +(localStorage.getItem('userId') ?? 0),
-    userName: this.updateUserForm.value.userName,
-    indirizzo: this.updateUserForm.value.indirizzo,
-    telefono: this.updateUserForm.value.telefono,
-    email: this.updateUserForm.value.email,
-    pwd: this.updateUserForm.value.pwd,
-    role: this.utente.role // mantiene il ruolo che ha già
-  };
-
-  this.utenteService.updateUser(updatedUser).subscribe({
-    next: (resp: any) => {
-      if (resp.rc) {
-        alert('Profilo aggiornato con successo!');
-        this.utente = { ...this.utente, ...updatedUser }; // aggiorna localmente
-        this.closeModalUpdateUtente();
-      } else {
-        alert('Errore: ' + resp.msg);
-      }
-    },
-    error: (err: HttpErrorResponse) => {
-      alert('Errore durante l\'aggiornamento: ' + err.message);
+    if (!values.pwd || !values.confirmPwd) {
+      alert('Inserisci la nuova password e confermala.');
+      return;
     }
-  });
-}
 
+    if (values.pwd !== values.confirmPwd) {
+      alert('Le password non corrispondono.');
+      return;
+    }
+
+    const updatedUser = {
+      id: +(localStorage.getItem('userId') ?? 0),
+      userName: values.userName,
+      indirizzo: values.indirizzo,
+      telefono: values.telefono,
+      email: values.email,
+      pwd: values.pwd,
+      role: this.utente.role,
+    };
+
+    this.utenteService.updateUser(updatedUser).subscribe({
+      next: (resp: any) => {
+        if (resp.rc) {
+          alert('Profilo aggiornato con successo!');
+          this.utente = { ...this.utente, ...updatedUser };
+          this.closeModalUpdateUtente();
+        } else {
+          alert('Errore: ' + resp.msg);
+        }
+      },
+      error: (err: HttpErrorResponse) => {
+        alert("Errore durante l'aggiornamento: " + err.message);
+      },
+    });
+  }
 
   /* UTENTE */
   showModalUpdateUtente = false;
@@ -132,6 +135,10 @@ export class DettagliUtenteComponent implements OnInit {
   /* UTENTE */
   openModalUpdateUtente() {
     this.showModalUpdateUtente = true;
+    this.updateUserForm.patchValue({
+    pwd: '',
+    confirmPwd: ''
+  });
   }
 
   closeModalUpdateUtente() {
