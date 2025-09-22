@@ -27,6 +27,7 @@ const routes: Routes = [
   {path:'profile', component:ProfileComponent},
   {path:'dettagliUtente', component:DettagliUtenteComponent, canActivate:[authGuard]},
   {path:'dettaglio/:id', component:DettaglioProdottoComponent, canActivate:[authGuard] },
+  {path:'listaProdotti', component:ListaProdottiComponent},
   {path:'listaProdotti/:id', component:ListaProdottiComponent},
   {path:'**', redirectTo:'404'}
 ];

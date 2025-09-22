@@ -5,7 +5,10 @@
       <h5>Filtra per marca</h5>
       <mat-radio-group [(ngModel)]="marcaSelezionata">
         <mat-radio-button
-          *ngFor="let marca of marche"
+          *ngFor="
+            let marca of marche
+              | slice : 0 : (mostraTutteLeMarche ? marche.length : 5)
+          "
           [value]="marca"
           class="d-block mb-2"
         >
@@ -13,40 +16,82 @@
         </mat-radio-button>
       </mat-radio-group>
 
-      <div class="d-flex align-items-center gap-2 mb-3">
-        <mat-form-field appearance="fill" style="width: 100px">
-          <mat-label>Min</mat-label>
-          <input matInput type="number" />
-        </mat-form-field>
+      <button
+        *ngIf="marche.length > 5"
+        type="button"
+        class="btn custom-btn"
+        (click)="mostraTutteLeMarche = !mostraTutteLeMarche"
+      >
+        {{ mostraTutteLeMarche ? "Mostra meno" : "Mostra tutto" }}
+      </button>
 
-        <mat-form-field appearance="fill" style="width: 100px">
-          <mat-label>Max</mat-label>
-          <input matInput type="number" />
-        </mat-form-field>
+      <hr class="my-3" />
+      <!--linea divisoria-->
+      <div *ngIf="!idParam">
+        <h5>Filtra per categoria</h5>
+        <mat-radio-group [(ngModel)]="categoriaSelezionata">
+          <mat-radio-button
+            *ngFor="
+              let categoria of categorie
+                | slice : 0 : (mostraTutteLeCategorie ? categorie.length : 5)
+            "
+            [value]="categoria"
+            class="d-block mb-2"
+          >
+            {{ capitalize(categoria) }}
+          </mat-radio-button>
+        </mat-radio-group>
+
+        <button
+          *ngIf="categorie.length > 5"
+          type="button"
+          class="btn custom-btn"
+          (click)="mostraTutteLeCategorie = !mostraTutteLeCategorie"
+        >
+          {{ mostraTutteLeCategorie ? "Mostra meno" : "Mostra tutto" }}
+        </button>
+        <hr class="my-3" />
+        </div>
+        <!--linea divisoria-->
+        <div class="d-flex align-items-center gap-2 mb-3">
+          <mat-form-field appearance="fill" style="width: 100px">
+            <mat-label>Min</mat-label>
+            <input matInput type="number" />
+          </mat-form-field>
+
+          <mat-form-field appearance="fill" style="width: 100px">
+            <mat-label>Max</mat-label>
+            <input matInput type="number" />
+          </mat-form-field>
+        </div>
+
+        <mat-slider min="200" max="500">
+          <input value="300" matSliderStartThumb />
+          <input value="400" matSliderEndThumb />
+        </mat-slider>
       </div>
 
-      <mat-slider min="200" max="500">
-        <input value="300" matSliderStartThumb />
-        <input value="400" matSliderEndThumb />
-      </mat-slider>
-    </div>
+      <!-- Colonna destra con i prodotti -->
+      <div class="col-md-9">
+        <!-- titolo categoria -->
+        <h2 *ngIf="prodotti.length > 0">
+          {{
+            idParam
+              ? capitalize(prodotti[0].categoria.descrizione)
+              : "Tutti i prodotti"
+          }}
+        </h2>
 
-    <!-- Colonna destra con i prodotti -->
-    <div class="col-md-9">
-      <!-- titolo categoria -->
-      <h2 *ngIf="prodotti.length > 0">
-        {{ capitalize(prodotti[0].categoria.descrizione) }}
-      </h2>
-
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
-        <div class="prodotto-card" *ngFor="let p of prodottiFiltrati">
-          <mat-card-content class="descrizione">
-            
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+          <div class="prodotto-card" *ngFor="let p of prodottiFiltrati">
+            <mat-card-content class="descrizione">
               <a
                 [routerLink]="['/dettaglio', p.id]"
                 class="text-decoration-none text-dark"
               >
-                <mat-card-title><strong>{{ p.descrizione }}</strong></mat-card-title>
+                <mat-card-title
+                  ><strong>{{ p.descrizione }}</strong></mat-card-title
+                >
               </a>
             </mat-card-content>
 
@@ -97,8 +142,9 @@
                 Non disponibile
               </button>
             </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+

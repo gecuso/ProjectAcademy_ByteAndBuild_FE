@@ -52,4 +52,6 @@
   transition: background-color .25s ease, transform .2s ease;
 }
 
-
+.text-custom-blue {
+  color: #115999;
+}

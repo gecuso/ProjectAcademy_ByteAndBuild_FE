@@ -17,23 +17,30 @@ export class NavbarComponent implements OnInit, OnDestroy {
   categorie: Categoria[] = [];
   private authSub!: Subscription;
 
-  constructor(private authService: AuthService, private router: Router, private categoriaService: CategoriaService,) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private categoriaService: CategoriaService
+  ) {}
 
   ngOnInit(): void {
     this.authSub = this.authService.isLogged$.subscribe((status) => {
       this.isLoggedIn = status;
     });
-    
+
     this.categoriaService.getCategorie().subscribe({
       next: (categorie) => {
-        this.categorie = categorie;
+        // Inserisce "Tutti i prodotti" in cima alla lista
+        this.categorie = [
+          { id: null, descrizione: 'Tutti i prodotti' },
+          ...categorie,
+        ];
       },
       error: (err) => {
         console.error('Errore nel caricamento categorie:', err);
-      }
+      },
     });
   }
-  
 
   logout(): void {
     this.authService.resetAll();
@@ -41,15 +48,16 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if (this.authSub) this.authSub.unsubscribe(); 
+    if (this.authSub) this.authSub.unsubscribe();
     // con subscribe() (per ascoltare se l’utente è loggato o no)
-    // Angular continua ad ascoltare anche dopo che il componente è chiuso. 
+    // Angular continua ad ascoltare anche dopo che il componente è chiuso.
     // con onDestroy e usubscribe smette di "ascoltare se l'utente è loggato o no" evitando utilizzo di
     // memoria inutile
   }
 
-  capitalize(text: string): string {  //funzione per mettere la prima lettera MAIUSCOLA
-  if (!text) return '';
-  return text.charAt(0).toUpperCase() + text.slice(1);
+  capitalize(text: string): string {
+    //funzione per mettere la prima lettera MAIUSCOLA
+    if (!text) return '';
+    return text.charAt(0).toUpperCase() + text.slice(1);
   }
 }
