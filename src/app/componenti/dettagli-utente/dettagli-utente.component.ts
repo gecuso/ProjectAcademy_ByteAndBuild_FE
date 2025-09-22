@@ -4,6 +4,10 @@ import { AuthService } from '../../auth/auth.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Categoria, CategoriaService } from '../../services/categoria.service';
+import { Marca, MarcaService } from '../../services/marca.service';
+import { ProdottoService } from '../../services/prodotto.service';
+
 
 @Component({
   selector: 'app-dettagli-utente',
@@ -12,14 +16,24 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./dettagli-utente.component.css'],
 })
 export class DettagliUtenteComponent implements OnInit {
+onSubmit() {
+throw new Error('Method not implemented.');
+}
   isAdmin: boolean = false;
   utente: any = null; // <-- dati dell’utente
+  prodottoForm!: FormGroup;
+  categorie: Categoria[] = []; // array per le categorie
+  marche: Marca[] = [];     // array per le marche
+  
 
   constructor(
     private authService: AuthService,
     private utenteService: UtenteService,
     private router: Router,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private categoriaService: CategoriaService,
+    private marcaService: MarcaService,
+    private prodottoService: ProdottoService
   ) {}
 
   updateUserForm!: FormGroup;
@@ -46,6 +60,7 @@ export class DettagliUtenteComponent implements OnInit {
             });
           } else {
             console.error('Errore API:', resp.msg);
+            
           }
         },
         error: (err: HttpErrorResponse) => {
@@ -55,6 +70,46 @@ export class DettagliUtenteComponent implements OnInit {
     } else {
       console.warn('Nessun ID utente trovato nel localStorage');
     }
+    
+    // Inizializzo il form del prodotto
+    this.prodottoForm = this.fb.group({
+      descrizione: ['', Validators.required],  // Campo descrizione, obbligatorio
+      costo: [0, Validators.required],         // Campo costo, inizializzato a 0, obbligatorio
+      prezzo: [0, Validators.required],        // Campo prezzo, inizializzato a 0, obbligatorio
+      quantita: [0, Validators.required],      // Campo quantità, inizializzato a 0, obbligatorio
+      img: ['', Validators.required],          // Campo immagine, obbligatorio
+      idCategoria: [null, Validators.required],// Campo categoria, inizializzato a null, obbligatorio
+      idMarca: [null, Validators.required]     // Campo marca, inizializzato a null, obbligatorio
+    });
+
+    // Carico le categorie dal backend
+    this.categoriaService.getCategorie().subscribe({
+      next: cats => this.categorie = cats,                    // Quando arrivano i dati, li salvo in this.categorie
+      error: err => console.error('Errore categorie:', err)   // Se c’è un errore, lo stampo in console
+    });
+
+    // Osservo il cambio di categoria selezionata
+    this.prodottoForm.get('idCategoria')?.valueChanges.subscribe(idCat => {
+      if (idCat) {
+        // Se è stata selezionata una categoria, carico le marche corrispondenti
+        this.marcaService.getMarcheByCategoria(idCat).subscribe({
+          next: brands => {
+            // Filtra le marche che contengono la categoria selezionata
+            this.marche = brands.filter(marca => 
+              marca.categoria.some((cat: Categoria) => cat.id === idCat)
+            );
+            // Resetta il campo marca, l’utente dovrà selezionarla di nuovo
+            this.prodottoForm.patchValue({ idMarca: null });
+          },
+          error: err => console.error('Errore marche:', err) // Stampa eventuali errori
+        });
+      } else {
+        // Se nessuna categoria è selezionata, svuoto le marche e resetto il campo marca
+        this.marche = [];
+        this.prodottoForm.patchValue({ idMarca: null });
+      }
+    });
+
   }
 
   deleteUser() {
@@ -121,6 +176,49 @@ export class DettagliUtenteComponent implements OnInit {
     });
   }
 
+  addProdotto() {
+  // Controlla che il form sia valido
+  if (this.prodottoForm.invalid) {
+    this.prodottoForm.markAllAsTouched(); // Mostra tutti gli errori
+    return;
+  }
+
+  // Prende i valori dal form
+  const nuovoProdotto = this.prodottoForm.value;
+  console.log('Nuovo prodotto da salvare:', nuovoProdotto);
+
+  // Chiamata al servizio per creare il prodotto
+  this.prodottoService.create(nuovoProdotto).subscribe({
+    next: (resp: any) => {
+      if (resp.rc) {
+        // Successo
+        alert('Prodotto aggiunto con successo!');
+        // Reset del form
+        this.prodottoForm.reset({
+          descrizione: '',
+          costo: 0,
+          prezzo: 0,
+          quantita: 0,
+          img: '',
+          idCategoria: null,
+          idMarca: null
+        });
+        // Chiude il modal
+        this.closeModalAddProdotto();
+      } else {
+        // Errore gestito dal backend
+        alert('Errore: ' + resp.msg);
+      }
+    },
+    error: (err) => {
+      // Errore lato client/server
+      console.error('Errore nel salvataggio del prodotto:', err);
+      alert('Si è verificato un errore durante il salvataggio.');
+    }
+  });
+}
+
+
   /* UTENTE */
   showModalUpdateUtente = false;
   showModalDeleteUtente = false;
@@ -166,6 +264,8 @@ export class DettagliUtenteComponent implements OnInit {
   openModalAddProdotto() {
     this.showModalAddProdotto = true;
   }
+
+
 
   closeModalAddProdotto() {
     this.showModalAddProdotto = false;
