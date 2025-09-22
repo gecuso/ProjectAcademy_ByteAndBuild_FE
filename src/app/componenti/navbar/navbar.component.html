@@ -55,26 +55,26 @@
           *ngFor="let voce of categorie"
           [routerLink]="'/listaProdotti/' + voce.id"
         >
-          {{ voce.descrizione }}
+          {{ capitalize(voce.descrizione) }}
         </button>
       </mat-menu>
 
       <!-- Link pagine -->
       <ul class="navbar-nav d-flex flex-row flex-wrap gap-3 mb-0">
         <li class="nav-item">
-          <a class="nav-link px-2" routerLink="/pagina1">Pc gaming</a>
+          <a class="nav-link px-2" routerLink="/listaProdotti/13">Pc gaming</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link px-2" routerLink="/pagina2">Mouse</a>
+          <a class="nav-link px-2" routerLink="/listaProdotti/7">Mouse</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link px-2" routerLink="/pagina3">Tastiere</a>
+          <a class="nav-link px-2" routerLink="/listaProdotti/12">Tastiere</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link px-2" routerLink="/laptop">Laptop</a>
+          <a class="nav-link px-2" routerLink="/listaProdotti/4">Laptop</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link px-2" routerLink="/pagina3">Cuffie</a>
+          <a class="nav-link px-2" routerLink="/listaProdotti/6">Monitor</a>
         </li>
         <li class="nav-item"><span class="nav-link px-2">|</span></li>
         <li class="nav-item">

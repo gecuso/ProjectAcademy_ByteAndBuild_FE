@@ -47,4 +47,9 @@ export class NavbarComponent implements OnInit, OnDestroy {
     // con onDestroy e usubscribe smette di "ascoltare se l'utente è loggato o no" evitando utilizzo di
     // memoria inutile
   }
+
+  capitalize(text: string): string {  //funzione per mettere la prima lettera MAIUSCOLA
+  if (!text) return '';
+  return text.charAt(0).toUpperCase() + text.slice(1);
+  }
 }

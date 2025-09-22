@@ -47,4 +47,11 @@ export class ListaProdottiComponent implements OnInit {
     }
     return this.prodotti.filter(p => p.marca?.descrizione === this.marcaSelezionata);
   }
+
+  capitalize(text: string): string {  //funzione per mettere la prima lettera MAIUSCOLA
+  if (!text) return '';
+  return text.charAt(0).toUpperCase() + text.slice(1);
 }
+}
+
+
