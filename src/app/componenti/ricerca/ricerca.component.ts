@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import { ListaProdottiService } from '../../services/lista-prodotti.service';
+import { Subscription } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-ricerca',
@@ -9,23 +10,75 @@ import { ListaProdottiService } from '../../services/lista-prodotti.service';
   styleUrl: './ricerca.component.css'
 })
 export class RicercaComponent implements OnInit{
-
-  elementoCercato = "";
+  // proprietà legate al template
+  marcaSelezionata: string = 'Tutte';
+  marche: string[] = [];
+  mostraTutteLeMarche = false;
+  idParam: string | null = null; // per passare id
   prodotti: any[] = [];
+  elementoCercato = "";
 
-constructor(private route: ActivatedRoute, private service:ListaProdottiService){}
+  categoriaSelezionata: string = 'Tutte';
+  categorie: string[] = [];
+  mostraTutteLeCategorie = false;
+
+  // Subscription aggregator (per fare unsubscribe in ngOnDestroy)
+  private subs = new Subscription();
+
+  constructor(private listaProdottiService: ListaProdottiService, private route:ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.elementoCercato = this.route.snapshot.queryParamMap.get('descrizione') || '';
-    console.log("Stampa quello che cerchi --> " + this.elementoCercato)
-    if(this.elementoCercato){
-      this.service.listByFilter(this.elementoCercato).subscribe((resp:any)=>{
-        this.prodotti = resp.dati
-        console.log(this.prodotti)
-      })
-    }
+    // carica i risultati iniziali
+        this.elementoCercato = this.route.snapshot.queryParamMap.get('descrizione') || '';
+    this.listaProdottiService.listByFilter(this.elementoCercato).subscribe(
+      (resp: any) => {
+        this.prodotti = resp.dati;
+        this.setupMarche();
+        this.setupCategorie();
+      }
+    );
   }
 
+  setupMarche(): void {
+    const marcheSet = new Set(
+      this.prodotti.map((p) => p.marca?.descrizione).filter((m) => !!m)
+    );
+    this.marche = ['Tutte', ...Array.from(marcheSet)];
+  }
 
+  setupCategorie(): void {
+    const categorieSet = new Set(
+      this.prodotti.map((p) => p.categoria?.descrizione).filter((c) => !!c)
+    );
+    this.categorie = ['Tutte', ...Array.from(categorieSet)];
+  }
 
+  get prodottiFiltrati() {
+    // fallback lato-client: filtra ulteriormente i prodotti se necessario
+    let filtri = this.prodotti;
+
+    if (this.marcaSelezionata !== 'Tutte') {
+      filtri = filtri.filter(
+        (p) => p.marca?.descrizione === this.marcaSelezionata
+      );
+    }
+
+    if (this.categoriaSelezionata && this.categoriaSelezionata !== 'Tutte') {
+      filtri = filtri.filter(
+        (p) => p.categoria?.descrizione === this.categoriaSelezionata
+      );
+    }
+
+    return filtri;
+  }
+
+  capitalize(text: string): string {
+    if (!text) return '';
+    return text.charAt(0).toUpperCase() + text.slice(1);
+  }
+
+  ngOnDestroy(): void {
+    // cancella tutte le subscription accumulate
+    this.subs.unsubscribe();
+  }
 }

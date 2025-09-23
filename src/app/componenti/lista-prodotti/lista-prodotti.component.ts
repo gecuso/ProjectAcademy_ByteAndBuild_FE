@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ListaProdottiService } from '../../services/lista-prodotti.service';
-import { NavbarComponent } from '../navbar/navbar.component';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
