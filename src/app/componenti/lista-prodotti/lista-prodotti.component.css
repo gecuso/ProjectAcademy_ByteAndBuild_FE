@@ -20,8 +20,12 @@ a img[mat-card-image] {
 
 /* Descrizione: altezza fissa o minima */
 mat-card-content.descrizione {
-  min-height: 60px;          /* Puoi usare anche height: 60px se vuoi rigidità */
+  font-size: 1rem;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
   overflow: hidden;
+  text-overflow: ellipsis;
+  min-height: 3rem;      
 }
 
 /* Quantità disponibile: altezza minima coerente */

@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 
 export interface Categoria {
-  id: number;
+  id: number | null;
   descrizione: string;
 }
 
