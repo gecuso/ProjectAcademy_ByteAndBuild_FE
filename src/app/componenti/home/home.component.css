@@ -55,3 +55,93 @@
 .text-custom-blue {
   color: #115999;
 }
+
+/* Card container: altezza 100%, layout flessibile verticale */
+mat-card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header con altezza minima coerente */
+mat-card-header {
+  min-height: 50px;
+}
+
+/* Immagine prodotto: dimensione fissa e uniforme */
+a img[mat-card-image] {
+  width: 100%;
+  height: 240px;             /* Altezza fissa per coerenza */
+  object-fit: contain;       /* Adatta l’immagine senza tagliarla */
+  display: block;
+}
+
+/* Descrizione: altezza fissa o minima */
+mat-card-content.descrizione {
+  font-size: 1rem;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-height: 3rem;      
+}
+
+/* Quantità disponibile: altezza minima coerente */
+mat-card-content.quantita {
+  min-height: 30px;
+}
+
+/* Footer: sempre in fondo alla card */
+.card-footer {
+  margin-top: auto;          /* Spinge il footer in fondo */
+}
+
+/* Pulsante "Acquista" personalizzato */
+.custom-btn {
+  background-color: #115999;
+  color: white;
+  border: none;
+}
+
+.custom-btn:hover {
+  background-color: #063a68;
+}
+
+/* Prezzo */
+.prezzo {
+  font-weight: bold;
+  font-size: 1.1rem;
+  color: #333;
+}
+
+/* Slider */
+mat-slider {
+  width: 150px;
+}
+
+/* Filtri */
+.example-radio-group {
+  display: flex;
+  flex-direction: column;
+  margin: 15px 0;
+  align-items: flex-start;
+}
+
+.example-radio-button {
+  margin: 5px;
+}
+.background-section {
+  background-color: #ece0ff; /* colore azzurro chiaro, puoi cambiare */
+  /* oppure usa un'immagine di sfondo */
+  /* background-image: url('path-to-image.jpg'); */
+  /* background-size: cover; */
+  /* background-position: center; */
+
+  padding: 20px;  /* padding interno */
+  border-radius: 10px; /* angoli arrotondati */
+}
+
+.prodotto-card {
+  background-color: white;
+  flex-direction: column;
+}
