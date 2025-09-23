@@ -28,15 +28,26 @@ export class RicercaComponent implements OnInit{
   constructor(private listaProdottiService: ListaProdottiService, private route:ActivatedRoute) {}
 
   ngOnInit(): void {
-    // carica i risultati iniziali
-        this.elementoCercato = this.route.snapshot.queryParamMap.get('descrizione') || '';
-    this.listaProdottiService.listByFilter(this.elementoCercato).subscribe(
-      (resp: any) => {
-        this.prodotti = resp.dati;
-        this.setupMarche();
-        this.setupCategorie();
-      }
-    );
+
+  this.subs.add(
+    this.route.queryParamMap.subscribe(params => {
+      const descr = params.get('descrizione') || '';
+      // evita chiamata inutile se è uguale a prima
+      if (descr === this.elementoCercato) return;
+
+      this.elementoCercato = descr;
+
+      // chiamata al servizio per ricaricare i prodotti
+      const s = this.listaProdottiService.listByFilter(this.elementoCercato)
+        .subscribe((resp: any) => {
+          this.prodotti = resp.dati || [];
+          this.setupMarche();
+          this.setupCategorie();
+        });
+      this.subs.add(s);
+    })
+  );
+
   }
 
   setupMarche(): void {
