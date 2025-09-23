@@ -7,6 +7,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Categoria, CategoriaService } from '../../services/categoria.service';
 import { Marca, MarcaService } from '../../services/marca.service';
 import { ProdottoService } from '../../services/prodotto.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ProdottoDialogComponent, ProdottoReq } from '../../dialogs/prodotto/dialog-prod/dialog-prod.component';
 
 
 @Component({
@@ -33,7 +35,8 @@ throw new Error('Method not implemented.');
     private fb: FormBuilder,
     private categoriaService: CategoriaService,
     private marcaService: MarcaService,
-    private prodottoService: ProdottoService
+    private prodottoService: ProdottoService,
+    private dialog: MatDialog
   ) {}
 
   updateUserForm!: FormGroup;
@@ -217,6 +220,17 @@ throw new Error('Method not implemented.');
     }
   });
 }
+openDialog() {
+  const dialogRef = this.dialog.open(ProdottoDialogComponent, {
+    width: '500px',
+    data: {} as ProdottoReq
+  });
+
+  dialogRef.afterClosed().subscribe(result => {
+    if (result) {
+      console.log('Prodotto salvato:', result);
+    }
+  });}
 
 
   /* UTENTE */

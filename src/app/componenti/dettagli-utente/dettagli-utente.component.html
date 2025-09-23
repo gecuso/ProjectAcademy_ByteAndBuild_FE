@@ -1,4 +1,4 @@
-<div class="container py-4">
+ <div class="container py-4">
   <div class="row">
     <div class="col-md-12">
       <div class="main-container">
@@ -54,64 +54,47 @@
             >
             <h4>Modifica utente</h4>
             <form [formGroup]="updateUserForm" (ngSubmit)="saveUserChanges()">
-              <h6>Nome Utente</h6>
-              <mat-form-field appearance="fill" class="full-width">
-                <mat-label>Inserire nuovo nome utente</mat-label>
-                <input matInput formControlName="userName" />
-              </mat-form-field>
+            <h6>Nome Utente</h6>
+            <mat-form-field appearance="fill" class="full-width">
+              <mat-label>Inserire nuovo nome utente</mat-label>
+              <input matInput formControlName="userName" />
+            </mat-form-field>
 
-              <h6>Indirizzo</h6>
-              <mat-form-field appearance="fill" class="full-width">
-                <mat-label>Inserire nuovo indirizzo</mat-label>
-                <input matInput formControlName="indirizzo" />
-              </mat-form-field>
+            <h6>Indirizzo</h6>
+            <mat-form-field appearance="fill" class="full-width">
+              <mat-label>Inserire nuovo indirizzo</mat-label>
+              <input matInput formControlName="indirizzo" />
+            </mat-form-field>
 
-              <h6>Telefono</h6>
-              <mat-form-field appearance="fill" class="full-width">
-                <mat-label>Inserire nuovo numero di telefono</mat-label>
-                <input matInput formControlName="telefono" />
-              </mat-form-field>
+            <h6>Telefono</h6>
+            <mat-form-field appearance="fill" class="full-width">
+              <mat-label>Inserire nuovo numero di telefono</mat-label>
+              <input matInput formControlName="telefono" />
+            </mat-form-field>
 
-              <h6>Email</h6>
-              <mat-form-field appearance="fill" class="full-width">
-                <mat-label>Inserire nuovo indirizzo email</mat-label>
-                <input matInput formControlName="email" />
-              </mat-form-field>
+            <h6>Email</h6>
+            <mat-form-field appearance="fill" class="full-width">
+              <mat-label>Inserire nuovo indirizzo email</mat-label>
+              <input matInput formControlName="email" />
+            </mat-form-field>
 
-              <h6>Nuova Password</h6>
-              <mat-form-field appearance="fill" class="full-width">
-                <mat-label>Inserisci nuova password</mat-label>
-                <input matInput formControlName="pwd" type="password" />
-              </mat-form-field>
+            <h6>Password</h6>
+            <mat-form-field appearance="fill" class="full-width">
+              <mat-label>Inserire nuova password</mat-label>
+              <input matInput formControlName="pwd" />
+            </mat-form-field>
 
-              <h6>Conferma Password</h6>
-              <mat-form-field appearance="fill" class="full-width">
-                <mat-label>Conferma nuova password</mat-label>
-                <input matInput formControlName="confirmPwd" type="password" />
-              </mat-form-field>
-
-              <!-- Mostra errore se non corrispondono -->
-              <div
-                *ngIf="
-                  updateUserForm.hasError('passwordMismatch') &&
-                  updateUserForm.touched
-                "
-                class="text-danger"
-              >
-                Le password non corrispondono.
-              </div>
-
-              <div class="user-actions">
-                <button class="custom-btn">Salva modifiche</button>
-                <button
+            <div class="user-actions">
+              <button class="custom-btn">Salva modifiche</button>
+              <button
                   class="custom-btn-danger"
                   type="button"
-                  (click)="closeModalUpdateUtente()"
-                >
-                  Annulla
-                </button>
-              </div>
-            </form>
+                (click)="closeModalUpdateUtente()"
+              >
+                Annulla
+              </button>
+            </div>
+          </form>
           </div>
         </div>
 
@@ -149,8 +132,8 @@
             <button class="custom-btn" (click)="openModalPC()">
               Creazione PC
             </button>
-            <button class="custom-btn" (click)="openModalAddProdotto()">
-              Aggiungi prodotto
+            <button mat-raised-button class="custom-btn" (click)="openDialog()">
+                Aggiungi Prodotto
             </button>
             <button class="custom-btn" (click)="openModalUpdateProdotto()">
               Modifica prodotto
@@ -246,93 +229,32 @@
 </div>
 
 <!-- Modale per "Aggiungi prodotto" -->
+<!--
 <div class="modal" *ngIf="showModalAddProdotto">
   <div class="modal-content">
     <span class="close-btn" (click)="closeModalAddProdotto()">&times;</span>
     <h4>Aggiungi Prodotto</h4>
 
-    <form [formGroup]="prodottoForm" (ngSubmit)="onSubmit()">
+    <h6>Placeholder</h6>
+    <mat-form-field appearance="fill">
+      <mat-label>Seleziona placeholder</mat-label>
+      <mat-select>
+        <mat-option value="1">Opzione 1</mat-option>
+        <mat-option value="2">Opzione 2</mat-option>
+      </mat-select>
+    </mat-form-field>
 
-      <!-- Descrizione -->
-      <mat-form-field appearance="fill" class="full-width">
-        <mat-label>Descrizione</mat-label>
-        <input matInput formControlName="descrizione" />
-        <mat-error *ngIf="prodottoForm.get('descrizione')?.invalid && prodottoForm.get('descrizione')?.touched">
-          La descrizione è obbligatoria
-        </mat-error>
-      </mat-form-field>
-
-      <!-- Costo -->
-      <mat-form-field appearance="fill" class="full-width">
-        <mat-label>Costo</mat-label>
-        <input matInput type="number" formControlName="costo" />
-        <mat-error *ngIf="prodottoForm.get('costo')?.invalid && prodottoForm.get('costo')?.touched">
-          Il costo è obbligatorio
-        </mat-error>
-      </mat-form-field>
-
-      <!-- Prezzo -->
-      <mat-form-field appearance="fill" class="full-width">
-        <mat-label>Prezzo</mat-label>
-        <input matInput type="number" formControlName="prezzo" />
-        <mat-error *ngIf="prodottoForm.get('prezzo')?.invalid && prodottoForm.get('prezzo')?.touched">
-          Il prezzo è obbligatorio
-        </mat-error>
-      </mat-form-field>
-
-      <!-- Quantità -->
-      <mat-form-field appearance="fill" class="full-width">
-        <mat-label>Quantità</mat-label>
-        <input matInput type="number" formControlName="quantita" />
-        <mat-error *ngIf="prodottoForm.get('quantita')?.invalid && prodottoForm.get('quantita')?.touched">
-          La quantità è obbligatoria
-        </mat-error>
-      </mat-form-field>
-
-      <!-- Immagine -->
-      <mat-form-field appearance="fill" class="full-width">
-        <mat-label>URL Immagine</mat-label>
-        <input matInput formControlName="img" />
-        <mat-error *ngIf="prodottoForm.get('img')?.invalid && prodottoForm.get('img')?.touched">
-          L'immagine è obbligatoria
-        </mat-error>
-      </mat-form-field>
-
-      <!-- Categoria -->
-      <mat-form-field appearance="fill" class="full-width">
-        <mat-label>Categoria</mat-label>
-        <mat-select formControlName="idCategoria">
-          <mat-option value="">-- Seleziona Categoria --</mat-option>
-          <mat-option *ngFor="let cat of categorie" [value]="cat.id">{{ cat.descrizione }}</mat-option>
-        </mat-select>
-        <mat-error *ngIf="prodottoForm.get('idCategoria')?.invalid && prodottoForm.get('idCategoria')?.touched">
-          La categoria è obbligatoria
-        </mat-error>
-      </mat-form-field>
-
-      <!-- Marca -->
-      <mat-form-field appearance="fill" class="full-width">
-        <mat-label>Marca</mat-label>
-        <mat-select formControlName="idMarca" [disabled]="!marche.length">
-          <mat-option value="">-- Seleziona Marca --</mat-option>
-          <mat-option *ngFor="let marca of marche" [value]="marca.id">{{ marca.descrizione }}</mat-option>
-        </mat-select>
-        <mat-error *ngIf="prodottoForm.get('idMarca')?.invalid && prodottoForm.get('idMarca')?.touched">
-          La marca è obbligatoria
-        </mat-error>
-      </mat-form-field>
-
-      <!-- Bottoni -->
-      <div class="user-actions">
-        <button class="custom-btn" type="button" (click)="addProdotto()" [disabled]="prodottoForm.invalid">Aggiungi prodotto</button>
-        <button class="custom-btn-danger" type="button" (click)="closeModalAddProdotto()">
-          Annulla
-        </button>
-      </div>
-
-    </form>
+    <div class="user-actions">
+      <button class="custom-btn">Aggiungi prodotto</button>
+      <button class="custom-btn-danger" (click)="closeModalAddProdotto()">
+        Annulla
+      </button>
+    </div>
   </div>
 </div>
+-->
+
+
 
 
 <!-- Modale per "Modifica prodotto" -->

@@ -8,7 +8,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ComponentiComponent } from './componenti/componenti.component';
 import { HomeComponent } from './componenti/home/home.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatIconModule} from '@angular/material/icon';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatBadgeModule} from '@angular/material/badge';
@@ -34,8 +34,7 @@ import { DettagliUtenteComponent } from './componenti/dettagli-utente/dettagli-u
 import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
 import { ListaProdottiComponent } from './componenti/lista-prodotti/lista-prodotti.component';
-import { ReactiveFormsModule } from '@angular/forms';
-
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 
@@ -59,7 +58,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     LavoraConNoiComponent,
     ProdottiComponentComponent,
     DettagliUtenteComponent,
-    ListaProdottiComponent
+    ListaProdottiComponent,
   ],
   imports: [
     BrowserModule,
@@ -76,7 +75,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatInputModule,
     MatSelectModule,
     MatOptionModule,
-    ReactiveFormsModule
+    MatDialogModule,
+    ReactiveFormsModule,
   ],
   providers: [provideHttpClient(withFetch())
   ],

@@ -1,0 +1,47 @@
+<h1 mat-dialog-title>Nuovo Prodotto</h1>
+
+<div mat-dialog-content>
+  <form [formGroup]="form" class="form-grid">
+    <mat-form-field appearance="fill">
+      <mat-label>Descrizione</mat-label>
+      <input matInput formControlName="descrizione" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Costo</mat-label>
+      <input matInput type="number" formControlName="costo" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Prezzo</mat-label>
+      <input matInput type="number" formControlName="prezzo" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Quantità</mat-label>
+      <input matInput type="number" formControlName="quantita" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Immagine (URL)</mat-label>
+      <input matInput formControlName="img" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Categoria</mat-label>
+      <input matInput type="number" formControlName="idCategoria" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Marca</mat-label>
+      <input matInput type="number" formControlName="idMarca" />
+    </mat-form-field>
+  </form>
+</div>
+
+<div mat-dialog-actions align="end">
+  <button mat-button (click)="onCancel()">Annulla</button>
+  <button mat-flat-button color="primary" (click)="onSave()" [disabled]="!form.valid">
+    Salva
+  </button>
+</div>

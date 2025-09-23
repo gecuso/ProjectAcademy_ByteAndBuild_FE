@@ -1,10 +1,11 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-categoria-modal',
   templateUrl: './categoria-modal.component.html',
-  styleUrls: ['./categoria-modal.component.css']
+  styleUrls: ['./categoria-modal.component.css'],
+  imports: [ReactiveFormsModule]
 })
 export class CategoriaModalComponent implements OnInit {
   @Input() categoria!: string;  // es. "alimentazione"
