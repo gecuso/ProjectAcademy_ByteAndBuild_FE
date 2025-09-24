@@ -1,0 +1,29 @@
+<h2 mat-dialog-title>Dati Scheda Grafica</h2>
+
+<mat-dialog-content>
+  <form [formGroup]="form" class="flex flex-col gap-4">
+
+    <mat-form-field appearance="outline">
+      <mat-label>Descrizione</mat-label>
+      <input matInput formControlName="descrizione" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Consumo (Watt)</mat-label>
+      <input matInput type="number" formControlName="consumo" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>ID Prodotto</mat-label>
+      <input matInput type="number" formControlName="idProdotto" />
+    </mat-form-field>
+
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="onCancel()">Annulla</button>
+  <button mat-flat-button color="primary" (click)="onSave()" [disabled]="!form.valid">
+    Salva
+  </button>
+</mat-dialog-actions>
