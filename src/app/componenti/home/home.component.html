@@ -79,6 +79,7 @@
     <span class="visually-hidden">Next</span>
   </button>
 </div>
+
 <div class="container-sm text-center my-5">
   <div class="row row-cols-2 row-cols-lg-4 g-3">
     <div class="col">
@@ -150,7 +151,6 @@
 
 <div class="background-section p-4 rounded">
   <div class="container">
-    <!-- Riga con titolo a sinistra e link a destra -->
     <div class="d-flex justify-content-between align-items-center mb-3">
       <h2><span class="text-custom-blue">PC</span> IN EVIDENZA</h2>
       <a class="fw-bold text-custom-blue" routerLink="/listaProdotti/13">
@@ -202,7 +202,7 @@
             <button
               *ngIf="p.quantita > 0"
               type="button"
-              class="btn custom-btn"
+              class="custom-btn"
               [routerLink]="['/dettaglio', p.id]"
             >
               Acquista
