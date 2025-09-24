@@ -157,7 +157,6 @@
         Vai a tutti i PC <i class="bi bi-arrow-right ms-1"></i>
       </a>
     </div>
-
     <div class="col-md-9 mx-auto">
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
         <div class="prodotto-card" *ngFor="let p of pcs | slice : 0 : 6">
@@ -227,14 +226,17 @@
 
 <div class="background-section2 p-4 rounded">
   <div class="container">
-    <!-- Riga con titolo a sinistra e link a destra -->
+    <!-- Titolo e link -->
     <div class="d-flex justify-content-between align-items-center mb-3">
       <h2><span class="text-custom-blue">ULTIMI</span> ARRIVI</h2>
       <a class="fw-bold text-custom-blue" routerLink="/listaProdotti">
         Vai a tutti i prodotti <i class="bi bi-arrow-right ms-1"></i>
       </a>
     </div>
+
+    <!-- Inizio carosello -->
     <div id="carouselExample" class="carousel slide">
+      <!-- Indicatori -->
       <div class="carousel-indicators">
         <button
           type="button"
@@ -257,34 +259,30 @@
           aria-label="Slide 3"
         ></button>
       </div>
+
+      <!-- Contenuto del carosello -->
       <div class="carousel-inner">
+
+        <!-- Slide 1 -->
         <div class="carousel-item active">
           <div class="col-md-9 mx-auto">
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
-              <div class="prodotto-card" *ngFor="let p of pcs | slice : 0 : 3">
+              <div
+                class="prodotto-card"
+                *ngFor="let p of prodotti | slice : 0 : 3"
+              >
                 <mat-card-content class="descrizione">
-                  <a
-                    [routerLink]="['/dettaglio', p.id]"
-                    class="text-decoration-none text-dark"
-                  >
-                    <mat-card-title
-                      ><strong>{{ p.descrizione }}</strong></mat-card-title
-                    >
+                  <a [routerLink]="['/dettaglio', p.id]" class="text-decoration-none text-dark">
+                    <mat-card-title><strong>{{ p.descrizione }}</strong></mat-card-title>
                   </a>
                 </mat-card-content>
 
-                <a
-                  [routerLink]="['/dettaglio', p.id]"
-                  class="text-decoration-none text-dark"
-                >
+                <a [routerLink]="['/dettaglio', p.id]" class="text-decoration-none text-dark">
                   <img mat-card-image [src]="p.img" [alt]="p.descrizione" />
                 </a>
 
                 <mat-card-content>
-                  <a
-                    [routerLink]="['/dettaglio', p.id]"
-                    class="text-decoration-none text-dark"
-                  >
+                  <a [routerLink]="['/dettaglio', p.id]" class="text-decoration-none text-dark">
                     <p>{{ p.descrizione }}</p>
                   </a>
                 </mat-card-content>
@@ -293,14 +291,10 @@
                   <p>Prodotti disponibili: {{ p.quantita }}</p>
                 </mat-card-content>
 
-                <div
-                  class="card-footer d-flex justify-content-between align-items-center mt-auto px-3 pb-3"
-                >
+                <div class="card-footer d-flex justify-content-between align-items-center mt-auto px-3 pb-3">
                   <div class="prezzo">
                     {{ p.prezzo | currency : "EUR" }}
                   </div>
-
-                  <!-- Bottone Acquista se disponibile -->
                   <button
                     *ngIf="p.quantita > 0"
                     type="button"
@@ -309,8 +303,6 @@
                   >
                     Acquista
                   </button>
-
-                  <!-- Bottone Non disponibile se quantità zero -->
                   <button
                     *ngIf="p.quantita === 0"
                     type="button"
@@ -324,74 +316,120 @@
             </div>
           </div>
         </div>
-      </div>
-      <div class="carousel-item">
-        <div class="col-md-9 mx-auto">
-          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
-            <div class="prodotto-card" *ngFor="let p of pcs | slice : 3 : 6">
-              <mat-card-content class="descrizione">
-                <a
-                  [routerLink]="['/dettaglio', p.id]"
-                  class="text-decoration-none text-dark"
-                >
-                  <mat-card-title
-                    ><strong>{{ p.descrizione }}</strong></mat-card-title
-                  >
-                </a>
-              </mat-card-content>
 
-              <a
-                [routerLink]="['/dettaglio', p.id]"
-                class="text-decoration-none text-dark"
-              >
-                <img mat-card-image [src]="p.img" [alt]="p.descrizione" />
-              </a>
-
-              <mat-card-content>
-                <a
-                  [routerLink]="['/dettaglio', p.id]"
-                  class="text-decoration-none text-dark"
-                >
-                  <p>{{ p.descrizione }}</p>
-                </a>
-              </mat-card-content>
-
-              <mat-card-content class="quantita">
-                <p>Prodotti disponibili: {{ p.quantita }}</p>
-              </mat-card-content>
-
+        <!-- Slide 2 -->
+        <div class="carousel-item">
+          <div class="col-md-9 mx-auto">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
               <div
-                class="card-footer d-flex justify-content-between align-items-center mt-auto px-3 pb-3"
+                class="prodotto-card"
+                *ngFor="let p of prodotti | slice : 3 : 6"
               >
-                <div class="prezzo">
-                  {{ p.prezzo | currency : "EUR" }}
+                <!-- Stessa struttura prodotto -->
+                <mat-card-content class="descrizione">
+                  <a [routerLink]="['/dettaglio', p.id]" class="text-decoration-none text-dark">
+                    <mat-card-title><strong>{{ p.descrizione }}</strong></mat-card-title>
+                  </a>
+                </mat-card-content>
+
+                <a [routerLink]="['/dettaglio', p.id]" class="text-decoration-none text-dark">
+                  <img mat-card-image [src]="p.img" [alt]="p.descrizione" />
+                </a>
+
+                <mat-card-content>
+                  <a [routerLink]="['/dettaglio', p.id]" class="text-decoration-none text-dark">
+                    <p>{{ p.descrizione }}</p>
+                  </a>
+                </mat-card-content>
+
+                <mat-card-content class="quantita">
+                  <p>Prodotti disponibili: {{ p.quantita }}</p>
+                </mat-card-content>
+
+                <div class="card-footer d-flex justify-content-between align-items-center mt-auto px-3 pb-3">
+                  <div class="prezzo">
+                    {{ p.prezzo | currency : "EUR" }}
+                  </div>
+                  <button
+                    *ngIf="p.quantita > 0"
+                    type="button"
+                    class="btn custom-btn"
+                    [routerLink]="['/dettaglio', p.id]"
+                  >
+                    Acquista
+                  </button>
+                  <button
+                    *ngIf="p.quantita === 0"
+                    type="button"
+                    class="btn btn-secondary"
+                    disabled
+                  >
+                    Non disponibile
+                  </button>
                 </div>
-
-                <!-- Bottone Acquista se disponibile -->
-                <button
-                  *ngIf="p.quantita > 0"
-                  type="button"
-                  class="btn custom-btn"
-                  [routerLink]="['/dettaglio', p.id]"
-                >
-                  Acquista
-                </button>
-
-                <!-- Bottone Non disponibile se quantità zero -->
-                <button
-                  *ngIf="p.quantita === 0"
-                  type="button"
-                  class="btn btn-secondary"
-                  disabled
-                >
-                  Non disponibile
-                </button>
               </div>
             </div>
           </div>
         </div>
+
+        <!-- Slide 3 -->
+        <div class="carousel-item">
+          <div class="col-md-9 mx-auto">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+              <div
+                class="prodotto-card"
+                *ngFor="let p of prodotti | slice : 6 : 9"
+              >
+                <!-- Stessa struttura prodotto -->
+                <mat-card-content class="descrizione">
+                  <a [routerLink]="['/dettaglio', p.id]" class="text-decoration-none text-dark">
+                    <mat-card-title><strong>{{ p.descrizione }}</strong></mat-card-title>
+                  </a>
+                </mat-card-content>
+
+                <a [routerLink]="['/dettaglio', p.id]" class="text-decoration-none text-dark">
+                  <img mat-card-image [src]="p.img" [alt]="p.descrizione" />
+                </a>
+
+                <mat-card-content>
+                  <a [routerLink]="['/dettaglio', p.id]" class="text-decoration-none text-dark">
+                    <p>{{ p.descrizione }}</p>
+                  </a>
+                </mat-card-content>
+
+                <mat-card-content class="quantita">
+                  <p>Prodotti disponibili: {{ p.quantita }}</p>
+                </mat-card-content>
+
+                <div class="card-footer d-flex justify-content-between align-items-center mt-auto px-3 pb-3">
+                  <div class="prezzo">
+                    {{ p.prezzo | currency : "EUR" }}
+                  </div>
+                  <button
+                    *ngIf="p.quantita > 0"
+                    type="button"
+                    class="btn custom-btn"
+                    [routerLink]="['/dettaglio', p.id]"
+                  >
+                    Acquista
+                  </button>
+                  <button
+                    *ngIf="p.quantita === 0"
+                    type="button"
+                    class="btn btn-secondary"
+                    disabled
+                  >
+                    Non disponibile
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
-      
+
+      <!-- Controlli -->
       <button
         class="carousel-control-prev"
         type="button"

@@ -10,6 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
   pcs: any[] = []; // Solo PC
+  prodotti: any[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -17,10 +18,17 @@ export class HomeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+  //PC
   this.listaProdottiService.getAllByIdCategoria(13).subscribe((resp: any) => {
     this.pcs = resp.dati;
   });
+
+  //prodotti
+  this.listaProdottiService.getAll().subscribe((resp: any) => {
+    this.prodotti = resp.dati;
+  });
 }
+
   capitalize(text: string): string {
     if (!text) return '';
     return text.charAt(0).toUpperCase() + text.slice(1);

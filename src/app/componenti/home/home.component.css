@@ -16,8 +16,8 @@
 }
 
 .carosel-me {
-  padding-right: 2em; /* o 0 */
-  padding-left: 2em; /* o 0 */
+  padding-right: 2em;
+  padding-left: 2em; 
 }
 
 .carousel-control-prev,
@@ -131,22 +131,12 @@ mat-slider {
   margin: 5px;
 }
 .background-section {
-  background-color: #ece0ff; /* colore azzurro chiaro, puoi cambiare */
-  /* oppure usa un'immagine di sfondo */
-  /* background-image: url('path-to-image.jpg'); */
-  /* background-size: cover; */
-  /* background-position: center; */
-
+  background-color: #ece0ff; 
   padding: 20px; /* padding interno */
   border-radius: 10px; /* angoli arrotondati */
 }
 .background-section2 {
-  background-color: #ffffff; /* colore azzurro chiaro, puoi cambiare */
-  /* oppure usa un'immagine di sfondo */
-  /* background-image: url('path-to-image.jpg'); */
-  /* background-size: cover; */
-  /* background-position: center; */
-
+  background-color: #ffffff; 
   padding: 20px; /* padding interno */
   border-radius: 10px; /* angoli arrotondati */
 }
