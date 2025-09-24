@@ -8,7 +8,18 @@ import { Marca, MarcaService } from '../../../services/marca.service';
 import { MatSelectModule } from "@angular/material/select";
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
-import { DialogAlimComponent } from '../../alimentazione/dialog-alim/dialog-alim.component';
+import { AlimentazioneReq, DialogAlimComponent } from '../../alimentazione/dialog-alim/dialog-alim.component';
+import { CaseReq, DialogCaseComponent } from '../../case/dialog-case/dialog-case.component';
+import { CpuReq, DialogCpuComponent } from '../../cpu/dialog-cpu/dialog-cpu.component';
+import { DialogLaptopComponent, LaptopReq } from '../../laptop/dialog-laptop/dialog-laptop.component';
+import { DialogMemoriaComponent, MemoriaReq } from '../../memoria/dialog-memoria/dialog-memoria.component';
+import { DialogMonitorComponent, MonitorReq } from '../../monitor/dialog-monitor/dialog-monitor.component';
+import { DialogMouseComponent, MouseReq } from '../../mouse/dialog-mouse/dialog-mouse.component';
+import { DialogRamComponent, RamReq } from '../../ram/dialog-ram/dialog-ram.component';
+import { DialogSchedaGraficaComponent, SchedaGraficaReq } from '../../schedaGrafica/dialog-scheda-grafica/dialog-scheda-grafica.component';
+import { DialogSchedaMadreComponent, SchedaMadreReq } from '../../schedaMadre/dialog-scheda-madre/dialog-scheda-madre.component';
+import { DialogSistemaRaffComponent, SistemaRaffreddamentoReq } from '../../sistemaRaffreddamento/dialog-sistema-raff/dialog-sistema-raff.component';
+import { DialogTastieraComponent, TastieraReq } from '../../tastiera/dialog-tastiera/dialog-tastiera.component';
 
 
 export interface ProdottoReq {
@@ -103,30 +114,47 @@ export class ProdottoDialogComponent {
   }
 
   openDialog() {
-
-    
     switch (this.cat) {
-      case 1: const dialogRef = this.dialog.open(DialogAlimComponent, {
-        width: '500px',
-        data: {} as ProdottoReq
-        });
+      case 1:  
+        this.openDialogAlim();
         break;
-       
-      //case 2: return 'case';
-      //case 3: return 'cpu';
-      //case 4: return 'laptop';
-      //case 5: return 'memoria';
-      //case 6: return 'monitor';
-      //case 7: return 'mouse';
-      //case 8: return 'ram';
-      //case 9: return 'schedaGrafica';
-      //case 10: return 'schedaMadre';
-      //case 11: return 'sistemaRaffreddamento';
-      //case 12: return 'tastiera';
-      //case 13: return 'pc';
-      
-      default: alert("Seleziona una categoria valida");
-    }
+      case 2:  
+        this.openDialogCase();
+        break;
+      case 3:  
+        this.openDialogCpu();
+        break;
+      case 4:  
+        this.openDialogLaptop();
+        break;
+      case 5:  
+        this.openDialogMemoria();
+        break;
+      case 6:  
+        this.openDialogMonitor();
+        break;
+      case 7:  
+        this.openDialogMouse();
+        break;
+      case 8:  
+        this.openDialogRam();
+        break;
+      case 9:  
+        this.openDialogSchedaGrafica();
+        break;
+      case 10:  
+        this.openDialogSchedaMadre();
+        break;
+      case 11:  
+        this.openDialogSistemaRaff();
+        break;
+      case 12:  
+        this.openDialogTastiera();
+        break;
+      default:
+        alert('Categoria non selezionata');
+        break;
+}
     
 
      //const dialogRef = this.dialog.open(DialogAlimComponent, {
@@ -140,4 +168,91 @@ export class ProdottoDialogComponent {
       }
     });}
 
+
+    openDialogAlim(): void{
+    const dialogRef = this.dialog.open(DialogAlimComponent, {
+            width: '500px',
+            data: {} as AlimentazioneReq
+              });
+    }
+      
+
+  openDialogCase(): void {
+    const dialogRef =this.dialog.open(DialogCaseComponent, {
+      width: '500px',
+      data: {} as CaseReq
+    });
+  }
+
+  openDialogCpu(): void {
+    const dialogRef = this.dialog.open(DialogCpuComponent, {
+      width: '500px',
+      data: {} as CpuReq
+    });
+  }
+
+  openDialogLaptop(): void {
+    const dialogRef =this.dialog.open(DialogLaptopComponent, {
+      width: '500px',
+      data: {} as LaptopReq
+    });
+  }
+
+  openDialogMemoria(): void {
+    const dialogRef =this.dialog.open(DialogMemoriaComponent, {
+      width: '500px',
+      data: {} as MemoriaReq
+    });
+  }
+
+  openDialogMonitor(): void {
+    const dialogRef = this.dialog.open(DialogMonitorComponent, {
+      width: '500px',
+      data: {} as MonitorReq
+    });
+  }
+
+  openDialogMouse(): void {
+    const dialogRef = this.dialog.open(DialogMouseComponent, {
+      width: '500px',
+      data: {} as MouseReq
+    });
+  }
+
+  openDialogRam(): void {
+    const dialogRef = this.dialog.open(DialogRamComponent, {
+      width: '500px',
+      data: {} as RamReq
+    });
+  }
+
+  openDialogSchedaGrafica(): void {
+    const dialogRef =this.dialog.open(DialogSchedaGraficaComponent, {
+      width: '500px',
+      data: {} as SchedaGraficaReq
+    });
+  }
+
+  openDialogSchedaMadre(): void {
+    const dialogRef =this.dialog.open(DialogSchedaMadreComponent, {
+      width: '500px',
+      data: {} as SchedaMadreReq
+    });
+  }
+
+  openDialogSistemaRaff(): void {
+    const dialogRef =this.dialog.open(DialogSistemaRaffComponent, {
+      width: '500px',
+      data: {} as SistemaRaffreddamentoReq
+    });
+  }
+
+  openDialogTastiera(): void {
+    const dialogRef =this.dialog.open(DialogTastieraComponent, {
+      width: '500px',
+      data: {} as TastieraReq
+    });
+  }
 }
+
+

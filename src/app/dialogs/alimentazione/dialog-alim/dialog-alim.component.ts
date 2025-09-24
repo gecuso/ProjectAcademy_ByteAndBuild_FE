@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialogModule, MatDialog } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from "@angular/material/select";
@@ -34,6 +34,7 @@ form: FormGroup;
   constructor(
     private fb: FormBuilder,
     public dialogRef: MatDialogRef<DialogAlimComponent>,
+
     @Inject(MAT_DIALOG_DATA) public data: AlimentazioneReq
   ) {
     this.form = this.fb.group({
@@ -55,4 +56,6 @@ form: FormGroup;
   onCancel(): void {
     this.dialogRef.close();
   }
+
+  
 }

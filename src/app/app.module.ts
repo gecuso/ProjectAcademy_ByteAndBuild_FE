@@ -35,14 +35,6 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
 import { ListaProdottiComponent } from './componenti/lista-prodotti/lista-prodotti.component';
 import { MatDialogModule } from '@angular/material/dialog';
-import { DialogAlimComponent } from './dialogs/alimentazione/dialog-alim/dialog-alim.component';
-import { DialogCaseComponent } from './dialogs/case/dialog-case/dialog-case.component';
-import { DialogCpuComponent } from './dialogs/case/dialog-cpu/dialog-cpu.component';
-import { DialogLaptopComponent } from './dialogs/laptop/dialog-laptop/dialog-laptop.component';
-import { DialogMemoriaComponent } from './dialogs/memoria/dialog-memoria/dialog-memoria.component';
-import { DialogMonitorComponent } from './dialogs/monitor/dialog-monitor/dialog-monitor.component';
-
-
 
 
 
@@ -65,11 +57,6 @@ import { DialogMonitorComponent } from './dialogs/monitor/dialog-monitor/dialog-
     ProdottiComponentComponent,
     DettagliUtenteComponent,
     ListaProdottiComponent,
-    DialogCaseComponent,
-    DialogCpuComponent,
-    DialogLaptopComponent,
-    DialogMemoriaComponent,
-    DialogMonitorComponent,
   ],
   imports: [
     BrowserModule,
