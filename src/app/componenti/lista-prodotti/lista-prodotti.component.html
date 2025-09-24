@@ -60,25 +60,29 @@
       </div>
       <!--linea divisoria-->
       <h5>Filtra per prezzo</h5>
-      <mat-form-field appearance="fill" style="width: 100px">
+      <div style="height: 10px"></div>
+      <!--spazio-->
+      <mat-form-field appearance="outline" style="width: 100px">
         <mat-label>Prezzo Min</mat-label>
         <input
           matInput
           type="number"
           min="0"
           [(ngModel)]="prezzoMin"
-          name="prezzoMin"
+          [attr.min]="prezzoMinAssoluto"
+          [attr.max]="prezzoMaxAssoluto"
         />
       </mat-form-field>
 
-      <mat-form-field appearance="fill" style="width: 100px">
+      <mat-form-field appearance="outline" style="width: 100px">
         <mat-label>Prezzo Max</mat-label>
         <input
           matInput
           type="number"
           min="0"
           [(ngModel)]="prezzoMax"
-          name="prezzoMax"
+          [attr.min]="prezzoMinAssoluto"
+          [attr.max]="prezzoMaxAssoluto"
         />
       </mat-form-field>
 
@@ -98,12 +102,16 @@
             : "Tutti i prodotti"
         }}
       </h2>
+      <!-- Mostra messaggio solo se NON sta caricando -->
       <div
-        *ngIf="prodottiFiltrati.length === 0"
-        class="alert alert-warning text-center mt-4"
+        *ngIf="!caricamentoInCorso && prodottiFiltrati.length === 0"
+        class="alert-custom-blu text-center mt-4"
       >
         Nessun prodotto trovato.
       </div>
+
+      <!-- Mostra spinner di caricamento -->
+      <div *ngIf="caricamentoInCorso" class="text-center mt-4"></div>
       <div
         class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4"
         *ngIf="prodottiFiltrati.length > 0"

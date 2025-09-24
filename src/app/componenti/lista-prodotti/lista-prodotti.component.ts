@@ -20,8 +20,12 @@ export class ListaProdottiComponent implements OnInit {
   mostraTutteLeCategorie = false;
   paginaCorrente: number = 1; //pagina per visualizzare prodotti
   prodottiPerPagina: number = 9; //numero di prodotti visualizzabili per pagina
-  prezzoMin: number = 0
-  prezzoMax: number = 5000;
+  prezzoMin!: number;
+  prezzoMax!: number;
+  prezzoMinAssoluto: number = 0;
+  prezzoMaxAssoluto: number = 0;
+  caricamentoInCorso: boolean = true; //per non far visuallizare il messaggio nessun prodotto trovato 
+  // prima che carichi i dati
 
   constructor(
     private route: ActivatedRoute,
@@ -29,27 +33,36 @@ export class ListaProdottiComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe((params) => {
-      this.idParam = params.get('id');
-      const id = this.idParam ? Number(this.idParam) : null;
+  this.route.paramMap.subscribe((params) => {
+    this.idParam = params.get('id');
+    const id = this.idParam ? Number(this.idParam) : null;
 
-      if (id) {
-        // Se id è presente e diverso da 0 carico i prodotti filtrati per categoria
-        this.listaProdottiService
-          .getAllByIdCategoria(id)
-          .subscribe((resp: any) => {
-            this.prodotti = resp.dati;
-            this.setupMarche();
-          });
-      } else {
-        // Altrimenti carico TUTTI i prodotti
-        this.listaProdottiService.getAll().subscribe((resp: any) => {
-          this.prodotti = resp.dati;
-          this.setupMarche();
-          this.setupCategorie();
-        });
-      }
-    });
+    if (id) {
+      this.listaProdottiService.getAllByIdCategoria(id).subscribe((resp: any) => {
+        this.prodotti = resp.dati;
+        this.setupMarche();
+        this.calcolaPrezziAssoluti();
+        this.caricamentoInCorso = false; // fine caricamento
+      });
+    } else {
+      this.listaProdottiService.getAll().subscribe((resp: any) => {
+        this.prodotti = resp.dati;
+        this.setupMarche();
+        this.setupCategorie();
+        this.calcolaPrezziAssoluti();
+        this.caricamentoInCorso = false; // fine caricamento
+      });
+    }
+  });
+}
+
+  calcolaPrezziAssoluti() {
+    if (this.prodotti.length > 0) {
+      this.prezzoMinAssoluto = Math.min(...this.prodotti.map((p) => p.prezzo));
+      this.prezzoMaxAssoluto = Math.max(...this.prodotti.map((p) => p.prezzo));
+      this.prezzoMin = this.prezzoMinAssoluto;
+      this.prezzoMax = this.prezzoMaxAssoluto;
+    }
   }
 
   setupMarche() {
@@ -81,12 +94,10 @@ export class ListaProdottiComponent implements OnInit {
       );
     }
 
-    if (this.prezzoMin !== null) {
-      filtri = filtri.filter((p) => p.prezzo >= this.prezzoMin!);
-    }
-
-    if (this.prezzoMax !== null) {
-      filtri = filtri.filter((p) => p.prezzo <= this.prezzoMax!);
+    if (this.prezzoMin != null && this.prezzoMax != null) {
+      filtri = filtri.filter(
+        (p) => p.prezzo >= this.prezzoMin && p.prezzo <= this.prezzoMax
+      );
     }
 
     // Applica paginazione
@@ -136,6 +147,4 @@ export class ListaProdottiComponent implements OnInit {
     if (!text) return '';
     return text.charAt(0).toUpperCase() + text.slice(1);
   }
-
-  
 }

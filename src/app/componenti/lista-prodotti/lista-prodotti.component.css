@@ -86,3 +86,12 @@ mat-slider {
 .pagination .page-link {
   color: #115999;
 }
+.alert-custom-blu {
+  border: 1px solid #115999;   /* Bordo blu */
+  color: #115999;              /* Testo blu */
+  background-color: white;     /* Sfondo bianco */
+  border-radius: 4px;
+  padding: 1rem;
+  font-weight: 500;
+}
+
