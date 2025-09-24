@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ListaProdottiService } from '../../services/lista-prodotti.service';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
@@ -9,7 +9,7 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './ricerca.component.html',
   styleUrl: './ricerca.component.css'
 })
-export class RicercaComponent implements OnInit{
+export class RicercaComponent implements OnInit, OnDestroy{
   // proprietà legate al template
   marcaSelezionata: string = 'Tutte';
   marche: string[] = [];
@@ -40,7 +40,7 @@ export class RicercaComponent implements OnInit{
       // chiamata al servizio per ricaricare i prodotti
       const s = this.listaProdottiService.listByFilter(this.elementoCercato)
         .subscribe((resp: any) => {
-          this.prodotti = resp.dati || [];
+          this.prodotti = resp?.dati;
           this.setupMarche();
           this.setupCategorie();
         });
@@ -65,7 +65,7 @@ export class RicercaComponent implements OnInit{
   }
 
   get prodottiFiltrati() {
-    // fallback lato-client: filtra ulteriormente i prodotti se necessario
+    // filtra ulteriormente i prodotti se necessario
     let filtri = this.prodotti;
 
     if (this.marcaSelezionata !== 'Tutte') {

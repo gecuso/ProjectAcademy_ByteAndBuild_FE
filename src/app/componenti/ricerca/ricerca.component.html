@@ -6,8 +6,7 @@
       <mat-radio-group [(ngModel)]="marcaSelezionata">
         <mat-radio-button
           *ngFor="
-            let marca of marche
-              | slice : 0 : (mostraTutteLeMarche ? marche.length : 5)"
+            let marca of marche| slice : 0 : (mostraTutteLeMarche ? marche.length : 5)"
           [value]="marca"
           class="d-block mb-2">
           {{ capitalize(marca) }}
@@ -145,4 +144,3 @@
       </div>
     </div>
   </div>
-
