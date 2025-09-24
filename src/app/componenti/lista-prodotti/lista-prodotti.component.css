@@ -72,3 +72,17 @@ mat-slider {
 .example-radio-button {
   margin: 5px;
 }
+.pagination .page-item.active .page-link {
+  background-color: #115999;
+  border-color: #115999;
+  color: white;
+}
+
+.pagination .page-link:hover {
+  background-color: #063a68;
+  color: white;
+}
+
+.pagination .page-link {
+  color: #115999;
+}

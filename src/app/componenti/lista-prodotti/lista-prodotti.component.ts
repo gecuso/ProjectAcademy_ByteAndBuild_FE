@@ -18,6 +18,10 @@ export class ListaProdottiComponent implements OnInit {
   categoriaSelezionata: string = 'Tutte';
   categorie: string[] = []; // array con le categorie caricate
   mostraTutteLeCategorie = false;
+  paginaCorrente: number = 1; //pagina per visualizzare prodotti
+  prodottiPerPagina: number = 9; //numero di prodotti visualizzabili per pagina
+  prezzoMin: number = 0
+  prezzoMax: number = 5000;
 
   constructor(
     private route: ActivatedRoute,
@@ -56,12 +60,11 @@ export class ListaProdottiComponent implements OnInit {
   }
 
   setupCategorie() {
-  const categorieSet = new Set(
-    this.prodotti.map(p => p.categoria?.descrizione).filter(c => !!c)
-  );
-  this.categorie = ['Tutte', ...Array.from(categorieSet)];
-}
-
+    const categorieSet = new Set(
+      this.prodotti.map((p) => p.categoria?.descrizione).filter((c) => !!c)
+    );
+    this.categorie = ['Tutte', ...Array.from(categorieSet)];
+  }
 
   get prodottiFiltrati() {
     let filtri = this.prodotti;
@@ -78,7 +81,54 @@ export class ListaProdottiComponent implements OnInit {
       );
     }
 
-    return filtri;
+    if (this.prezzoMin !== null) {
+      filtri = filtri.filter((p) => p.prezzo >= this.prezzoMin!);
+    }
+
+    if (this.prezzoMax !== null) {
+      filtri = filtri.filter((p) => p.prezzo <= this.prezzoMax!);
+    }
+
+    // Applica paginazione
+    const start = (this.paginaCorrente - 1) * this.prodottiPerPagina;
+    return filtri.slice(start, start + this.prodottiPerPagina);
+  }
+
+  get numeroPagine(): number {
+    const total = this.prodotti.filter((p) => {
+      let valido = true;
+
+      if (this.marcaSelezionata !== 'Tutte') {
+        valido = valido && p.marca?.descrizione === this.marcaSelezionata;
+      }
+
+      if (this.categoriaSelezionata && this.categoriaSelezionata !== 'Tutte') {
+        valido =
+          valido && p.categoria?.descrizione === this.categoriaSelezionata;
+      }
+
+      if (this.prezzoMin !== null) {
+        valido = valido && p.prezzo >= this.prezzoMin;
+      }
+
+      if (this.prezzoMax !== null) {
+        valido = valido && p.prezzo <= this.prezzoMax;
+      }
+
+      return valido;
+    }).length;
+
+    return Math.ceil(total / this.prodottiPerPagina);
+  }
+
+  cambiaPagina(nuovaPagina: number) {
+    this.paginaCorrente = nuovaPagina;
+
+    // Scrolla in cima alla lista prodotti
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth', //  'auto' senza animazione
+    });
   }
 
   capitalize(text: string): string {
@@ -86,4 +136,6 @@ export class ListaProdottiComponent implements OnInit {
     if (!text) return '';
     return text.charAt(0).toUpperCase() + text.slice(1);
   }
+
+  
 }
