@@ -35,6 +35,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
 import { ListaProdottiComponent } from './componenti/lista-prodotti/lista-prodotti.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { DialogAlimComponent } from './dialogs/alimentazione/dialog-alim/dialog-alim.component';
 
 
 
