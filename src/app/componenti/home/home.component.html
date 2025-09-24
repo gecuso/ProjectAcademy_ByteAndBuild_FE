@@ -202,7 +202,7 @@
             <button
               *ngIf="p.quantita > 0"
               type="button"
-              class="custom-btn"
+              class="btn custom-btn"
               [routerLink]="['/dettaglio', p.id]"
             >
               Acquista
@@ -262,7 +262,6 @@
 
       <!-- Contenuto del carosello -->
       <div class="carousel-inner">
-
         <!-- Slide 1 -->
         <div class="carousel-item active">
           <div class="col-md-9 mx-auto">
@@ -272,17 +271,28 @@
                 *ngFor="let p of prodotti | slice : 0 : 3"
               >
                 <mat-card-content class="descrizione">
-                  <a [routerLink]="['/dettaglio', p.id]" class="text-decoration-none text-dark">
-                    <mat-card-title><strong>{{ p.descrizione }}</strong></mat-card-title>
+                  <a
+                    [routerLink]="['/dettaglio', p.id]"
+                    class="text-decoration-none text-dark"
+                  >
+                    <mat-card-title
+                      ><strong>{{ p.descrizione }}</strong></mat-card-title
+                    >
                   </a>
                 </mat-card-content>
 
-                <a [routerLink]="['/dettaglio', p.id]" class="text-decoration-none text-dark">
+                <a
+                  [routerLink]="['/dettaglio', p.id]"
+                  class="text-decoration-none text-dark"
+                >
                   <img mat-card-image [src]="p.img" [alt]="p.descrizione" />
                 </a>
 
                 <mat-card-content>
-                  <a [routerLink]="['/dettaglio', p.id]" class="text-decoration-none text-dark">
+                  <a
+                    [routerLink]="['/dettaglio', p.id]"
+                    class="text-decoration-none text-dark"
+                  >
                     <p>{{ p.descrizione }}</p>
                   </a>
                 </mat-card-content>
@@ -291,7 +301,9 @@
                   <p>Prodotti disponibili: {{ p.quantita }}</p>
                 </mat-card-content>
 
-                <div class="card-footer d-flex justify-content-between align-items-center mt-auto px-3 pb-3">
+                <div
+                  class="card-footer d-flex justify-content-between align-items-center mt-auto px-3 pb-3"
+                >
                   <div class="prezzo">
                     {{ p.prezzo | currency : "EUR" }}
                   </div>
@@ -327,17 +339,28 @@
               >
                 <!-- Stessa struttura prodotto -->
                 <mat-card-content class="descrizione">
-                  <a [routerLink]="['/dettaglio', p.id]" class="text-decoration-none text-dark">
-                    <mat-card-title><strong>{{ p.descrizione }}</strong></mat-card-title>
+                  <a
+                    [routerLink]="['/dettaglio', p.id]"
+                    class="text-decoration-none text-dark"
+                  >
+                    <mat-card-title
+                      ><strong>{{ p.descrizione }}</strong></mat-card-title
+                    >
                   </a>
                 </mat-card-content>
 
-                <a [routerLink]="['/dettaglio', p.id]" class="text-decoration-none text-dark">
+                <a
+                  [routerLink]="['/dettaglio', p.id]"
+                  class="text-decoration-none text-dark"
+                >
                   <img mat-card-image [src]="p.img" [alt]="p.descrizione" />
                 </a>
 
                 <mat-card-content>
-                  <a [routerLink]="['/dettaglio', p.id]" class="text-decoration-none text-dark">
+                  <a
+                    [routerLink]="['/dettaglio', p.id]"
+                    class="text-decoration-none text-dark"
+                  >
                     <p>{{ p.descrizione }}</p>
                   </a>
                 </mat-card-content>
@@ -346,7 +369,9 @@
                   <p>Prodotti disponibili: {{ p.quantita }}</p>
                 </mat-card-content>
 
-                <div class="card-footer d-flex justify-content-between align-items-center mt-auto px-3 pb-3">
+                <div
+                  class="card-footer d-flex justify-content-between align-items-center mt-auto px-3 pb-3"
+                >
                   <div class="prezzo">
                     {{ p.prezzo | currency : "EUR" }}
                   </div>
@@ -382,17 +407,28 @@
               >
                 <!-- Stessa struttura prodotto -->
                 <mat-card-content class="descrizione">
-                  <a [routerLink]="['/dettaglio', p.id]" class="text-decoration-none text-dark">
-                    <mat-card-title><strong>{{ p.descrizione }}</strong></mat-card-title>
+                  <a
+                    [routerLink]="['/dettaglio', p.id]"
+                    class="text-decoration-none text-dark"
+                  >
+                    <mat-card-title
+                      ><strong>{{ p.descrizione }}</strong></mat-card-title
+                    >
                   </a>
                 </mat-card-content>
 
-                <a [routerLink]="['/dettaglio', p.id]" class="text-decoration-none text-dark">
+                <a
+                  [routerLink]="['/dettaglio', p.id]"
+                  class="text-decoration-none text-dark"
+                >
                   <img mat-card-image [src]="p.img" [alt]="p.descrizione" />
                 </a>
 
                 <mat-card-content>
-                  <a [routerLink]="['/dettaglio', p.id]" class="text-decoration-none text-dark">
+                  <a
+                    [routerLink]="['/dettaglio', p.id]"
+                    class="text-decoration-none text-dark"
+                  >
                     <p>{{ p.descrizione }}</p>
                   </a>
                 </mat-card-content>
@@ -401,7 +437,9 @@
                   <p>Prodotti disponibili: {{ p.quantita }}</p>
                 </mat-card-content>
 
-                <div class="card-footer d-flex justify-content-between align-items-center mt-auto px-3 pb-3">
+                <div
+                  class="card-footer d-flex justify-content-between align-items-center mt-auto px-3 pb-3"
+                >
                   <div class="prezzo">
                     {{ p.prezzo | currency : "EUR" }}
                   </div>
@@ -426,7 +464,6 @@
             </div>
           </div>
         </div>
-
       </div>
 
       <!-- Controlli -->
