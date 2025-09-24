@@ -1,0 +1,34 @@
+<h1 mat-dialog-title>Nuovo Case</h1>
+
+<div mat-dialog-content>
+  <form [formGroup]="form" class="form-grid">
+
+    <mat-form-field appearance="fill">
+      <mat-label>Descrizione</mat-label>
+      <input matInput formControlName="descrizione" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Dimensioni</mat-label>
+      <input matInput formControlName="dimensioni" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>ID Formato</mat-label>
+      <input matInput type="number" formControlName="idFormato" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>ID Prodotto</mat-label>
+      <input matInput type="number" formControlName="idProdotto" />
+    </mat-form-field>
+
+  </form>
+</div>
+
+<div mat-dialog-actions align="end">
+  <button mat-button (click)="onCancel()">Annulla</button>
+  <button mat-flat-button color="primary" (click)="onSave()" [disabled]="!form.valid">
+    Salva
+  </button>
+</div>

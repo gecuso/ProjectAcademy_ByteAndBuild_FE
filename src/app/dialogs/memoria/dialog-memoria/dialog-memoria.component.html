@@ -1,0 +1,44 @@
+<h1 mat-dialog-title>Nuova Memoria</h1>
+
+<div mat-dialog-content>
+  <form [formGroup]="form" class="form-grid">
+
+    <!-- Descrizione -->
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label>Descrizione</mat-label>
+      <input matInput formControlName="descrizione" />
+      <mat-error *ngIf="form.get('descrizione')?.hasError('required')">
+        La descrizione è obbligatoria
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Spazio -->
+    <mat-form-field appearance="fill">
+      <mat-label>Spazio (GB)</mat-label>
+      <input matInput type="number" formControlName="spazio" />
+      <mat-error *ngIf="form.get('spazio')?.hasError('required')">
+        Inserisci la capacità di memoria
+      </mat-error>
+      <mat-error *ngIf="form.get('spazio')?.hasError('min')">
+        Deve essere maggiore di 0
+      </mat-error>
+    </mat-form-field>
+
+    <!-- ID Prodotto -->
+    <mat-form-field appearance="fill">
+      <mat-label>ID Prodotto</mat-label>
+      <input matInput type="number" formControlName="idProdotto" />
+      <mat-error *ngIf="form.get('idProdotto')?.hasError('required')">
+        L'ID prodotto è obbligatorio
+      </mat-error>
+    </mat-form-field>
+
+  </form>
+</div>
+
+<div mat-dialog-actions align="end">
+  <button mat-button (click)="onCancel()">Annulla</button>
+  <button mat-flat-button color="primary" (click)="onSave()" [disabled]="!form.valid">
+    Salva
+  </button>
+</div>

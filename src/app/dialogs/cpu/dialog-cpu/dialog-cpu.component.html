@@ -1,0 +1,49 @@
+<h1 mat-dialog-title>Nuova CPU</h1>
+
+<div mat-dialog-content>
+  <form [formGroup]="form" class="form-grid">
+
+    <mat-form-field appearance="fill">
+      <mat-label>Descrizione</mat-label>
+      <input matInput formControlName="descrizione" />
+      <mat-error *ngIf="form.get('descrizione')?.hasError('required')">
+        La descrizione è obbligatoria
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Compatibilità</mat-label>
+      <input matInput formControlName="compatibilita" />
+      <mat-error *ngIf="form.get('compatibilita')?.hasError('required')">
+        La compatibilità è obbligatoria
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Consumo (W)</mat-label>
+      <input matInput type="number" formControlName="consumo" />
+      <mat-error *ngIf="form.get('consumo')?.hasError('required')">
+        Inserisci il consumo
+      </mat-error>
+      <mat-error *ngIf="form.get('consumo')?.hasError('min')">
+        Il valore deve essere maggiore di 0
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>ID Prodotto</mat-label>
+      <input matInput type="number" formControlName="idProdotto" />
+      <mat-error *ngIf="form.get('idProdotto')?.hasError('required')">
+        L'ID Prodotto è obbligatorio
+      </mat-error>
+    </mat-form-field>
+
+  </form>
+</div>
+
+<div mat-dialog-actions align="end">
+  <button mat-button (click)="onCancel()">Annulla</button>
+  <button mat-flat-button color="primary" (click)="onSave()" [disabled]="!form.valid">
+    Salva
+  </button>
+</div>

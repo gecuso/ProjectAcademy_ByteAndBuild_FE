@@ -7,17 +7,17 @@ import { MatSelectModule } from "@angular/material/select";
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 
-export interface AlimentazioneReq {
+export interface CaseReq {
   id?: number;
   descrizione: string;
-  potenza: number;
+  dimensioni: string;
+  idFormato: number;
   idProdotto: number;
 }
 
 @Component({
-  selector: 'app-dialog-alim',
-  templateUrl: './dialog-alim.component.html',
-  styleUrl: './dialog-alim.component.css',
+  selector: 'app-dialog-case',
+  templateUrl: './dialog-case.component.html',
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -28,22 +28,21 @@ export interface AlimentazioneReq {
     MatInputModule
   ],
 })
-export class DialogAlimComponent {
-form: FormGroup;
+export class DialogCaseComponent {
+  form: FormGroup;
 
   constructor(
     private fb: FormBuilder,
-    public dialogRef: MatDialogRef<DialogAlimComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: AlimentazioneReq
+    public dialogRef: MatDialogRef<DialogCaseComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: CaseReq
   ) {
     this.form = this.fb.group({
       id: [data?.id],
       descrizione: [data?.descrizione || '', Validators.required],
-      potenza: [data?.potenza || 0, [Validators.required, Validators.min(1)]],
+      dimensioni: [data?.dimensioni || '', Validators.required],
+      idFormato: [data?.idFormato || null, Validators.required],
       idProdotto: [data?.idProdotto || null, Validators.required],
     });
-  }
-  ngOnInit() {
   }
 
   onSave(): void {

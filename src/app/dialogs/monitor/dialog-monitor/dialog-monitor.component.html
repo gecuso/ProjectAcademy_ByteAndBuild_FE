@@ -1,0 +1,59 @@
+<h1 mat-dialog-title>Nuovo Monitor</h1>
+
+<div mat-dialog-content>
+  <form [formGroup]="form" class="form-grid">
+
+    <!-- Descrizione -->
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label>Descrizione</mat-label>
+      <input matInput formControlName="descrizione" />
+      <mat-error *ngIf="form.get('descrizione')?.hasError('required')">
+        La descrizione è obbligatoria
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Risoluzione -->
+    <mat-form-field appearance="fill">
+      <mat-label>Risoluzione</mat-label>
+      <input matInput formControlName="risoluzione" />
+      <mat-error *ngIf="form.get('risoluzione')?.hasError('required')">
+        Inserisci la risoluzione
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Latenza -->
+    <mat-form-field appearance="fill">
+      <mat-label>Latenza (ms)</mat-label>
+      <input matInput formControlName="latenza" />
+      <mat-error *ngIf="form.get('latenza')?.hasError('required')">
+        Inserisci la latenza
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Frequenza -->
+    <mat-form-field appearance="fill">
+      <mat-label>Frequenza (Hz)</mat-label>
+      <input matInput formControlName="frequenza" />
+      <mat-error *ngIf="form.get('frequenza')?.hasError('required')">
+        Inserisci la frequenza
+      </mat-error>
+    </mat-form-field>
+
+    <!-- ID Prodotto -->
+    <mat-form-field appearance="fill">
+      <mat-label>ID Prodotto</mat-label>
+      <input matInput type="number" formControlName="idProdotto" />
+      <mat-error *ngIf="form.get('idProdotto')?.hasError('required')">
+        L'ID prodotto è obbligatorio
+      </mat-error>
+    </mat-form-field>
+
+  </form>
+</div>
+
+<div mat-dialog-actions align="end">
+  <button mat-button (click)="onCancel()">Annulla</button>
+  <button mat-flat-button color="primary" (click)="onSave()" [disabled]="!form.valid">
+    Salva
+  </button>
+</div>

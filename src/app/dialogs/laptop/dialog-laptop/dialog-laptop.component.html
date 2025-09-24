@@ -1,0 +1,53 @@
+<h1 mat-dialog-title>Nuovo Laptop</h1>
+
+<div mat-dialog-content>
+  <form [formGroup]="form" class="form-grid">
+
+    <!-- Descrizione -->
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label>Descrizione</mat-label>
+      <input matInput formControlName="descrizione" />
+      <mat-error *ngIf="form.get('descrizione')?.hasError('required')">
+        La descrizione è obbligatoria
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Caratteristiche -->
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label>Caratteristiche</mat-label>
+      <textarea matInput formControlName="caratteristiche"></textarea>
+      <mat-error *ngIf="form.get('caratteristiche')?.hasError('required')">
+        Le caratteristiche sono obbligatorie
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Consumo -->
+    <mat-form-field appearance="fill">
+      <mat-label>Consumo (W)</mat-label>
+      <input matInput type="number" formControlName="consumo" />
+      <mat-error *ngIf="form.get('consumo')?.hasError('required')">
+        Inserisci il consumo
+      </mat-error>
+      <mat-error *ngIf="form.get('consumo')?.hasError('min')">
+        Il consumo deve essere maggiore di 0
+      </mat-error>
+    </mat-form-field>
+
+    <!-- ID Prodotto -->
+    <mat-form-field appearance="fill">
+      <mat-label>ID Prodotto</mat-label>
+      <input matInput type="number" formControlName="idProdotto" />
+      <mat-error *ngIf="form.get('idProdotto')?.hasError('required')">
+        L'ID prodotto è obbligatorio
+      </mat-error>
+    </mat-form-field>
+
+  </form>
+</div>
+
+<div mat-dialog-actions align="end">
+  <button mat-button (click)="onCancel()">Annulla</button>
+  <button mat-flat-button color="primary" (click)="onSave()" [disabled]="!form.valid">
+    Salva
+  </button>
+</div>
