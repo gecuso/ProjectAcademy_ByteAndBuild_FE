@@ -13,11 +13,11 @@ import { NgForm } from '@angular/forms';
 })
 export class NavbarComponent implements OnInit, OnDestroy {
   title = 'Byte&Build';
-    elementoCercato= "";
+  elementoCercato = '';
   isLoggedIn = false;
   categorie: Categoria[] = [];
   private authSub!: Subscription;
-searchTerm: string = "";
+  searchTerm: string = '';
 
   constructor(
     private authService: AuthService,
@@ -58,15 +58,18 @@ searchTerm: string = "";
   }
 
   capitalize(text: string): string {
-    //funzione per mettere la prima lettera MAIUSCOLA
+    //funzione per mettere la prima lettera MAIUSCOLA e dividere il testo se trova una Maiuscola
     if (!text) return '';
-    return text.charAt(0).toUpperCase() + text.slice(1);
+    const spaced = text.replace(/([A-Z])/g, ' $1'); // aggiunge uno spazio prima di ogni maiuscola
+    const trimmed = spaced.trim(); // rimuove eventuali spazi iniziali
+    return trimmed.charAt(0).toUpperCase() + trimmed.slice(1);
   }
 
-  ricerca(){
-    const element = (this.elementoCercato || '').trim()
-    if(!element) return;
-    this.router.navigate(['/ricerca'], {queryParams: {descrizione:element}})
+  ricerca() {
+    const element = (this.elementoCercato || '').trim();
+    if (!element) return;
+    this.router.navigate(['/ricerca'], {
+      queryParams: { descrizione: element },
+    });
   }
-  
 }
