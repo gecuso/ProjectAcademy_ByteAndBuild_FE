@@ -3,16 +3,42 @@
 <div mat-dialog-content>
   <form [formGroup]="form" class="form-grid">
 
-    <!-- Descrizione -->
-    <mat-form-field appearance="fill" class="w-full">
+   <mat-form-field appearance="fill">
       <mat-label>Descrizione</mat-label>
       <input matInput formControlName="descrizione" />
-      <mat-error *ngIf="form.get('descrizione')?.hasError('required')">
-        La descrizione è obbligatoria
-      </mat-error>
     </mat-form-field>
 
-    <!-- Risoluzione -->
+    <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Marca</mat-label>
+        <mat-select formControlName="idMarca" [disabled]="!marche.length">
+          <mat-option value="">-- Seleziona Marca --</mat-option>
+          <mat-option *ngFor="let marca of marche" [value]="marca.id">{{ marca.descrizione }}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.get('idMarca')?.invalid && form.get('idMarca')?.touched">
+          La marca è obbligatoria
+        </mat-error>
+      </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Costo</mat-label>
+      <input matInput type="number" formControlName="costo" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Prezzo</mat-label>
+      <input matInput type="number" formControlName="prezzo" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Quantità</mat-label>
+      <input matInput type="number" formControlName="quantita" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Immagine (URL)</mat-label>
+      <input matInput formControlName="img" />
+    </mat-form-field>
+
     <mat-form-field appearance="fill">
       <mat-label>Risoluzione</mat-label>
       <input matInput formControlName="risoluzione" />
@@ -21,7 +47,6 @@
       </mat-error>
     </mat-form-field>
 
-    <!-- Latenza -->
     <mat-form-field appearance="fill">
       <mat-label>Latenza (ms)</mat-label>
       <input matInput formControlName="latenza" />
@@ -30,7 +55,6 @@
       </mat-error>
     </mat-form-field>
 
-    <!-- Frequenza -->
     <mat-form-field appearance="fill">
       <mat-label>Frequenza (Hz)</mat-label>
       <input matInput formControlName="frequenza" />
@@ -39,21 +63,12 @@
       </mat-error>
     </mat-form-field>
 
-    <!-- ID Prodotto -->
-    <mat-form-field appearance="fill">
-      <mat-label>ID Prodotto</mat-label>
-      <input matInput type="number" formControlName="idProdotto" />
-      <mat-error *ngIf="form.get('idProdotto')?.hasError('required')">
-        L'ID prodotto è obbligatorio
-      </mat-error>
-    </mat-form-field>
-
   </form>
 </div>
 
 <div mat-dialog-actions align="end">
   <button mat-button (click)="onCancel()">Annulla</button>
-  <button mat-flat-button color="primary" (click)="onSave()" [disabled]="!form.valid">
+  <button mat-flat-button color="primary" (click)="onSubmit()" [disabled]="!form.valid">
     Salva
   </button>
 </div>

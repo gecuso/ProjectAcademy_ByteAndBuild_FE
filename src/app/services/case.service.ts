@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { CaseReq, ProdottoReq } from '../requests/general-req/general-req.component';
 
 @Injectable({
   providedIn: 'root'
@@ -13,4 +14,10 @@ export class CaseService {
   create(casee:any) {
     return this.http.post(this.url + 'create', casee);
   }
+
+  createCaseProd(caseReq: CaseReq, prodReq:ProdottoReq) {
+      const body = { caseReq, prodReq };
+      console.log(body);
+      return this.http.post(this.url + 'createCaseProd', body);
+    }
 }

@@ -9,8 +9,8 @@ import { MatSelectModule } from "@angular/material/select";
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { DialogAlimComponent } from '../../alimentazione/dialog-alim/dialog-alim.component';
-import { CaseReq, DialogCaseComponent } from '../../case/dialog-case/dialog-case.component';
-import { CpuReq, DialogCpuComponent } from '../../cpu/dialog-cpu/dialog-cpu.component';
+import { DialogCaseComponent } from '../../case/dialog-case/dialog-case.component';
+import { DialogCpuComponent } from '../../cpu/dialog-cpu/dialog-cpu.component';
 import { DialogLaptopComponent, LaptopReq } from '../../laptop/dialog-laptop/dialog-laptop.component';
 import { DialogMemoriaComponent, MemoriaReq } from '../../memoria/dialog-memoria/dialog-memoria.component';
 import { DialogMonitorComponent, MonitorReq } from '../../monitor/dialog-monitor/dialog-monitor.component';
@@ -20,19 +20,7 @@ import { DialogSchedaGraficaComponent, SchedaGraficaReq } from '../../schedaGraf
 import { DialogSchedaMadreComponent, SchedaMadreReq } from '../../schedaMadre/dialog-scheda-madre/dialog-scheda-madre.component';
 import { DialogSistemaRaffComponent, SistemaRaffreddamentoReq } from '../../sistemaRaffreddamento/dialog-sistema-raff/dialog-sistema-raff.component';
 import { DialogTastieraComponent, TastieraReq } from '../../tastiera/dialog-tastiera/dialog-tastiera.component';
-import { AlimentazioneReq } from '../../../requests/general-req/general-req.component';
-
-
-export interface ProdottoReq {
-  id?: number;
-  descrizione: string;
-  costo: number;
-  prezzo: number;
-  quantita: number;
-  img: string;
-  idCategoria: number;
-  idMarca: number;
-}
+import { AlimentazioneReq, CaseReq, CpuReq, ProdottoReq } from '../../../requests/general-req/general-req.component';
 
 @Component({
   selector: 'app-prodotto-dialog',

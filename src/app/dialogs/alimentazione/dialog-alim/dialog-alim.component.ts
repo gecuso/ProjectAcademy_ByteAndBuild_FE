@@ -7,11 +7,8 @@ import { MatSelectModule } from "@angular/material/select";
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MarcaService } from '../../../services/marca.service';
-import { Categoria } from '../../../services/categoria.service';
 import { AlimentazioneService } from '../../../services/alimentazione.service';
-import { AlimentazioneReq } from '../../../requests/general-req/general-req.component';
-import { ProdottoReq } from '../../prodotto/dialog-prod/dialog-prod.component';
-
+import { AlimentazioneReq, Categoria, ProdottoReq } from '../../../requests/general-req/general-req.component';
 
 
 @Component({
@@ -50,8 +47,8 @@ prodottoReq: ProdottoReq = {
   constructor(
     private fb: FormBuilder,
     public dialogRef: MatDialogRef<DialogAlimComponent>,
-    public marcaService : MarcaService,
-    public alimservice : AlimentazioneService,
+    private marcaService : MarcaService,
+    private alimservice : AlimentazioneService,
     @Inject(MAT_DIALOG_DATA) private dataAlim: AlimentazioneReq,
     @Inject(MAT_DIALOG_DATA) private dataProd: ProdottoReq
   ) {
@@ -82,7 +79,6 @@ prodottoReq: ProdottoReq = {
           },
           error: err => console.error('Errore marche:', err) // Stampa eventuali errori
         });
-      
     }
   
 

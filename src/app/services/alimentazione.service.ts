@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { AlimentazioneReq, ProdottoReq } from '../dialogs/alimentazione/dialog-alim/dialog-alim.component';
+import { AlimentazioneReq, ProdottoReq } from '../requests/general-req/general-req.component';
 
 @Injectable({
   providedIn: 'root'

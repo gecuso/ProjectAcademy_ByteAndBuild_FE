@@ -33,7 +33,7 @@ export interface CpuReq {
   idProdotto: number ;
 }
 export interface LaptopReq {
-  id: number | null;
+  id?: number;
   descrizione: string;
   caratteristiche: string;
   consumo: number | null;
@@ -41,13 +41,13 @@ export interface LaptopReq {
 }
 
 export interface MemoriaReq {
-  id: number | null;
+  id?: number;
   descrizione: string;
   spazio: number | null;
   idProdotto: number | null;
 }
 export interface MonitorReq {
-  id: number | null;
+  id?: number;
   descrizione: string;
   risoluzione: string;
   latenza: string;
@@ -56,28 +56,28 @@ export interface MonitorReq {
 }
 
 export interface MouseReq {
-  id: number | null;
+  id?: number;
   descrizione: string;
   collegamento: string;
   idProdotto: number | null;
 }
 
 export interface RamReq {
-  id: number | null;
+  id?: number;
   descrizione: string;
   consumo: number | null;
   idProdotto: number | null;
 }
 
 export interface SchedaGraficaReq {
-  id: number | null;
+  id?: number;
   descrizione: string;
   consumo: number | null;
   idProdotto: number | null;
 }
 
 export interface SchedaMadreReq {
-  id: number | null;
+  id?: number;
   descrizione: string;
   compatibilita: string;
   consumo: number | null;
@@ -86,18 +86,28 @@ export interface SchedaMadreReq {
 }
 
 export interface SistemaRaffreddamentoReq {
-  id: number | null;
+  id?: number;
   descrizione: string;
   consumo: number | null;
   idProdotto: number | null;
 }
 
 export interface TastieraReq {
-  id: number | null;
+  id?: number;
   descrizione: string;
   tipologia: string;
   collegamento: string;
   idProdotto: number | null;
+}
+
+export interface Categoria {
+  id: number;
+  descrizione: string;
+}
+
+export interface Formato {
+  id: number;
+  descrizione: string;
 }
 
 @Component({

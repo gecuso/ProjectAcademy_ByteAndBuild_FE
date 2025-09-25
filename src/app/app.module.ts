@@ -35,7 +35,6 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
 import { ListaProdottiComponent } from './componenti/lista-prodotti/lista-prodotti.component';
 import { MatDialogModule } from '@angular/material/dialog';
-import { GeneraleReqComponent } from './requests/generale-req/generale-req.component';
 import { GeneralReqComponent } from './requests/general-req/general-req.component';
 
 
@@ -59,8 +58,7 @@ import { GeneralReqComponent } from './requests/general-req/general-req.componen
     ProdottiComponentComponent,
     DettagliUtenteComponent,
     ListaProdottiComponent,
-    GeneraleReqComponent,
-    GeneralReqComponent,
+    GeneralReqComponent
   ],
   imports: [
     BrowserModule,
