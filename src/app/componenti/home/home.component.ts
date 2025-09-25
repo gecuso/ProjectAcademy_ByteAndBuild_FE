@@ -25,7 +25,8 @@ export class HomeComponent implements OnInit {
 
   //prodotti
   this.listaProdottiService.getAll().subscribe((resp: any) => {
-    this.prodotti = resp.dati;
+    this.prodotti = resp.dati.sort((a: any, b: any) => b.id - a.id); 
+    //ordino in base ad id, in ordine descrescente
   });
 }
 
