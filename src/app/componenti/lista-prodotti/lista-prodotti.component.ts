@@ -23,7 +23,7 @@ export class ListaProdottiComponent implements OnInit {
   prezzoMax!: number;
   prezzoMinAssoluto: number = 0;
   prezzoMaxAssoluto: number = 0;
-  caricamentoInCorso: boolean = true; //per non far visuallizare il messaggio nessun prodotto trovato 
+  caricamentoInCorso: boolean = true; //per non far visuallizare il messaggio nessun prodotto trovato
   // prima che carichi i dati
 
   constructor(
@@ -32,28 +32,30 @@ export class ListaProdottiComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-  this.route.paramMap.subscribe((params) => {
-    this.idParam = params.get('id');
-    const id = this.idParam ? Number(this.idParam) : null;
+    this.route.paramMap.subscribe((params) => {
+      this.idParam = params.get('id');
+      const id = this.idParam ? Number(this.idParam) : null;
 
-    if (id) {
-      this.listaProdottiService.getAllByIdCategoria(id).subscribe((resp: any) => {
-        this.prodotti = resp.dati;
-        this.setupMarche();
-        this.calcolaPrezziAssoluti();
-        this.caricamentoInCorso = false; // fine caricamento
-      });
-    } else {
-      this.listaProdottiService.getAll().subscribe((resp: any) => {
-        this.prodotti = resp.dati;
-        this.setupMarche();
-        this.setupCategorie();
-        this.calcolaPrezziAssoluti();
-        this.caricamentoInCorso = false; // fine caricamento
-      });
-    }
-  });
-}
+      if (id) {
+        this.listaProdottiService
+          .getAllByIdCategoria(id)
+          .subscribe((resp: any) => {
+            this.prodotti = resp.dati;
+            this.setupMarche();
+            this.calcolaPrezziAssoluti();
+            this.caricamentoInCorso = false; // fine caricamento
+          });
+      } else {
+        this.listaProdottiService.getAll().subscribe((resp: any) => {
+          this.prodotti = resp.dati;
+          this.setupMarche();
+          this.setupCategorie();
+          this.calcolaPrezziAssoluti();
+          this.caricamentoInCorso = false; // fine caricamento
+        });
+      }
+    });
+  }
 
   calcolaPrezziAssoluti() {
     if (this.prodotti.length > 0) {
@@ -142,10 +144,14 @@ export class ListaProdottiComponent implements OnInit {
   }
 
   capitalize(text: string): string {
-  //funzione per mettere la prima lettera MAIUSCOLA e dividere il testo se trova una Maiuscola
-  if (!text) return '';
-  const spaced = text.replace(/([A-Z])/g, ' $1'); // aggiunge uno spazio prima di ogni maiuscola
-  const trimmed = spaced.trim(); // rimuove eventuali spazi iniziali
-  return trimmed.charAt(0).toUpperCase() + trimmed.slice(1);
+    //funzione per mettere la prima lettera MAIUSCOLA e dividere il testo se trova una Maiuscola
+    if (!text) return '';
+    const spaced = text.replace(/([A-Z])/g, ' $1'); // aggiunge uno spazio prima di ogni maiuscola
+    const trimmed = spaced.trim(); // rimuove eventuali spazi iniziali
+    return trimmed.charAt(0).toUpperCase() + trimmed.slice(1);
+  }
+
+  applicaFiltri() {
+    this.paginaCorrente = 1;
   }
 }

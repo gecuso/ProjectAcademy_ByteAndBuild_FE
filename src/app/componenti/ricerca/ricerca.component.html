@@ -3,7 +3,7 @@
     <!-- Colonna sinistra con le marche ed il prezzo -->
     <div class="col-md-3">
       <h5>Filtra per marca</h5>
-      <mat-radio-group [(ngModel)]="marcaSelezionata">
+      <mat-radio-group [(ngModel)]="marcaSelezionata" (ngModelChange)="applicaFiltri()">
         <mat-radio-button
           *ngFor="
             let marca of marche
@@ -28,7 +28,7 @@
       <!--linea divisoria-->
       <div *ngIf="!idParam">
         <h5>Filtra per categoria</h5>
-        <mat-radio-group [(ngModel)]="categoriaSelezionata">
+        <mat-radio-group [(ngModel)]="categoriaSelezionata" (ngModelChange)="applicaFiltri()">
           <mat-radio-button
             *ngFor="
               let categoria of categorie
@@ -64,6 +64,7 @@
           [(ngModel)]="prezzoMin"
           [attr.min]="prezzoMinAssoluto"
           [attr.max]="prezzoMaxAssoluto"
+          (ngModelChange)="applicaFiltri()"
         />
       </mat-form-field>
 
@@ -76,6 +77,7 @@
           [(ngModel)]="prezzoMax"
           [attr.min]="prezzoMinAssoluto"
           [attr.max]="prezzoMaxAssoluto"
+          (ngModelChange)="applicaFiltri()"
         />
       </mat-form-field>
     </div>
@@ -90,8 +92,17 @@
             : "Tutti i prodotti"
         }}
       </h2>
-
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+      <div
+        *ngIf="!caricamentoInCorso && prodottiFiltrati.length === 0"
+        class="alert-custom-blu text-center mt-4"
+      >
+        Nessun prodotto trovato.
+      </div>
+      <div *ngIf="caricamentoInCorso" class="text-center mt-4"></div>
+      <div
+        class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4"
+        *ngIf="prodottiFiltrati.length > 0"
+      >
         <div class="prodotto-card" *ngFor="let p of prodottiFiltrati">
           <mat-card-content class="descrizione">
             <a

@@ -28,9 +28,8 @@ export class RicercaComponent implements OnInit, OnDestroy {
   prezzoMax!: number;
   prezzoMinAssoluto: number = 0;
   prezzoMaxAssoluto: number = 0;
-  caricamentoInCorso: boolean = true; //per non far visuallizare il messaggio nessun prodotto trovato 
+  caricamentoInCorso: boolean = true; //per non far visuallizare il messaggio nessun prodotto trovato
   // prima che carichi i dati
-
 
   // Subscription aggregator (per fare unsubscribe in ngOnDestroy)
   private subs = new Subscription();
@@ -151,6 +150,9 @@ export class RicercaComponent implements OnInit, OnDestroy {
     const spaced = text.replace(/([A-Z])/g, ' $1'); // aggiunge uno spazio prima di ogni maiuscola
     const trimmed = spaced.trim(); // rimuove eventuali spazi iniziali
     return trimmed.charAt(0).toUpperCase() + trimmed.slice(1);
+  }
+  applicaFiltri() {
+    this.paginaCorrente = 1;
   }
 
   ngOnDestroy(): void {
