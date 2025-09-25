@@ -158,8 +158,9 @@
       </a>
     </div>
     <div class="col-md-9 mx-auto">
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
-        <div class="prodotto-card" *ngFor="let p of pcs | slice : 0 : 6">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-2">
+        <div class="col" *ngFor="let p of pcs | slice : 0 : 6">
+          <div class="prodotto-card">
           <mat-card-content class="descrizione">
             <a
               [routerLink]="['/dettaglio', p.id]"
@@ -222,6 +223,7 @@
       </div>
     </div>
   </div>
+</div>
 </div>
 
 <div class="background-section2 p-4 rounded">
