@@ -8,7 +8,7 @@ import { Marca, MarcaService } from '../../../services/marca.service';
 import { MatSelectModule } from "@angular/material/select";
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
-import { AlimentazioneReq, DialogAlimComponent } from '../../alimentazione/dialog-alim/dialog-alim.component';
+import { DialogAlimComponent } from '../../alimentazione/dialog-alim/dialog-alim.component';
 import { CaseReq, DialogCaseComponent } from '../../case/dialog-case/dialog-case.component';
 import { CpuReq, DialogCpuComponent } from '../../cpu/dialog-cpu/dialog-cpu.component';
 import { DialogLaptopComponent, LaptopReq } from '../../laptop/dialog-laptop/dialog-laptop.component';
@@ -20,6 +20,7 @@ import { DialogSchedaGraficaComponent, SchedaGraficaReq } from '../../schedaGraf
 import { DialogSchedaMadreComponent, SchedaMadreReq } from '../../schedaMadre/dialog-scheda-madre/dialog-scheda-madre.component';
 import { DialogSistemaRaffComponent, SistemaRaffreddamentoReq } from '../../sistemaRaffreddamento/dialog-sistema-raff/dialog-sistema-raff.component';
 import { DialogTastieraComponent, TastieraReq } from '../../tastiera/dialog-tastiera/dialog-tastiera.component';
+import { AlimentazioneReq } from '../../../requests/general-req/general-req.component';
 
 
 export interface ProdottoReq {
@@ -61,14 +62,7 @@ export class ProdottoDialogComponent {
     @Inject(MAT_DIALOG_DATA) public data: ProdottoReq
   ) {
     this.form = this.fb.group({
-      id: [data?.id],
-      descrizione: [data?.descrizione || '', Validators.required],
-      costo: [data?.costo || 0, Validators.required],
-      prezzo: [data?.prezzo || 0, Validators.required],
-      quantita: [data?.quantita || 0, Validators.required],
-      img: [data?.img || ''],
       idCategoria: [data?.idCategoria || null, Validators.required],
-      idMarca: [data?.idMarca || null, Validators.required],
     });
     
   }
@@ -82,25 +76,8 @@ export class ProdottoDialogComponent {
     this.form.get('idCategoria')?.valueChanges.subscribe(idCat => {
       if (idCat) {
         this.cat=idCat;
-        console.log(this.cat);
-        // Se è stata selezionata una categoria, carico le marche corrispondenti
-        this.marcaService.getMarcheByCategoria(idCat).subscribe({
-          next: brands => {
-            // Filtra le marche che contengono la categoria selezionata
-            this.marche = brands.filter(marca => 
-              marca.categoria.some((cat: Categoria) => cat.id === idCat)
-            );
-            // Resetta il campo marca, l’utente dovrà selezionarla di nuovo
-            this.form.patchValue({ idMarca: null });
-          },
-          error: err => console.error('Errore marche:', err) // Stampa eventuali errori
-        });
-      } else {
-        // Se nessuna categoria è selezionata, svuoto le marche e resetto il campo marca
-        this.marche = [];
-        this.form.patchValue({ idMarca: null });
-      }
-    });
+              console.log(this.cat);
+      }});
   }
 
   onSave(): void {
@@ -117,39 +94,51 @@ export class ProdottoDialogComponent {
     switch (this.cat) {
       case 1:  
         this.openDialogAlim();
+        this.dialogRef.close();
         break;
       case 2:  
         this.openDialogCase();
+        this.dialogRef.close();
         break;
       case 3:  
         this.openDialogCpu();
+        this.dialogRef.close();
         break;
       case 4:  
         this.openDialogLaptop();
+        this.dialogRef.close();
         break;
       case 5:  
         this.openDialogMemoria();
+        this.dialogRef.close();
         break;
       case 6:  
         this.openDialogMonitor();
+        this.dialogRef.close();
         break;
       case 7:  
         this.openDialogMouse();
+        this.dialogRef.close();
         break;
       case 8:  
         this.openDialogRam();
+        this.dialogRef.close();
         break;
       case 9:  
         this.openDialogSchedaGrafica();
+        this.dialogRef.close();
         break;
       case 10:  
         this.openDialogSchedaMadre();
+        this.dialogRef.close();
         break;
       case 11:  
         this.openDialogSistemaRaff();
+        this.dialogRef.close();
         break;
       case 12:  
         this.openDialogTastiera();
+        this.dialogRef.close();
         break;
       default:
         alert('Categoria non selezionata');

@@ -3,30 +3,6 @@
 <div mat-dialog-content>
   
   <form [formGroup]="form" class="form-grid">
-    <mat-form-field appearance="fill">
-      <mat-label>Descrizione</mat-label>
-      <input matInput formControlName="descrizione" />
-    </mat-form-field>
-
-    <mat-form-field appearance="fill">
-      <mat-label>Costo</mat-label>
-      <input matInput type="number" formControlName="costo" />
-    </mat-form-field>
-
-    <mat-form-field appearance="fill">
-      <mat-label>Prezzo</mat-label>
-      <input matInput type="number" formControlName="prezzo" />
-    </mat-form-field>
-
-    <mat-form-field appearance="fill">
-      <mat-label>Quantità</mat-label>
-      <input matInput type="number" formControlName="quantita" />
-    </mat-form-field>
-
-    <mat-form-field appearance="fill">
-      <mat-label>Immagine (URL)</mat-label>
-      <input matInput formControlName="img" />
-    </mat-form-field>
     
     <mat-form-field appearance="fill" >
     <mat-label>Categoria</mat-label>
@@ -41,20 +17,9 @@
     </mat-error>
     </mat-form-field>
     
-
-    <mat-form-field appearance="fill" class="full-width">
-        <mat-label>Marca</mat-label>
-        <mat-select formControlName="idMarca" [disabled]="!marche.length">
-          <mat-option value="">-- Seleziona Marca --</mat-option>
-          <mat-option *ngFor="let marca of marche" [value]="marca.id">{{ marca.descrizione }}</mat-option>
-        </mat-select>
-        <mat-error *ngIf="form.get('idMarca')?.invalid && form.get('idMarca')?.touched">
-          La marca è obbligatoria
-        </mat-error>
-      </mat-form-field>
-    <!--[disabled]="form.invalid"-->
+    <!---->
       <div class="user-actions">
-        <button class="custom-btn" type="button" (click)="openDialog()" >Aggiungi prodotto</button>
+        <button class="custom-btn" type="button" (click)="openDialog()" [disabled]="form.invalid">Aggiungi prodotto</button>
         <button class="custom-btn-danger" type="button" (click)="onCancel()">
           Annulla
         </button>
