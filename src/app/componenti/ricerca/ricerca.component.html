@@ -97,7 +97,11 @@
       >
         Nessun prodotto trovato.
       </div>
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+      <div *ngIf="caricamentoInCorso" class="text-center mt-4"></div>
+      <div
+        class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4"
+        *ngIf="prodottiFiltrati.length > 0"
+      >
         <div class="prodotto-card" *ngFor="let p of prodottiFiltrati">
           <mat-card-content class="descrizione">
             <a
