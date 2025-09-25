@@ -43,4 +43,5 @@ export class RegisterComponent {
         this.msg= resp.msg
     })
   }
+
 }
