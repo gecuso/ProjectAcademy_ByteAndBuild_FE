@@ -156,7 +156,12 @@ mat-slider {
   flex-direction: column;
   border-radius: 10px;
   padding: 10px;
+  transition: transform .2s;
   /*margin: 0.1px;*/
+}
+
+.prodotto-card:hover {
+  transform: scale(1.03)
 }
 
 button.btn {
