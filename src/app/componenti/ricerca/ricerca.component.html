@@ -91,7 +91,12 @@
             : "Tutti i prodotti"
         }}
       </h2>
-
+      <div
+        *ngIf="!caricamentoInCorso && prodottiFiltrati.length === 0"
+        class="alert-custom-blu text-center mt-4"
+      >
+        Nessun prodotto trovato.
+      </div>
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
         <div class="prodotto-card" *ngFor="let p of prodottiFiltrati">
           <mat-card-content class="descrizione">
