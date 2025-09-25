@@ -142,8 +142,10 @@ export class ListaProdottiComponent implements OnInit {
   }
 
   capitalize(text: string): string {
-    //funzione per mettere la prima lettera MAIUSCOLA
-    if (!text) return '';
-    return text.charAt(0).toUpperCase() + text.slice(1);
+  //funzione per mettere la prima lettera MAIUSCOLA e dividere il testo se trova una Maiuscola
+  if (!text) return '';
+  const spaced = text.replace(/([A-Z])/g, ' $1'); // aggiunge uno spazio prima di ogni maiuscola
+  const trimmed = spaced.trim(); // rimuove eventuali spazi iniziali
+  return trimmed.charAt(0).toUpperCase() + trimmed.slice(1);
   }
 }
