@@ -68,4 +68,5 @@ searchTerm: string = "";
     if(!element) return;
     this.router.navigate(['/ricerca'], {queryParams: {descrizione:element}})
   }
+  
 }
