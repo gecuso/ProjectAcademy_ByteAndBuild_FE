@@ -113,6 +113,7 @@ mat-card-content.quantita {
   outline: none !important;
 }
 
+
 .custom-btn:hover {
   background-color: #063a68 !important;
 }
@@ -155,3 +156,6 @@ mat-slider {
   flex-direction: column;
 }
 
+button.btn {
+  height: 36px;
+}
