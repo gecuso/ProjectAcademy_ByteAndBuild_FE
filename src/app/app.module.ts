@@ -39,6 +39,8 @@ import { RicercaComponent } from './componenti/ricerca/ricerca.component';
 
 
 
+import { MatDialogModule } from '@angular/material/dialog';
+import { GeneralReqComponent } from './requests/general-req/general-req.component';
 
 
 
@@ -61,7 +63,8 @@ import { RicercaComponent } from './componenti/ricerca/ricerca.component';
     ProdottiComponentComponent,
     DettagliUtenteComponent,
     ListaProdottiComponent,
-    RicercaComponent
+    RicercaComponent,
+    GeneralReqComponent
   ],
   imports: [
     BrowserModule,
@@ -78,7 +81,8 @@ import { RicercaComponent } from './componenti/ricerca/ricerca.component';
     MatInputModule,
     MatSelectModule,
     MatOptionModule,
-    ReactiveFormsModule
+    MatDialogModule,
+    ReactiveFormsModule,
   ],
   providers: [provideHttpClient(withFetch())
   ],

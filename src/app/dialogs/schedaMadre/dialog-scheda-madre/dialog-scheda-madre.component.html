@@ -1,0 +1,84 @@
+<h2 mat-dialog-title>Dati Scheda Madre</h2>
+
+<mat-dialog-content>
+  <form [formGroup]="form" class="flex flex-col gap-4">
+
+<mat-form-field appearance="fill">
+      <mat-label>Descrizione</mat-label>
+      <input matInput formControlName="descrizione" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Marca</mat-label>
+        <mat-select formControlName="idMarca" [disabled]="!marche.length">
+          <mat-option value="">-- Seleziona Marca --</mat-option>
+          <mat-option *ngFor="let marca of marche" [value]="marca.id">{{ marca.descrizione }}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.get('idMarca')?.invalid && form.get('idMarca')?.touched">
+          La marca è obbligatoria
+        </mat-error>
+      </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Costo</mat-label>
+      <input matInput type="number" formControlName="costo" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Prezzo</mat-label>
+      <input matInput type="number" formControlName="prezzo" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Quantità</mat-label>
+      <input matInput type="number" formControlName="quantita" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Immagine (URL)</mat-label>
+      <input matInput formControlName="img" />
+    </mat-form-field>
+    
+
+    <mat-form-field appearance="outline">
+      <mat-label>Compatibilità</mat-label>
+      <mat-select formControlName="compatibilita">
+        <mat-option value="">-- Seleziona Compatibilità --</mat-option>
+        <mat-option value="AMD">AMD</mat-option>
+        <mat-option value="INTEL">INTEL</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Consumo (W)</mat-label>
+      <input matInput type="number" formControlName="consumo" />
+      <mat-error *ngIf="form.get('consumo')?.hasError('required')">
+        Inserisci il consumo
+      </mat-error>
+      <mat-error *ngIf="form.get('consumo')?.hasError('min')">
+        Il valore deve essere maggiore di 0
+      </mat-error>
+    </mat-form-field>>
+
+    <mat-form-field appearance="fill" >
+    <mat-label>Formato</mat-label>
+    <mat-select formControlName="idFormato">
+      <mat-option value="null">-- Seleziona Formato --</mat-option>
+      <mat-option *ngFor="let format of formati" [value]="format.id">
+        {{ format.descrizione }}
+      </mat-option>
+    </mat-select>
+    <mat-error *ngIf="form.get('idFormato')?.invalid && form.get('idFormato')?.touched">
+      il Formato è obbligatorio
+    </mat-error>
+    </mat-form-field>
+
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="onCancel()">Annulla</button>
+  <button mat-flat-button color="primary" (click)="onSubmit()" [disabled]="!form.valid">
+    Salva
+  </button>
+</mat-dialog-actions>

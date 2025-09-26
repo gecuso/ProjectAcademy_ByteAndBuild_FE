@@ -1,11 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
+import { Categoria } from '../requests/general-req/general-req.component';
 
-export interface Categoria {
-  id: number | null;
-  descrizione: string;
-}
 
 @Injectable({
   providedIn: 'root',

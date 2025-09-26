@@ -1,9 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { CategoriaService, Categoria } from '../../services/categoria.service';
+import { CategoriaService } from '../../services/categoria.service';
 import { AuthService } from '../../auth/auth.service';
 import { Subscription } from 'rxjs';
 import { NgForm } from '@angular/forms';
+import { Categoria } from '../../requests/general-req/general-req.component';
 
 @Component({
   selector: 'app-navbar',
