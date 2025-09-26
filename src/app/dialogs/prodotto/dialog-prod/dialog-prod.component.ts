@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialogModule, MatDialog } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { Categoria, CategoriaService } from '../../../services/categoria.service';
+import { CategoriaService } from '../../../services/categoria.service';
 import { Marca, MarcaService } from '../../../services/marca.service';
 import { MatSelectModule } from "@angular/material/select";
 import { CommonModule } from '@angular/common';
@@ -11,16 +11,16 @@ import { MatButtonModule } from '@angular/material/button';
 import { DialogAlimComponent } from '../../alimentazione/dialog-alim/dialog-alim.component';
 import { DialogCaseComponent } from '../../case/dialog-case/dialog-case.component';
 import { DialogCpuComponent } from '../../cpu/dialog-cpu/dialog-cpu.component';
-import { DialogLaptopComponent, LaptopReq } from '../../laptop/dialog-laptop/dialog-laptop.component';
-import { DialogMemoriaComponent, MemoriaReq } from '../../memoria/dialog-memoria/dialog-memoria.component';
-import { DialogMonitorComponent, MonitorReq } from '../../monitor/dialog-monitor/dialog-monitor.component';
-import { DialogMouseComponent, MouseReq } from '../../mouse/dialog-mouse/dialog-mouse.component';
-import { DialogRamComponent, RamReq } from '../../ram/dialog-ram/dialog-ram.component';
+import { DialogLaptopComponent} from '../../laptop/dialog-laptop/dialog-laptop.component';
+import { DialogMemoriaComponent } from '../../memoria/dialog-memoria/dialog-memoria.component';
+import { DialogMonitorComponent } from '../../monitor/dialog-monitor/dialog-monitor.component';
+import { DialogMouseComponent } from '../../mouse/dialog-mouse/dialog-mouse.component';
+import { DialogRamComponent } from '../../ram/dialog-ram/dialog-ram.component';
 import { DialogSchedaGraficaComponent, SchedaGraficaReq } from '../../schedaGrafica/dialog-scheda-grafica/dialog-scheda-grafica.component';
 import { DialogSchedaMadreComponent, SchedaMadreReq } from '../../schedaMadre/dialog-scheda-madre/dialog-scheda-madre.component';
 import { DialogSistemaRaffComponent, SistemaRaffreddamentoReq } from '../../sistemaRaffreddamento/dialog-sistema-raff/dialog-sistema-raff.component';
 import { DialogTastieraComponent, TastieraReq } from '../../tastiera/dialog-tastiera/dialog-tastiera.component';
-import { AlimentazioneReq, CaseReq, CpuReq, ProdottoReq } from '../../../requests/general-req/general-req.component';
+import { AlimentazioneReq, CaseReq, Categoria, CpuReq, LaptopReq, MemoriaReq, MonitorReq, MouseReq, ProdottoReq, RamReq } from '../../../requests/general-req/general-req.component';
 
 @Component({
   selector: 'app-prodotto-dialog',

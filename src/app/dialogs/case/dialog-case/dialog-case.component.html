@@ -46,8 +46,8 @@
 
     <mat-form-field appearance="fill" >
     <mat-label>Formato</mat-label>
-    <mat-select formControlName="idCategoria">
-      <mat-option value="null">-- Seleziona Categoria --</mat-option>
+    <mat-select formControlName="idFormato">
+      <mat-option value="null">-- Seleziona Formato --</mat-option>
       <mat-option *ngFor="let format of formati" [value]="format.id">
         {{ format.descrizione }}
       </mat-option>

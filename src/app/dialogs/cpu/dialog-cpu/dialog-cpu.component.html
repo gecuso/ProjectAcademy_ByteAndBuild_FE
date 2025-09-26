@@ -41,10 +41,15 @@
 
     <mat-form-field appearance="fill">
       <mat-label>Compatibilità</mat-label>
-      <input matInput formControlName="compatibilita" />
-      <mat-error *ngIf="form.get('compatibilita')?.hasError('required')">
-        La compatibilità è obbligatoria
-      </mat-error>
+      <mat-select formControlName="compatibilita">
+          <mat-option value="">-- Seleziona compatibilita--</mat-option>
+          <mat-option value="AMD">AMD</mat-option>
+          <mat-option value="INTEL">INTEL</mat-option>
+
+        </mat-select>
+        <mat-error *ngIf="form.get('idMarca')?.invalid && form.get('idMarca')?.touched">
+          la compatibilità è obbligatoria
+        </mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="fill">

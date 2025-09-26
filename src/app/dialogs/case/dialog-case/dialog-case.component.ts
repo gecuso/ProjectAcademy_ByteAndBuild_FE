@@ -6,9 +6,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from "@angular/material/select";
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
-import { CaseReq, ProdottoReq } from '../../../requests/general-req/general-req.component';
+import { CaseReq, Categoria, ProdottoReq } from '../../../requests/general-req/general-req.component';
 import { MarcaService } from '../../../services/marca.service';
-import { Categoria } from '../../../services/categoria.service';
 import { FormatoService } from '../../../services/formato.service';
 import { CaseService } from '../../../services/case.service';
 
@@ -88,7 +87,8 @@ export class DialogCaseComponent {
             next: formats => this.formati = formats,                    // Quando arrivano i dati, li salvo in this.formats
             error: err => console.error('Errore formati:', err)   // Se c’è un errore, lo stampo in console
           });
-        
+                  console.log(this.formati);
+
       }
 
   onSubmit(): void {

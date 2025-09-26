@@ -18,6 +18,6 @@ export class MemoriaService {
   createMemProd(memReq: MemoriaReq, prodReq:ProdottoReq) {
       const body = { memReq, prodReq };
       console.log(body);
-      return this.http.post(this.url + 'createMemaProd', body);
+      return this.http.post(this.url + 'createMemProd', body);
     }
 }

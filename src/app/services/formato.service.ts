@@ -16,7 +16,7 @@ export class FormatoService {
 
 
   getFormati(): Observable<Formato[]> {
-      return this.http.get<{ dati: Formato[] }>(this.url + 'listAllFormati').pipe(
+      return this.http.get<{ dati: Formato[] }>(this.url + 'listAllFormato').pipe(
         map(response => response.dati || []) // usa solo "dati"
       );
     }
