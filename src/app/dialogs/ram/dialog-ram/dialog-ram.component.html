@@ -39,9 +39,15 @@
       <input matInput formControlName="img" />
     </mat-form-field>
 
-    <mat-form-field appearance="outline">
-      <mat-label>Consumo (Watt)</mat-label>
+    <mat-form-field appearance="fill">
+      <mat-label>Consumo (W)</mat-label>
       <input matInput type="number" formControlName="consumo" />
+      <mat-error *ngIf="form.get('consumo')?.hasError('required')">
+        Inserisci il consumo
+      </mat-error>
+      <mat-error *ngIf="form.get('consumo')?.hasError('min')">
+        Il valore deve essere maggiore di 0
+      </mat-error>
     </mat-form-field>
 
   </form>

@@ -3,24 +3,58 @@
 <mat-dialog-content>
   <form [formGroup]="form" class="flex flex-col gap-4">
 
-    <mat-form-field appearance="outline">
+<mat-form-field appearance="fill">
       <mat-label>Descrizione</mat-label>
       <input matInput formControlName="descrizione" />
     </mat-form-field>
 
+    <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Marca</mat-label>
+        <mat-select formControlName="idMarca" [disabled]="!marche.length">
+          <mat-option value="">-- Seleziona Marca --</mat-option>
+          <mat-option *ngFor="let marca of marche" [value]="marca.id">{{ marca.descrizione }}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.get('idMarca')?.invalid && form.get('idMarca')?.touched">
+          La marca è obbligatoria
+        </mat-error>
+      </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Costo</mat-label>
+      <input matInput type="number" formControlName="costo" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Prezzo</mat-label>
+      <input matInput type="number" formControlName="prezzo" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Quantità</mat-label>
+      <input matInput type="number" formControlName="quantita" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Immagine (URL)</mat-label>
+      <input matInput formControlName="img" />
+    </mat-form-field>
+
     <mat-form-field appearance="outline">
       <mat-label>Tipologia</mat-label>
-      <input matInput formControlName="tipologia" />
+      <mat-select formControlName="tipologia">
+        <mat-option value="">-- Seleziona Tipologia --</mat-option>
+        <mat-option value="MECCANCA">MECCANCA</mat-option>
+        <mat-option value="MEMBRANA">MEMBRANA</mat-option>
+      </mat-select>
     </mat-form-field>
 
     <mat-form-field appearance="outline">
       <mat-label>Collegamento</mat-label>
-      <input matInput formControlName="collegamento" />
-    </mat-form-field>
-
-    <mat-form-field appearance="outline">
-      <mat-label>ID Prodotto</mat-label>
-      <input matInput type="number" formControlName="idProdotto" />
+      <mat-select formControlName="collegamento">
+        <mat-option value="">-- Seleziona Collegamento --</mat-option>
+        <mat-option value="CAVO">CAVO</mat-option>
+        <mat-option value="WIRELESS">WIRELESS</mat-option>
+      </mat-select>
     </mat-form-field>
 
   </form>
@@ -28,7 +62,7 @@
 
 <mat-dialog-actions align="end">
   <button mat-button (click)="onCancel()">Annulla</button>
-  <button mat-flat-button color="primary" (click)="onSave()" [disabled]="!form.valid">
+  <button mat-flat-button color="primary" (click)="onSubmit()" [disabled]="!form.valid">
     Salva
   </button>
 </mat-dialog-actions>
