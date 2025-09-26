@@ -95,3 +95,10 @@ mat-slider {
   font-weight: 500;
 }
 
+.card-personalizzata{
+  transition: transform .2s;
+}
+
+.card-personalizzata:hover{
+  transform: scale(1.02);
+}

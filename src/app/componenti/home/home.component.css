@@ -164,6 +164,15 @@ mat-slider {
   transform: scale(1.03)
 }
 
+.card-personalizzata{
+  transition: transform .2s;
+}
+
+.card-personalizzata:hover{
+  transform: scale(1.03);
+
+}
+
 button.btn {
   height: 36px;
 }

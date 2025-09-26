@@ -85,7 +85,7 @@
     <!-- Colonna destra con i prodotti -->
     <div class="col-md-9">
       <!-- titolo categoria -->
-      <h2 *ngIf="prodotti.length > 0">
+      <h2 *ngIf="prodotti.length > 0" class="pb-3">
         {{
           idParam
             ? capitalize(prodotti[0].categoria.descrizione)
@@ -103,7 +103,7 @@
         class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4"
         *ngIf="prodottiFiltrati.length > 0"
       >
-        <div class="prodotto-card" *ngFor="let p of prodottiFiltrati">
+        <div class="prodotto-card card-personalizzata"  *ngFor="let p of prodottiFiltrati">
           <mat-card-content class="descrizione">
             <a
               [routerLink]="['/dettaglio', p.id]"
@@ -164,7 +164,7 @@
           </div>
         </div>
       </div>
-      <div class="d-flex justify-content-center mt-4">
+      <div class="d-flex justify-content-center mt-5">
         <nav>
           <ul class="pagination">
             <li class="page-item" [class.disabled]="paginaCorrente === 1">
