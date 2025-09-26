@@ -10,18 +10,19 @@
       </a>
 
       <!-- Search bar (al centro, cresce) -->
-      <form class="flex-grow-1 mx-3 position-relative" style="max-width: 900px">
+      <form class="flex-grow-1 mx-3 position-relative" style="max-width: 900px" #param="ngForm" 
+      (ngSubmit)="ricerca()" 
+        >
         <input
           class="form-control rounded-pill"
           type="search"
           placeholder="Cosa cerchi?"
-          [(ngModel)]="searchTerm"
+          [(ngModel)]="elementoCercato"
           name="search"
           style="padding-left: 40px"
         />
         <i class="bi bi-search position-absolute search-icon"></i>
       </form>
-
 
       <div class="d-flex align-items-center gap-3">
         <a routerLink="/dettagliUtente" title="Utente">
@@ -41,7 +42,6 @@
       </div>
     </div>
 
-    
     <div class="d-flex align-items-center gap-3 w-100 flex-wrap">
       <!-- Bottone categorie -->
       <button mat-button [matMenuTriggerFor]="menu">
@@ -53,7 +53,9 @@
         <button
           mat-menu-item
           *ngFor="let voce of categorie"
-          [routerLink]="'/listaProdotti/' + voce.id"
+          [routerLink]="
+            voce.id === null ? '/listaProdotti' : '/listaProdotti/' + voce.id
+          "
         >
           {{ capitalize(voce.descrizione) }}
         </button>
@@ -62,7 +64,7 @@
       <!-- Link pagine -->
       <ul class="navbar-nav d-flex flex-row flex-wrap gap-3 mb-0">
         <li class="nav-item">
-          <a class="nav-link px-2" routerLink="/listaProdotti/13">Pc gaming</a>
+          <a class="nav-link px-2" routerLink="/listaProdotti/13">Pc</a>
         </li>
         <li class="nav-item">
           <a class="nav-link px-2" routerLink="/listaProdotti/7">Mouse</a>

@@ -34,6 +34,11 @@ import { DettagliUtenteComponent } from './componenti/dettagli-utente/dettagli-u
 import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
 import { ListaProdottiComponent } from './componenti/lista-prodotti/lista-prodotti.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { RicercaComponent } from './componenti/ricerca/ricerca.component';
+
+
+
 import { MatDialogModule } from '@angular/material/dialog';
 import { GeneralReqComponent } from './requests/general-req/general-req.component';
 
@@ -57,6 +62,8 @@ import { GeneralReqComponent } from './requests/general-req/general-req.componen
     LavoraConNoiComponent,
     ProdottiComponentComponent,
     DettagliUtenteComponent,
+    ListaProdottiComponent,
+    RicercaComponent
     ListaProdottiComponent,
     GeneralReqComponent
   ],

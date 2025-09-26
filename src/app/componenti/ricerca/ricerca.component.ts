@@ -1,22 +1,27 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ListaProdottiService } from '../../services/lista-prodotti.service';
+import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-lista-prodotti',
+  selector: 'app-ricerca',
   standalone: false,
-  templateUrl: './lista-prodotti.component.html',
-  styleUrl: './lista-prodotti.component.css',
+  templateUrl: './ricerca.component.html',
+  styleUrl: './ricerca.component.css',
 })
-export class ListaProdottiComponent implements OnInit {
+export class RicercaComponent implements OnInit, OnDestroy {
+  // proprietà legate al template
   marcaSelezionata: string = 'Tutte';
   marche: string[] = [];
   mostraTutteLeMarche = false;
-  prodotti: any[] = [];
   idParam: string | null = null; // per passare id
+  prodotti: any[] = [];
+  elementoCercato = '';
+
   categoriaSelezionata: string = 'Tutte';
-  categorie: string[] = []; // array con le categorie caricate
+  categorie: string[] = [];
   mostraTutteLeCategorie = false;
+
   paginaCorrente: number = 1; //pagina per visualizzare prodotti
   prodottiPerPagina: number = 9; //numero di prodotti visualizzabili per pagina
   prezzoMin!: number;
@@ -26,54 +31,46 @@ export class ListaProdottiComponent implements OnInit {
   caricamentoInCorso: boolean = true; //per non far visuallizare il messaggio nessun prodotto trovato
   // prima che carichi i dati
 
+  // Subscription aggregator (per fare unsubscribe in ngOnDestroy)
+  private subs = new Subscription();
+
   constructor(
-    private route: ActivatedRoute,
-    private listaProdottiService: ListaProdottiService
+    private listaProdottiService: ListaProdottiService,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe((params) => {
-      this.idParam = params.get('id');
-      const id = this.idParam ? Number(this.idParam) : null;
+    this.subs.add(
+      this.route.queryParamMap.subscribe((params) => {
+        const descr = params.get('descrizione') || '';
+        // evita chiamata inutile se è uguale a prima
+        if (descr === this.elementoCercato) return;
 
-      if (id) {
-        this.listaProdottiService
-          .getAllByIdCategoria(id)
+        this.elementoCercato = descr;
+
+        // chiamata al servizio per ricaricare i prodotti
+        const s = this.listaProdottiService
+          .listByFilter(this.elementoCercato)
           .subscribe((resp: any) => {
-            this.prodotti = resp.dati;
+            this.prodotti = resp?.dati;
             this.setupMarche();
+            this.setupCategorie();
             this.calcolaPrezziAssoluti();
             this.caricamentoInCorso = false; // fine caricamento
           });
-      } else {
-        this.listaProdottiService.getAll().subscribe((resp: any) => {
-          this.prodotti = resp.dati;
-          this.setupMarche();
-          this.setupCategorie();
-          this.calcolaPrezziAssoluti();
-          this.caricamentoInCorso = false; // fine caricamento
-        });
-      }
-    });
+        this.subs.add(s);
+      })
+    );
   }
 
-  calcolaPrezziAssoluti() {
-    if (this.prodotti.length > 0) {
-      this.prezzoMinAssoluto = Math.min(...this.prodotti.map((p) => p.prezzo));
-      this.prezzoMaxAssoluto = Math.max(...this.prodotti.map((p) => p.prezzo));
-      this.prezzoMin = this.prezzoMinAssoluto;
-      this.prezzoMax = this.prezzoMaxAssoluto;
-    }
-  }
-
-  setupMarche() {
+  setupMarche(): void {
     const marcheSet = new Set(
       this.prodotti.map((p) => p.marca?.descrizione).filter((m) => !!m)
     );
     this.marche = ['Tutte', ...Array.from(marcheSet)];
   }
 
-  setupCategorie() {
+  setupCategorie(): void {
     const categorieSet = new Set(
       this.prodotti.map((p) => p.categoria?.descrizione).filter((c) => !!c)
     );
@@ -81,6 +78,7 @@ export class ListaProdottiComponent implements OnInit {
   }
 
   get prodottiFiltrati() {
+    // filtra ulteriormente i prodotti se necessario
     let filtri = this.prodotti;
 
     if (this.marcaSelezionata !== 'Tutte') {
@@ -95,15 +93,18 @@ export class ListaProdottiComponent implements OnInit {
       );
     }
 
-    if (this.prezzoMin != null && this.prezzoMax != null) {
-      filtri = filtri.filter(
-        (p) => p.prezzo >= this.prezzoMin && p.prezzo <= this.prezzoMax
-      );
-    }
-
     // Applica paginazione
     const start = (this.paginaCorrente - 1) * this.prodottiPerPagina;
     return filtri.slice(start, start + this.prodottiPerPagina);
+  }
+
+  calcolaPrezziAssoluti() {
+    if (this.prodotti.length > 0) {
+      this.prezzoMinAssoluto = Math.min(...this.prodotti.map((p) => p.prezzo));
+      this.prezzoMaxAssoluto = Math.max(...this.prodotti.map((p) => p.prezzo));
+      this.prezzoMin = this.prezzoMinAssoluto;
+      this.prezzoMax = this.prezzoMaxAssoluto;
+    }
   }
 
   get numeroPagine(): number {
@@ -150,8 +151,12 @@ export class ListaProdottiComponent implements OnInit {
     const trimmed = spaced.trim(); // rimuove eventuali spazi iniziali
     return trimmed.charAt(0).toUpperCase() + trimmed.slice(1);
   }
-
   applicaFiltri() {
     this.paginaCorrente = 1;
+  }
+
+  ngOnDestroy(): void {
+    // cancella tutte le subscription accumulate
+    this.subs.unsubscribe();
   }
 }

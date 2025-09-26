@@ -13,5 +13,16 @@ export class ListaProdottiService {
   getAllByIdCategoria(id:number) {
     return this.http.get(this.url + 'listAllByIdCategoria?id=' + id);
   }
+
+  listByFilter(descrizione:String){
+    return this.http.get(this.url + 'listByFilter?descrizione=' + descrizione)
+  }
   
+  getById(id:number){
+     return this.http.get(this.url + 'getProdotto?id=' + id);
+  }
+  
+  getAll(){
+    return this.http.get(this.url + 'listAllProdotto');
+  }
 }

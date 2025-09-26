@@ -1,5 +1,8 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ListaProdottiService } from '../../services/lista-prodotti.service';
+import { Location } from '@angular/common';
+
 
 @Component({
   selector: 'app-dettaglio-prodotto',
@@ -7,24 +10,36 @@ import { Router } from '@angular/router';
   templateUrl: './dettaglio-prodotto.component.html',
   styleUrl: './dettaglio-prodotto.component.css',
 })
-export class DettaglioProdottoComponent {
+export class DettaglioProdottoComponent implements OnInit {
   prodotto: any;
   quantita: number = 1;
   showModal = false;
 
-  constructor(private router: Router) {}
+  constructor(
+    private route: ActivatedRoute,
+    private prodottoService: ListaProdottiService,
+    private router: Router,
+    private indietro: Location
+  ) {}
 
   ngOnInit() {
-    this.prodotto = {
-      titolo: 'HP Pavilion 13"',
-      descrizione: 'Intel i3, 8GB RAM, 128GB SSD',
-      marca: 'HP',
-      prezzo: 1000,
-      disponibilita: 0,
-      immagine:
-        'https://i5.walmartimages.com/seo/HP-Pavilion-13-3-FHD-Intel-Core-i3-8GB-RAM-128GB-SSD-Silver_906cf222-d138-430a-8146-d129b0cca3a2_2.f838f300a6e31f50074faf4091a1da7b.jpeg',
-    };
+    const id = Number(this.route.snapshot.paramMap.get('id'));
+    if (id) {
+      this.prodottoService.getById(id).subscribe({
+        next: (resp: any) => {
+          if (resp.dati) {
+            this.prodotto = resp.dati;
+          } else {
+            console.error('Prodotto non trovato:', resp.msg);
+          }
+        },
+        error: (err) => {
+          console.error('Errore HTTP:', err.message);
+        },
+      });
+    }
   }
+
   aggiungiAlCarrello() {
     this.showModal = true;
   }
@@ -36,4 +51,14 @@ export class DettaglioProdottoComponent {
   vaiAlCarrello() {
     this.router.navigate(['/carrello']);
   }
+
+  capitalize(text: string): string {
+    //funzione per mettere la prima lettera MAIUSCOLA
+    if (!text) return '';
+    return text.charAt(0).toUpperCase() + text.slice(1);
+  }
+  
+  tornaIndietro() {
+  this.indietro.back();
+}
 }

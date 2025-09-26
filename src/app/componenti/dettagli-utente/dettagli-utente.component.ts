@@ -144,14 +144,17 @@ throw new Error('Method not implemented.');
   saveUserChanges() {
     const values = this.updateUserForm.value;
 
-    if (!values.pwd || !values.confirmPwd) {
-      alert('Inserisci la nuova password e confermala.');
-      return;
-    }
+    // Se è stato inserito uno dei due campi password
+    if (values.pwd || values.confirmPwd) {
+      if (!values.pwd || !values.confirmPwd) {
+        alert('Inserisci la nuova password e confermala.');
+        return;
+      }
 
-    if (values.pwd !== values.confirmPwd) {
-      alert('Le password non corrispondono.');
-      return;
+      if (values.pwd !== values.confirmPwd) {
+        alert('Le password non corrispondono.');
+        return;
+      }
     }
 
     const updatedUser = {
@@ -160,7 +163,7 @@ throw new Error('Method not implemented.');
       indirizzo: values.indirizzo,
       telefono: values.telefono,
       email: values.email,
-      pwd: values.pwd,
+      pwd: values.pwd || null, // oppure lascia vuoto se non è cambiata
       role: this.utente.role,
     };
 
@@ -248,9 +251,9 @@ openDialog() {
   openModalUpdateUtente() {
     this.showModalUpdateUtente = true;
     this.updateUserForm.patchValue({
-    pwd: '',
-    confirmPwd: ''
-  });
+      pwd: '',
+      confirmPwd: '',
+    });
   }
 
   closeModalUpdateUtente() {

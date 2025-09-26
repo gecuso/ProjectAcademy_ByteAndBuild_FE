@@ -3,16 +3,15 @@
     <!-- Colonna sinistra con le marche ed il prezzo -->
     <div class="col-md-3">
       <h5>Filtra per marca</h5>
-      <mat-radio-group
-        [(ngModel)]="marcaSelezionata"
-        (ngModelChange)="applicaFiltri()"
-      >
+      <mat-radio-group [(ngModel)]="marcaSelezionata" (ngModelChange)="applicaFiltri()">
         <mat-radio-button
           *ngFor="
             let marca of marche
-              | slice : 0 : (mostraTutteLeMarche ? marche.length : 5)"
+              | slice : 0 : (mostraTutteLeMarche ? marche.length : 5)
+          "
           [value]="marca"
-          class="d-block mb-2">
+          class="d-block mb-2"
+        >
           {{ capitalize(marca) }}
         </mat-radio-button>
       </mat-radio-group>
@@ -30,10 +29,7 @@
       <!--linea divisoria-->
       <div *ngIf="!idParam">
         <h5>Filtra per categoria</h5>
-        <mat-radio-group
-          [(ngModel)]="categoriaSelezionata"
-          (ngModelChange)="applicaFiltri()"
-        >
+        <mat-radio-group [(ngModel)]="categoriaSelezionata" (ngModelChange)="applicaFiltri()">
           <mat-radio-button
             *ngFor="
               let categoria of categorie
@@ -85,11 +81,6 @@
           (ngModelChange)="applicaFiltri()"
         />
       </mat-form-field>
-
-      <!-- <mat-slider min="200" max="500">
-        <input value="300" matSliderStartThumb />
-        <input value="400" matSliderEndThumb />
-      </mat-slider>-->
     </div>
 
     <!-- Colonna destra con i prodotti -->
@@ -102,15 +93,12 @@
             : "Tutti i prodotti"
         }}
       </h2>
-      <!-- Mostra messaggio solo se NON sta caricando -->
       <div
         *ngIf="!caricamentoInCorso && prodottiFiltrati.length === 0"
         class="alert-custom-blu text-center mt-4"
       >
         Nessun prodotto trovato.
       </div>
-
-      <!-- Mostra spinner di caricamento -->
       <div *ngIf="caricamentoInCorso" class="text-center mt-4"></div>
       <div
         class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4"
