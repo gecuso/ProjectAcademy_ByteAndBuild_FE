@@ -39,7 +39,7 @@ export class DettagliUtenteComponent implements OnInit {
             this.updateUserForm = this.fb.group({
               userName: [this.utente.userName, Validators.required],
               indirizzo: [this.utente.indirizzo],
-              telefono: [this.utente.telefono],
+              telefono: [this.utente.telefono] ,
               email: [this.utente.email],
               pwd: [''], // nuova password (opzionale)
               confirmPwd: [''], // conferma (opzionale)
