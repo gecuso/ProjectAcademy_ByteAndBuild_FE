@@ -4,11 +4,12 @@ import { AuthService } from '../../auth/auth.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Categoria, CategoriaService } from '../../services/categoria.service';
+import { CategoriaService } from '../../services/categoria.service';
 import { Marca, MarcaService } from '../../services/marca.service';
 import { ProdottoService } from '../../services/prodotto.service';
 import { MatDialog } from '@angular/material/dialog';
-import { ProdottoDialogComponent, ProdottoReq } from '../../dialogs/prodotto/dialog-prod/dialog-prod.component';
+import { ProdottoDialogComponent } from '../../dialogs/prodotto/dialog-prod/dialog-prod.component';
+import { Categoria, ProdottoReq } from '../../requests/general-req/general-req.component';
 
 
 @Component({
@@ -223,7 +224,6 @@ throw new Error('Method not implemented.');
 openDialog() {
   const dialogRef = this.dialog.open(ProdottoDialogComponent, {
     width: '500px',
-    data: {} as ProdottoReq
   });
 
   dialogRef.afterClosed().subscribe(result => {
