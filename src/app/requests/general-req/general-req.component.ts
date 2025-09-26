@@ -110,6 +110,27 @@ export interface Formato {
   descrizione: string;
 }
 
+export interface Caratteristiche {
+  id: number;
+  descrizione: string;
+  tipologia: string;
+  collegamento: string;
+  idProdotto: number | null;
+  consumo: number | null;
+  compatibilita: string;
+  idFormato: number | null;
+  risoluzione: string;
+  latenza: string;
+  frequenza: string;
+  spazio: number | null;
+  potenza: number;  
+  idMarca: number;
+  costo: number;
+  prezzo: number;
+  quantita: number;
+  img: string;
+}
+
 @Component({
   selector: 'app-general-req',
   standalone: false,
