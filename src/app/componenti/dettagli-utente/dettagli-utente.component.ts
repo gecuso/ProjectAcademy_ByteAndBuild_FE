@@ -107,7 +107,7 @@ export class DettagliUtenteComponent implements OnInit {
       email: values.email,
       pwd: values.pwd || null, // oppure lascia vuoto se non è cambiata
       role: this.utente.role,
-      currentpwd: values.currentpwd
+      currentpwd: values.currentpwd,
     };
     this.utenteService.updateUser(updatedUser).subscribe({
       next: (resp: any) => {
@@ -140,9 +140,13 @@ export class DettagliUtenteComponent implements OnInit {
   openModalUpdateUtente() {
     this.showModalUpdateUtente = true;
     this.updateUserForm.patchValue({
+      userName: this.utente.userName,
+      indirizzo: this.utente.indirizzo,
+      telefono: this.utente.telefono,
+      email: this.utente.email,
       pwd: '',
       confirmPwd: '',
-      currentpwd: ''
+      currentpwd: '',
     });
   }
 
