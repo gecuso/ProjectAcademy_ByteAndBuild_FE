@@ -98,7 +98,7 @@ export class DialogSistemaRaffComponent {
     this.prodottoReq.idMarca = this.form.value.idMarca;
 
     console.log(this.form.value);
-    this.sisRafservice.createSisRafrod(this.sisRafReq, this.prodottoReq).subscribe(data =>{ console.log(data)})
+    this.sisRafservice.createSisRafProd(this.sisRafReq, this.prodottoReq).subscribe(data =>{ console.log(data)})
     this.dialogRef.close(this.form.value);
   }
 

@@ -15,9 +15,9 @@ export class TastieraService {
     return this.http.post(this.url + 'create', tastiera);
   }
 
-  createTastReqProd(tastReq: TastieraReq, prodReq:ProdottoReq) {
+  createTastProd(tastReq: TastieraReq, prodReq:ProdottoReq) {
     const body = { tastReq, prodReq };
     console.log(body);
-    return this.http.post(this.url + 'createTastReqProd', body);
+    return this.http.post(this.url + 'createTastProd', body);
   }
 }

@@ -101,7 +101,7 @@ export class DialogTastieraComponent {
     this.prodottoReq.idMarca = this.form.value.idMarca;
 
     console.log(this.form.value);
-    this.tastieraservice.createTastReqProd(this.tastReq, this.prodottoReq).subscribe(data =>{ console.log(data)})
+    this.tastieraservice.createTastProd(this.tastReq, this.prodottoReq).subscribe(data =>{ console.log(data)})
     this.dialogRef.close(this.form.value);
   }
 

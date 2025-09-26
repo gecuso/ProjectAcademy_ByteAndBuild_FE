@@ -15,9 +15,9 @@ export class SistemaRaffreddamentoService {
     return this.http.post(this.url + 'create', sistemaRaffreddamento);
   }
   
-  createSisRafrod(sisRafReq: SistemaRaffreddamentoReq, prodReq:ProdottoReq) {
+  createSisRafProd(sisRafReq: SistemaRaffreddamentoReq, prodReq:ProdottoReq) {
     const body = { sisRafReq, prodReq };
     console.log(body);
-    return this.http.post(this.url + 'createAlimProd', body);
+    return this.http.post(this.url + 'createSisRafProd', body);
   }
 }

@@ -9,6 +9,7 @@ import { Categoria, ProdottoReq, SchedaMadreReq } from '../../../requests/genera
 import { MatSelectModule } from '@angular/material/select';
 import { SchedaMadreService } from '../../../services/scheda-madre.service';
 import { MarcaService } from '../../../services/marca.service';
+import { FormatoService } from '../../../services/formato.service';
 
 @Component({
   selector: 'app-dialog-scheda-madre',
@@ -50,6 +51,7 @@ export class DialogSchedaMadreComponent {
     public dialogRef: MatDialogRef<DialogSchedaMadreComponent>,
     private marcaService : MarcaService,
     private scherdaMadreService : SchedaMadreService,
+    private formatoService : FormatoService,
     @Inject(MAT_DIALOG_DATA) public dataSchMdr: SchedaMadreReq,
     @Inject(MAT_DIALOG_DATA) private dataProd: ProdottoReq
   ) {
@@ -82,6 +84,12 @@ export class DialogSchedaMadreComponent {
         },
         error: err => console.error('Errore marche:', err) // Stampa eventuali errori
       });
+
+      this.formatoService.getFormati().subscribe({
+            next: formats => this.formati = formats,                    // Quando arrivano i dati, li salvo in this.formats
+            error: err => console.error('Errore formati:', err)   // Se c’è un errore, lo stampo in console
+          });
+                  console.log(this.formati);
     }
 
   onSave(): void {
@@ -94,6 +102,7 @@ export class DialogSchedaMadreComponent {
     this.schMdrReq.descrizione = this.form.value.descrizione;
     this.schMdrReq.compatibilita = this.form.value.compatibilita;
     this.schMdrReq.consumo = this.form.value.consumo;
+    this.schMdrReq.idFormato = this.form.value.idFormato;
 
     this.prodottoReq.descrizione = this.form.value.descrizione;
     this.prodottoReq.costo = this.form.value.costo;
