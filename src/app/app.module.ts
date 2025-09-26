@@ -8,7 +8,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ComponentiComponent } from './componenti/componenti.component';
 import { HomeComponent } from './componenti/home/home.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import {MatIconModule} from '@angular/material/icon';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatBadgeModule} from '@angular/material/badge';
@@ -63,8 +63,7 @@ import { GeneralReqComponent } from './requests/general-req/general-req.componen
     ProdottiComponentComponent,
     DettagliUtenteComponent,
     ListaProdottiComponent,
-    RicercaComponent
-    ListaProdottiComponent,
+    RicercaComponent,
     GeneralReqComponent
   ],
   imports: [

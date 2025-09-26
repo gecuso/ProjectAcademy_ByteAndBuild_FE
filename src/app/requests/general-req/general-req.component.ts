@@ -101,7 +101,7 @@ export interface TastieraReq {
 }
 
 export interface Categoria {
-  id: number;
+  id: number | null;
   descrizione: string;
 }
 
