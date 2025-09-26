@@ -42,6 +42,15 @@
     <mat-form-field appearance="outline">
       <mat-label>Collegamento</mat-label>
       <input matInput formControlName="collegamento" />
+      <mat-select formControlName="collegamento">
+          <mat-option value="">-- Seleziona collegamento--</mat-option>
+          <mat-option value="CAVO">cavo</mat-option>
+          <mat-option value="WIRELESS">wireless</mat-option>
+
+        </mat-select>
+        <mat-error *ngIf="form.get('idMarca')?.invalid && form.get('idMarca')?.touched">
+          la compatibilità è obbligatoria
+        </mat-error>
     </mat-form-field>
 
   </form>
