@@ -43,6 +43,7 @@ export class DettagliUtenteComponent implements OnInit {
               email: [this.utente.email],
               pwd: [''], // nuova password (opzionale)
               confirmPwd: [''], // conferma (opzionale)
+              currentpwd: ['', Validators.required],
             });
           } else {
             console.error('Errore API:', resp.msg);
@@ -106,8 +107,8 @@ export class DettagliUtenteComponent implements OnInit {
       email: values.email,
       pwd: values.pwd || null, // oppure lascia vuoto se non è cambiata
       role: this.utente.role,
+      currentpwd: values.currentpwd
     };
-
     this.utenteService.updateUser(updatedUser).subscribe({
       next: (resp: any) => {
         if (resp.rc) {
@@ -119,7 +120,7 @@ export class DettagliUtenteComponent implements OnInit {
         }
       },
       error: (err: HttpErrorResponse) => {
-        alert("Errore durante l'aggiornamento: " + err.message);
+        alert('Errore nella modifica');
       },
     });
   }
@@ -141,6 +142,7 @@ export class DettagliUtenteComponent implements OnInit {
     this.updateUserForm.patchValue({
       pwd: '',
       confirmPwd: '',
+      currentpwd: ''
     });
   }
 
