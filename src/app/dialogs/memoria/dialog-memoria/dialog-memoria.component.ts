@@ -9,6 +9,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { Categoria, MemoriaReq, ProdottoReq } from '../../../requests/general-req/general-req.component';
 import { MemoriaService } from '../../../services/memoria.service';
 import { MarcaService } from '../../../services/marca.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dialog-memoria',
@@ -49,6 +50,7 @@ export class DialogMemoriaComponent {
     public dialogRef: MatDialogRef<DialogMemoriaComponent>,
     private marcaService : MarcaService,
     private memoriaService: MemoriaService,
+    private router: Router,
     @Inject(MAT_DIALOG_DATA) public dataMem: MemoriaReq,
     @Inject(MAT_DIALOG_DATA) private dataProd: ProdottoReq,
     @Inject(MAT_DIALOG_DATA) private dataElem: any
@@ -108,28 +110,38 @@ export class DialogMemoriaComponent {
     }
   }
 
-    onSubmit(): void {
-    if(this.dataElem?.data?.id){
+  onSubmit(): void {
+  if(this.dataElem?.data?.id){
+    this.memoriaReq.id = this.dataElem.data?.id;
+    this.prodottoReq.id = this.dataElem.data.prodotto?.id; 
+  }    
+    this.memoriaReq.spazio = this.form.value.spazio;
+
+    this.prodottoReq.descrizione = this.form.value.descrizione;
+    this.prodottoReq.costo = this.form.value.costo;
+    this.prodottoReq.prezzo = this.form.value.prezzo;
+    this.prodottoReq.quantita = this.form.value.quantita;
+    this.prodottoReq.img = this.form.value.img;
+    this.prodottoReq.idCategoria = this.cat;
+    this.prodottoReq.idMarca = this.form.value.idMarca;
+
+    console.log(this.form.value);
+    if (this.dataElem?.data?.id){
+      this.memoriaService.updateMemProd(this.memoriaReq, this.prodottoReq).subscribe(data =>{ console.log(data)})
+    }else{
+      this.memoriaService.createMemProd(this.memoriaReq, this.prodottoReq).subscribe(data =>{ console.log(data)})
+    }this.dialogRef.close(this.form.value);
+  }
+
+  onDelete(): void {
+    if(this.dataElem.data.prodotto?.id){
       this.memoriaReq.id = this.dataElem.data?.id;
       this.prodottoReq.id = this.dataElem.data.prodotto?.id; 
-    }    
-      this.memoriaReq.spazio = this.form.value.spazio;
-
-      this.prodottoReq.descrizione = this.form.value.descrizione;
-      this.prodottoReq.costo = this.form.value.costo;
-      this.prodottoReq.prezzo = this.form.value.prezzo;
-      this.prodottoReq.quantita = this.form.value.quantita;
-      this.prodottoReq.img = this.form.value.img;
-      this.prodottoReq.idCategoria = this.cat;
-      this.prodottoReq.idMarca = this.form.value.idMarca;
-
-      console.log(this.form.value);
-      if (this.dataElem?.data?.id){
-        this.memoriaService.updateMemProd(this.memoriaReq, this.prodottoReq).subscribe(data =>{ console.log(data)})
-      }else{
-        this.memoriaService.createMemProd(this.memoriaReq, this.prodottoReq).subscribe(data =>{ console.log(data)})
-      }this.dialogRef.close(this.form.value);
-    }
+      this.memoriaService.deleteMemProd(this.memoriaReq, this.prodottoReq).subscribe(data =>{ console.log(data)})
+      this.dialogRef.close(this.form.value);
+      this.router.navigate(['/listaProdotti',this.cat]);
+    } 
+  }
 
   onCancel(): void {
     this.dialogRef.close();

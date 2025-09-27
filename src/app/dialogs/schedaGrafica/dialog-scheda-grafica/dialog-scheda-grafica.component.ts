@@ -9,6 +9,7 @@ import { Categoria, ProdottoReq, SchedaGraficaReq } from '../../../requests/gene
 import { MarcaService } from '../../../services/marca.service';
 import { SchedaGraficaService } from '../../../services/scheda-grafica.service';
 import { MatSelectModule } from '@angular/material/select';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dialog-scheda-grafica',
@@ -50,6 +51,7 @@ export class DialogSchedaGraficaComponent {
     public dialogRef: MatDialogRef<DialogSchedaGraficaComponent>,
     private marcaService : MarcaService,
     private schGraficaService : SchedaGraficaService,
+    private router: Router,
     @Inject(MAT_DIALOG_DATA) public dataschGrf: SchedaGraficaReq,
     @Inject(MAT_DIALOG_DATA) private dataProd: ProdottoReq,
     @Inject(MAT_DIALOG_DATA) private dataElem: any
@@ -132,6 +134,16 @@ export class DialogSchedaGraficaComponent {
     }else{
       this.schGraficaService.createSchGrfProd(this.schGrfReq, this.prodottoReq).subscribe(data =>{ console.log(data)})
     }this.dialogRef.close(this.form.value);
+  }
+
+  onDelete(): void {
+    if(this.dataElem.data.prodotto?.id){
+      this.schGrfReq.id = this.dataElem.data?.id;
+      this.prodottoReq.id = this.dataElem.data.prodotto?.id; 
+      this.schGraficaService.deleteSchGrfProd(this.schGrfReq, this.prodottoReq).subscribe(data =>{ console.log(data)})
+      this.dialogRef.close(this.form.value);
+      this.router.navigate(['/listaProdotti',this.cat]);
+    } 
   }
 
   onCancel(): void {

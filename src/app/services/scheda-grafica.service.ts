@@ -24,6 +24,12 @@ export class SchedaGraficaService {
   updateSchGrfProd(schGrfReq: SchedaGraficaReq, prodReq:ProdottoReq) {
     const body = { schGrfReq, prodReq };
     console.log(body);
-    return this.http.post(this.url + 'updateSchGrfProd', body);
+    return this.http.put(this.url + 'updateSchGrfProd', body);
+  }
+
+  deleteSchGrfProd(schGrfReq: SchedaGraficaReq, prodReq:ProdottoReq) {
+    const body = { schGrfReq, prodReq };
+    console.log(body);
+    return this.http.post(this.url + 'deleteSchGrfProd', body);
   }
 }

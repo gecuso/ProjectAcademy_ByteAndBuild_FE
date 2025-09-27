@@ -38,8 +38,12 @@
           <strong>Compatibilità:</strong> {{ capitalize(elemento.compatibilita) }}<br />
         </ng-container>
 
-        <ng-container *ngIf="elemento?.idFormato">
-          <strong>ID Formato:</strong> {{ capitalize(elemento.idFormato.descrizione) }}<br />
+        <ng-container *ngIf="elemento?.formato">
+          <strong>Formato:</strong> {{ capitalize(elemento.formato.descrizione) }}<br />
+        </ng-container>
+
+        <ng-container *ngIf="elemento?.dimensioni">
+          <strong>Dimensioni:</strong> {{ capitalize(elemento.dimensioni) }}<br />
         </ng-container>
 
         <ng-container *ngIf="elemento?.risoluzione">

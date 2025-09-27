@@ -24,6 +24,12 @@ export class MemoriaService {
   updateMemProd(memReq: MemoriaReq, prodReq:ProdottoReq) {
     const body = { memReq, prodReq };
     console.log(body);
-    return this.http.post(this.url + 'updateMemProd', body);
+    return this.http.put(this.url + 'updateMemProd', body);
+  }
+
+  deleteMemProd(memReq: MemoriaReq, prodReq:ProdottoReq) {
+    const body = { memReq, prodReq };
+    console.log(body);
+    return this.http.post(this.url + 'deleteMemProd', body);
   }
 }

@@ -9,6 +9,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { Categoria, MonitorReq, ProdottoReq } from '../../../requests/general-req/general-req.component';
 import { MarcaService } from '../../../services/marca.service';
 import { MonitorService } from '../../../services/monitor.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dialog-monitor',
@@ -51,6 +52,7 @@ export class DialogMonitorComponent {
     public dialogRef: MatDialogRef<DialogMonitorComponent>,
     private marcaService : MarcaService,
     private monitorService: MonitorService,
+    private router: Router,
     @Inject(MAT_DIALOG_DATA) public dataMon: MonitorReq,
     @Inject(MAT_DIALOG_DATA) private dataProd: ProdottoReq,
     @Inject(MAT_DIALOG_DATA) private dataElem: any
@@ -139,6 +141,16 @@ export class DialogMonitorComponent {
     }else{
       this.monitorService.createMonitorProd(this.monitorReq, this.prodottoReq).subscribe(data =>{ console.log(data)})
     }this.dialogRef.close(this.form.value);
+  }
+
+  onDelete(): void {
+    if(this.dataElem.data.prodotto?.id){
+      this.monitorReq.id = this.dataElem.data?.id;
+      this.prodottoReq.id = this.dataElem.data.prodotto?.id; 
+      this.monitorService.deleteMonitorProd(this.monitorReq, this.prodottoReq).subscribe(data =>{ console.log(data)})
+      this.dialogRef.close(this.form.value);
+      this.router.navigate(['/listaProdotti',this.cat]);
+    } 
   }
 
   onCancel(): void {

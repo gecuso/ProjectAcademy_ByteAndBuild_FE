@@ -10,6 +10,7 @@ import { CaseReq, Categoria, ProdottoReq } from '../../../requests/general-req/g
 import { MarcaService } from '../../../services/marca.service';
 import { FormatoService } from '../../../services/formato.service';
 import { CaseService } from '../../../services/case.service';
+import { Route, Router } from '@angular/router';
 
 @Component({
   selector: 'app-dialog-case',
@@ -52,6 +53,7 @@ export class DialogCaseComponent {
     private marcaService : MarcaService,
     private formatoService : FormatoService,
     private caseService : CaseService,
+    private router: Router,
     public dialogRef: MatDialogRef<DialogCaseComponent>,
     @Inject(MAT_DIALOG_DATA) private dataCase: CaseReq,
     @Inject(MAT_DIALOG_DATA) private dataProd: ProdottoReq,
@@ -149,5 +151,15 @@ export class DialogCaseComponent {
 
   onCancel(): void {
     this.dialogRef.close();
+  }
+
+    onDelete(): void {
+    if(this.dataElem.data.prodotto?.id){
+      this.caseReq.id = this.dataElem.data?.id;
+      this.prodottoReq.id = this.dataElem.data.prodotto?.id; 
+      this.caseService.deleteCaseProd(this.caseReq, this.prodottoReq).subscribe(data =>{ console.log(data)})
+      this.dialogRef.close(this.form.value);
+      this.router.navigate(['/listaProdotti',this.cat]);
+    } 
   }
 }

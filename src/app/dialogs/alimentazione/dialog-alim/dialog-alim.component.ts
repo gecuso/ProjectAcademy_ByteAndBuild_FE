@@ -151,10 +151,8 @@ prodottoReq: ProdottoReq = {
     this.dialogRef.close(this.form.value);
   }
 
-
   onCancel(): void {
     this.dialogRef.close();
   }
 
-  
 }

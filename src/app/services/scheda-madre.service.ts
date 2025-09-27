@@ -24,6 +24,12 @@ export class SchedaMadreService {
   updateSchMdrProd(schMdrReq: SchedaMadreReq, prodReq:ProdottoReq) {
     const body = { schMdrReq, prodReq };
     console.log(body);
-    return this.http.post(this.url + 'updateSchMdrProd', body);
+    return this.http.put(this.url + 'updateSchMdrProd', body);
+  }
+
+  deleteSchMdrProd(schMdrReq: SchedaMadreReq, prodReq:ProdottoReq) {
+    const body = { schMdrReq, prodReq };
+    console.log(body);
+    return this.http.post(this.url + 'deleteSchMdrProd', body);
   }
 }

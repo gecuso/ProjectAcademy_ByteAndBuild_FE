@@ -24,6 +24,12 @@ export class CaseService {
   updateCaseProd(caseReq: CaseReq, prodReq:ProdottoReq) {
     const body = { caseReq, prodReq };
     console.log(body);
-    return this.http.post(this.url + 'updateCaseProd', body);
+    return this.http.put(this.url + 'updateCaseProd', body);
+  }
+
+  deleteCaseProd(caseReq: CaseReq, prodReq:ProdottoReq) {
+    const body = { caseReq, prodReq };
+    console.log(body);
+    return this.http.post(this.url + 'deleteCaseProd', body);
   }
 }

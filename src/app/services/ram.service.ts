@@ -20,6 +20,12 @@ export class RamService {
   updateRamProd(ramReq: RamReq, prodReq:ProdottoReq) {
     const body = { ramReq, prodReq };
     console.log(body);
-    return this.http.post(this.url + 'updateRamProd', body);
+    return this.http.put(this.url + 'updateRamProd', body);
+  }
+
+  deleteRamProd(ramReq: RamReq, prodReq:ProdottoReq) {
+    const body = { ramReq, prodReq };
+    console.log(body);
+    return this.http.post(this.url + 'deleteRamProd', body);
   }
 }
