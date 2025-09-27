@@ -20,4 +20,10 @@ export class SistemaRaffreddamentoService {
     console.log(body);
     return this.http.post(this.url + 'createSisRafProd', body);
   }
+
+  updateSisRafProd(sisRafReq: SistemaRaffreddamentoReq, prodReq:ProdottoReq) {
+    const body = { sisRafReq, prodReq };
+    console.log(body);
+    return this.http.post(this.url + 'updateSisRafProd', body);
+  }
 }

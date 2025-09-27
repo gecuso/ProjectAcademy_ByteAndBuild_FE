@@ -20,4 +20,10 @@ export class TastieraService {
     console.log(body);
     return this.http.post(this.url + 'createTastProd', body);
   }
+
+  updateTastProd(tastReq: TastieraReq, prodReq:ProdottoReq) {
+    const body = { tastReq, prodReq };
+    console.log(body);
+    return this.http.post(this.url + 'updateTastProd', body);
+  }
 }

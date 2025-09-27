@@ -28,12 +28,14 @@ export class DialogTastieraComponent {
   cat=12;
   marche: any[] = [];
   tastReq: TastieraReq = {
+    id: 0,
     descrizione: '',
     tipologia: '',
     collegamento: '',
     idProdotto: 0
   };
   prodottoReq: ProdottoReq = {
+    id: 0,
     descrizione: '',
     costo: 0,
     prezzo: 0,
@@ -49,10 +51,11 @@ export class DialogTastieraComponent {
     private marcaService : MarcaService,
     private tastieraservice : TastieraService,
     @Inject(MAT_DIALOG_DATA) public dataTast: TastieraReq,
-    @Inject(MAT_DIALOG_DATA) private dataProd: ProdottoReq
+    @Inject(MAT_DIALOG_DATA) private dataProd: ProdottoReq,
+    @Inject(MAT_DIALOG_DATA) private dataElem: any
   ) {
     this.form = this.fb.group({
-      id: [dataProd?.id],
+      idProd: [dataProd?.id],
       descrizione: [dataProd?.descrizione || '', Validators.required],
       costo: [dataProd?.costo || 0, Validators.required],
       prezzo: [dataProd?.prezzo || 0, Validators.required],
@@ -62,6 +65,7 @@ export class DialogTastieraComponent {
       idMarca: [dataProd?.idMarca || null, Validators.required],
       tipologia: [dataTast?.tipologia || '', Validators.required],
       collegamento: [dataTast?.collegamento || '', Validators.required],
+      idElem:[dataTast?.id],
     });
   }
 
@@ -75,10 +79,30 @@ export class DialogTastieraComponent {
           marca.categoria.some((cat: Categoria) => cat.id === this.cat)
         );
         // Resetta il campo marca, l’utente dovrà selezionarla di nuovo
-        this.form.patchValue({ idMarca: null });
+        if (!this.form.get('idMarca')?.value) {
+          this.form.patchValue({ idMarca: null });
+        }
       },
       error: err => console.error('Errore marche:', err) // Stampa eventuali errori
     });
+
+    if (this.dataElem?.data) {
+      console.log(this.dataElem)
+      this.form.patchValue({
+        idElem: this.dataElem.data?.id,
+        idProd: this.dataElem.data.prodotto?.id,
+        descrizione: this.dataElem.data.descrizione,
+        costo: this.dataElem.data.prodotto?.costo,
+        prezzo: this.dataElem.data.prodotto?.prezzo,
+        quantita: this.dataElem.data.prodotto?.quantita,
+        img: this.dataElem.data.prodotto?.img,
+        idCategoria: this.dataElem.data.prodotto?.categoria?.id,
+        idMarca: this.dataElem.data.prodotto?.marca?.id,
+        tipologia: this.dataElem.data.tipologia,
+        collegamento: this.dataElem.data.collegamento,
+      });
+      console.log(this.form.value)
+    }
   }
 
   onSave(): void {
@@ -87,7 +111,11 @@ export class DialogTastieraComponent {
     }
   }
 
-    onSubmit(): void {
+  onSubmit(): void {
+    if(this.dataElem?.data?.id){
+      this.tastReq.id = this.dataElem.data?.id;
+      this.prodottoReq.id = this.dataElem.data.prodotto?.id; 
+    }
     this.tastReq.descrizione = this.form.value.descrizione;
     this.tastReq.tipologia = this.form.value.tipologia;
     this.tastReq.collegamento = this.form.value.collegamento;
@@ -101,7 +129,11 @@ export class DialogTastieraComponent {
     this.prodottoReq.idMarca = this.form.value.idMarca;
 
     console.log(this.form.value);
-    this.tastieraservice.createTastProd(this.tastReq, this.prodottoReq).subscribe(data =>{ console.log(data)})
+    if (this.dataElem?.data?.id){
+      this.tastieraservice.updateTastProd(this.tastReq, this.prodottoReq).subscribe(data =>{ console.log(data)})
+    }else{
+      this.tastieraservice.createTastProd(this.tastReq, this.prodottoReq).subscribe(data =>{ console.log(data)})
+    }
     this.dialogRef.close(this.form.value);
   }
 
