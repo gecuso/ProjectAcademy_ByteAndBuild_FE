@@ -16,8 +16,14 @@ export class MemoriaService {
   }
 
   createMemProd(memReq: MemoriaReq, prodReq:ProdottoReq) {
-      const body = { memReq, prodReq };
-      console.log(body);
-      return this.http.post(this.url + 'createMemProd', body);
-    }
+    const body = { memReq, prodReq };
+    console.log(body);
+    return this.http.post(this.url + 'createMemProd', body);
+  }
+
+  updateMemProd(memReq: MemoriaReq, prodReq:ProdottoReq) {
+    const body = { memReq, prodReq };
+    console.log(body);
+    return this.http.post(this.url + 'updateMemProd', body);
+  }
 }

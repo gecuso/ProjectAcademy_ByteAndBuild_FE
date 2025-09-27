@@ -24,24 +24,26 @@ import { CpuService } from '../../../services/cpu.service';
   ],
 })
 export class DialogCpuComponent {
-  form: FormGroup;
-  cat=3;
-  marche: any[] = [];
-  cpuReq: CpuReq = {
-    descrizione: '',
-    compatibilita: '',
-    consumo: 0,
-    idProdotto: 0
-  };
-  prodottoReq: ProdottoReq = {
-    descrizione: '',
-    costo: 0,
-    prezzo: 0,
-    quantita: 0,
-    img: '',
-    idCategoria: this.cat,
-    idMarca: 0
-  };
+form: FormGroup;
+cat=3;
+marche: any[] = [];
+cpuReq: CpuReq = {
+  id: 0,
+  descrizione: '',
+  compatibilita: '',
+  consumo: 0,
+  idProdotto: 0
+};
+prodottoReq: ProdottoReq = {
+  id: 0,
+  descrizione: '',
+  costo: 0,
+  prezzo: 0,
+  quantita: 0,
+  img: '',
+  idCategoria: this.cat,
+  idMarca: 0
+};
 
   constructor(
     private fb: FormBuilder,
@@ -49,10 +51,11 @@ export class DialogCpuComponent {
     public cpuService : CpuService,
     public dialogRef: MatDialogRef<DialogCpuComponent>,
     @Inject(MAT_DIALOG_DATA) public dataCpu: CpuReq,
-    @Inject(MAT_DIALOG_DATA) private dataProd: ProdottoReq
+    @Inject(MAT_DIALOG_DATA) private dataProd: ProdottoReq,
+    @Inject(MAT_DIALOG_DATA) private dataElem: any
   ) {
     this.form = this.fb.group({
-      id: [dataProd?.id],
+      idProd: [dataProd?.id],
       descrizione: [dataProd?.descrizione || '', Validators.required],
       costo: [dataProd?.costo || 0, Validators.required],
       prezzo: [dataProd?.prezzo || 0, Validators.required],
@@ -62,25 +65,49 @@ export class DialogCpuComponent {
       idMarca: [dataProd?.idMarca || null, Validators.required],
       compatibilita: [dataCpu?.compatibilita || '', Validators.required],
       consumo: [dataCpu?.consumo || 0, [Validators.required, Validators.min(1)]],
+      idElem:[dataCpu?.id],
       });
   }
 
   ngOnInit() {
-        console.log(this.cat);
-        // Se è stata selezionata una categoria, carico le marche corrispondenti
-        this.marcaService.getMarcheByCategoria(this.cat).subscribe({
-          next: brands => {
-            // Filtra le marche che contengono la categoria selezionata
-            this.marche = brands.filter(marca => 
-              marca.categoria.some((cat: Categoria) => cat.id === this.cat)
-            );
-            // Resetta il campo marca, l’utente dovrà selezionarla di nuovo
-            this.form.patchValue({ idMarca: null });
-          },
-          error: err => console.error('Errore marche:', err) // Stampa eventuali errori
-        });
-      
+    console.log(this.cat);
+    // Se è stata selezionata una categoria, carico le marche corrispondenti
+    this.marcaService.getMarcheByCategoria(this.cat).subscribe({
+      next: brands => {
+        // Filtra le marche che contengono la categoria selezionata
+        this.marche = brands.filter(marca => 
+          marca.categoria.some((cat: Categoria) => cat.id === this.cat)
+        );
+        // Resetta il campo marca, l’utente dovrà selezionarla di nuovo
+        if (!this.form.get('idMarca')?.value) {
+          this.form.patchValue({ idMarca: null });
+        };
+      },
+      error: err => console.error('Errore marche:', err) // Stampa eventuali errori
+    });
+
+    if (!this.form.get('compatibilita')?.value) {
+          this.form.patchValue({ compatibilita: null });
     }
+
+    if (this.dataElem?.data) {
+      console.log(this.dataElem)
+      this.form.patchValue({
+        idElem: this.dataElem.data?.id,
+        idProd: this.dataElem.data.prodotto?.id,
+        descrizione: this.dataElem.data.descrizione,
+        costo: this.dataElem.data.prodotto?.costo,
+        prezzo: this.dataElem.data.prodotto?.prezzo,
+        quantita: this.dataElem.data.prodotto?.quantita,
+        img: this.dataElem.data.prodotto?.img,
+        idCategoria: this.dataElem.data.prodotto?.categoria?.id,
+        idMarca: this.dataElem.data.prodotto?.marca?.id,
+        compatibilita: this.dataElem.data.compatibilita,
+        consumo: this.dataElem.data.consumo,
+      });
+      console.log(this.form.value)
+    }
+  }
 
   onSave(): void {
     if (this.form.valid) {
@@ -89,6 +116,10 @@ export class DialogCpuComponent {
   }
 
     onSubmit(): void {
+    if(this.dataElem?.data?.id){
+      this.cpuReq.id = this.dataElem.data?.id;
+      this.prodottoReq.id = this.dataElem.data.prodotto?.id; 
+    }
     this.cpuReq.descrizione = this.form.value.descrizione;
     this.cpuReq.compatibilita = this.form.value.compatibilita;
     this.cpuReq.consumo = this.form.value.consumo;
@@ -102,8 +133,11 @@ export class DialogCpuComponent {
     this.prodottoReq.idMarca = this.form.value.idMarca;
 
     console.log(this.form.value);
-    this.cpuService.createCpuProd(this.cpuReq, this.prodottoReq).subscribe(data =>{ console.log(data)})
-    this.dialogRef.close(this.form.value);
+    if (this.dataElem?.data?.id){
+      this.cpuService.updateCpuProd(this.cpuReq, this.prodottoReq).subscribe(data =>{ console.log(data)})
+    }else{
+      this.cpuService.createCpuProd(this.cpuReq, this.prodottoReq).subscribe(data =>{ console.log(data)})
+    }this.dialogRef.close(this.form.value);
   }
 
   onCancel(): void {

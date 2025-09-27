@@ -15,9 +15,15 @@ export class SchedaGraficaService {
     return this.http.post(this.url + 'create', schedaGrafica);
   }
 
-    createSchGrfProd(schGrfReq: SchedaGraficaReq, prodReq:ProdottoReq) {
-      const body = { schGrfReq, prodReq };
-      console.log(body);
-      return this.http.post(this.url + 'createSchGrfProd', body);
-    }
+  createSchGrfProd(schGrfReq: SchedaGraficaReq, prodReq:ProdottoReq) {
+    const body = { schGrfReq, prodReq };
+    console.log(body);
+    return this.http.post(this.url + 'createSchGrfProd', body);
+  }
+
+  updateSchGrfProd(schGrfReq: SchedaGraficaReq, prodReq:ProdottoReq) {
+    const body = { schGrfReq, prodReq };
+    console.log(body);
+    return this.http.post(this.url + 'updateSchGrfProd', body);
+  }
 }

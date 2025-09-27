@@ -20,4 +20,10 @@ export class AlimentazioneService {
     console.log(body);
     return this.http.post(this.url + 'createAlimProd', body);
   }
+
+  updateAlimProd(alimReq: AlimentazioneReq, prodReq:ProdottoReq) {
+    const body = { alimReq, prodReq };
+    console.log(body);
+    return this.http.post(this.url + 'updateAlimProd', body);
+  }
 }

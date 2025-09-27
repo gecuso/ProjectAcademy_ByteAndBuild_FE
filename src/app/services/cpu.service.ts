@@ -21,4 +21,10 @@ export class CpuService {
     console.log(body);
     return this.http.post(this.url + 'createCpuProd', body);
   }
+  
+  updateCpuProd(cpuReq: CpuReq, prodReq:ProdottoReq) {
+    const body = { cpuReq, prodReq };
+    console.log(body);
+    return this.http.post(this.url + 'updateCpuProd', body);
+  }
 }

@@ -16,8 +16,14 @@ export class MouseService {
   }
 
   createMouseProd(mouseReq: MouseReq, prodReq:ProdottoReq) {
-      const body = { mouseReq, prodReq };
-      console.log(body);
-      return this.http.post(this.url + 'createMouseProd', body);
-    }
+    const body = { mouseReq, prodReq };
+    console.log(body);
+    return this.http.post(this.url + 'createMouseProd', body);
+  }
+
+  updateMouseProd(mouseReq: MouseReq, prodReq:ProdottoReq) {
+    const body = { mouseReq, prodReq };
+    console.log(body);
+    return this.http.post(this.url + 'updateMouseProd', body);
+  }
 }

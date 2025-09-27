@@ -28,6 +28,7 @@ export class DialogMonitorComponent {
   cat=6;
   marche: any[] = [];
   monitorReq: MonitorReq = {
+    id: 0,
     descrizione: '',
     risoluzione: '',
     latenza: '',
@@ -35,6 +36,7 @@ export class DialogMonitorComponent {
     idProdotto: 0
   };
   prodottoReq: ProdottoReq = {
+    id: 0,
     descrizione: '',
     costo: 0,
     prezzo: 0,
@@ -50,10 +52,11 @@ export class DialogMonitorComponent {
     private marcaService : MarcaService,
     private monitorService: MonitorService,
     @Inject(MAT_DIALOG_DATA) public dataMon: MonitorReq,
-    @Inject(MAT_DIALOG_DATA) private dataProd: ProdottoReq
+    @Inject(MAT_DIALOG_DATA) private dataProd: ProdottoReq,
+    @Inject(MAT_DIALOG_DATA) private dataElem: any
   ) {
     this.form = this.fb.group({
-      id: [dataProd?.id],
+      idProd: [dataProd?.id],
       descrizione: [dataProd?.descrizione || '', Validators.required],
       costo: [dataProd?.costo || 0, Validators.required],
       prezzo: [dataProd?.prezzo || 0, Validators.required],
@@ -64,24 +67,46 @@ export class DialogMonitorComponent {
       risoluzione: [dataMon?.risoluzione || '', Validators.required],
       latenza: [dataMon?.latenza || '', Validators.required],
       frequenza: [dataMon?.frequenza || '', Validators.required],
+      idElem:[dataMon?.id],
     });
   }
 
     ngOnInit() {
-          console.log(this.cat);
-          // Se è stata selezionata una categoria, carico le marche corrispondenti
-          this.marcaService.getMarcheByCategoria(this.cat).subscribe({
-            next: brands => {
-              // Filtra le marche che contengono la categoria selezionata
-              this.marche = brands.filter(marca => 
-                marca.categoria.some((cat: Categoria) => cat.id === this.cat)
-              );
-              // Resetta il campo marca, l’utente dovrà selezionarla di nuovo
-              this.form.patchValue({ idMarca: null });
-            },
-            error: err => console.error('Errore marche:', err) // Stampa eventuali errori
-          });
+      console.log(this.cat);
+      // Se è stata selezionata una categoria, carico le marche corrispondenti
+      this.marcaService.getMarcheByCategoria(this.cat).subscribe({
+        next: brands => {
+          // Filtra le marche che contengono la categoria selezionata
+          this.marche = brands.filter(marca => 
+            marca.categoria.some((cat: Categoria) => cat.id === this.cat)
+          );
+          // Resetta il campo marca, l’utente dovrà selezionarla di nuovo
+          if (!this.form.get('idMarca')?.value) {
+            this.form.patchValue({ idMarca: null });
+          }
+        },
+        error: err => console.error('Errore marche:', err) // Stampa eventuali errori
+      });
+
+      if (this.dataElem?.data) {
+        console.log(this.dataElem)
+        this.form.patchValue({
+          idElem: this.dataElem.data?.id,
+          idProd: this.dataElem.data.prodotto?.id,
+          descrizione: this.dataElem.data.descrizione,
+          costo: this.dataElem.data.prodotto?.costo,
+          prezzo: this.dataElem.data.prodotto?.prezzo,
+          quantita: this.dataElem.data.prodotto?.quantita,
+          img: this.dataElem.data.prodotto?.img,
+          idCategoria: this.dataElem.data.prodotto?.categoria?.id,
+          idMarca: this.dataElem.data.prodotto?.marca?.id,
+          risoluzione: this.dataElem.data.risoluzione,
+          latenza: this.dataElem.data.latenza,
+          frequenza: this.dataElem.data.frequenza
+        });
+        console.log(this.form.value)
       }
+    }
 
   onSave(): void {
     if (this.form.valid) {
@@ -90,6 +115,10 @@ export class DialogMonitorComponent {
   }
 
   onSubmit(): void {
+    if(this.dataElem?.data?.id){
+      this.monitorReq.id = this.dataElem.data?.id;
+      this.prodottoReq.id = this.dataElem.data.prodotto?.id; 
+    }
     this.monitorReq.descrizione = this.form.value.descrizione;
     this.monitorReq.risoluzione = this.form.value.risoluzione;
     this.monitorReq.latenza = this.form.value.latenza;
@@ -105,8 +134,11 @@ export class DialogMonitorComponent {
     this.prodottoReq.idMarca = this.form.value.idMarca;
 
     console.log(this.form.value);
-    this.monitorService.createMonitorProd(this.monitorReq, this.prodottoReq).subscribe(data =>{ console.log(data)})
-    this.dialogRef.close(this.form.value);
+    if (this.dataElem?.data?.id){
+      this.monitorService.upadateMonitorProd(this.monitorReq, this.prodottoReq).subscribe(data =>{ console.log(data)})
+    }else{
+      this.monitorService.createMonitorProd(this.monitorReq, this.prodottoReq).subscribe(data =>{ console.log(data)})
+    }this.dialogRef.close(this.form.value);
   }
 
   onCancel(): void {

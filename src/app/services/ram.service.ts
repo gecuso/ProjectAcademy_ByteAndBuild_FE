@@ -16,4 +16,10 @@ export class RamService {
     console.log(body);
     return this.http.post(this.url + 'createRamProd', body);
   }
+
+  updateRamProd(ramReq: RamReq, prodReq:ProdottoReq) {
+    const body = { ramReq, prodReq };
+    console.log(body);
+    return this.http.post(this.url + 'updateRamProd', body);
+  }
 }

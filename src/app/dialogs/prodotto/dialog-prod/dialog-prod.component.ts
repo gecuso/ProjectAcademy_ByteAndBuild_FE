@@ -131,26 +131,15 @@ export class ProdottoDialogComponent {
       default:
         alert('Categoria non selezionata');
         break;
-}
-    
-
-     //const dialogRef = this.dialog.open(DialogAlimComponent, {
-      //width: '500px',
-    //  data: {} as ProdottoReq
-    //});
-  
-    this.dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        console.log('Prodotto salvato:', result);
-      }
-    });}
+    }
+  } 
 
 
     openDialogAlim(): void{
-    const dialogRef = this.dialog.open(DialogAlimComponent, {
-            width: '500px',
-            data: {} as AlimentazioneReq
-              });
+      const dialogRef = this.dialog.open(DialogAlimComponent, {
+        width: '500px',
+        data: {} as AlimentazioneReq
+      });
     }
       
 

@@ -16,8 +16,14 @@ export class CaseService {
   }
 
   createCaseProd(caseReq: CaseReq, prodReq:ProdottoReq) {
-      const body = { caseReq, prodReq };
-      console.log(body);
-      return this.http.post(this.url + 'createCaseProd', body);
-    }
+    const body = { caseReq, prodReq };
+    console.log(body);
+    return this.http.post(this.url + 'createCaseProd', body);
+  }
+
+  updateCaseProd(caseReq: CaseReq, prodReq:ProdottoReq) {
+    const body = { caseReq, prodReq };
+    console.log(body);
+    return this.http.post(this.url + 'updateCaseProd', body);
+  }
 }
