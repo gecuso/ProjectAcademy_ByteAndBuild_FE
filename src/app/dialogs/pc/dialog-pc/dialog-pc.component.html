@@ -1,0 +1,145 @@
+<h1 mat-dialog-title>Nuovo PC</h1>
+
+<div mat-dialog-content>
+  <form [formGroup]="form" class="form-grid">
+
+    <mat-form-field appearance="fill">
+      <mat-label>Descrizione</mat-label>
+      <input matInput formControlName="descrizione" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Marca</mat-label>
+        <mat-select formControlName="idMarca" [disabled]="!marche.length">
+          <mat-option value="24">Byte&Build</mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.get('idMarca')?.invalid && form.get('idMarca')?.touched">
+          La marca è obbligatoria
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Costo</mat-label>
+      <input matInput type="number" formControlName="costo"  placeholder=""/>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Prezzo</mat-label>
+      <input matInput type="number" formControlName="prezzo" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Quantità</mat-label>
+      <input matInput type="number" formControlName="quantita" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Immagine (URL)</mat-label>
+      <input matInput formControlName="img" />
+    </mat-form-field>
+    
+    <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Alimentatore</mat-label>
+        <mat-select formControlName="idAlimentatore" [disabled]="!alimentatori.length">
+          <mat-option value="">---SELEZIONA ALIMENTATORE---</mat-option>
+          <mat-option *ngFor="let ogg of alimentatori" [value]="ogg.id">{{ ogg.descrizione }}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.get('idAlimentatore')?.invalid && form.get('idAlimentatore')?.touched">
+          L'alimentatore è obbligatorio
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Case</mat-label>
+        <mat-select formControlName="idCase" [disabled]="!cases.length">
+          <mat-option value="">---SELEZIONA CASE---</mat-option>
+          <mat-option *ngFor="let ogg of cases" [value]="ogg.id">{{ ogg.descrizione }}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.get('idCase')?.invalid && form.get('idCase')?.touched">
+          Il Case è obbligatorio
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Cpu</mat-label>
+        <mat-select formControlName="idCpu" [disabled]="!cases.length">
+          <mat-option value="">---SELEZIONA CPU---</mat-option>
+          <mat-option *ngFor="let ogg of cpus" [value]="ogg.id">{{ ogg.descrizione }}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.get('idCpu')?.invalid && form.get('idCpu')?.touched">
+          La CPU è obbligatoria
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Memoria</mat-label>
+        <mat-select formControlName="idMemoria" [disabled]="!cases.length">
+          <mat-option value="">---SELEZIONA MEMORIA---</mat-option>
+          <mat-option *ngFor="let ogg of memorie" [value]="ogg.id">{{ ogg.descrizione }}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.get('idMemoria')?.invalid && form.get('idMemoria')?.touched">
+          La Memoria è obbligatoria
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Ram</mat-label>
+        <mat-select formControlName="idRam" [disabled]="!cases.length">
+          <mat-option value="">---SELEZIONA MEMORIA---</mat-option>
+          <mat-option *ngFor="let ogg of rams" [value]="ogg.id">{{ ogg.descrizione }}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.get('idRam')?.invalid && form.get('idRam')?.touched">
+          La Ram è obbligatoria
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Scheda Grafica</mat-label>
+        <mat-select formControlName="idSchedaGrafica" [disabled]="!cases.length">
+          <mat-option value="">---SELEZIONA SCHEDA GRAFICA---</mat-option>
+          <mat-option *ngFor="let ogg of schedegrafiche" [value]="ogg.id">{{ ogg.descrizione }}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.get('idSchedaGrafica')?.invalid && form.get('idSchedaGrafica')?.touched">
+          La Scheda Grafica è obbligatoria
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Scheda Madre</mat-label>
+        <mat-select formControlName="idSchedaMadre" [disabled]="!cases.length">
+          <mat-option value="">---SELEZIONA SCHEDA MADRE---</mat-option>
+          <mat-option *ngFor="let ogg of schedemadri" [value]="ogg.id">{{ ogg.descrizione }}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.get('idSchedaMadre')?.invalid && form.get('idSchedaMadre')?.touched">
+          La Scheda Madre è obbligatoria
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Sistema Raffreddamento</mat-label>
+        <mat-select formControlName="idSistemaRaffreddamento" [disabled]="!cases.length">
+          <mat-option value="">---SELEZIONA SISTEMA DI RAFFREDDAMENTO---</mat-option>
+          <mat-option *ngFor="let ogg of sistemiraf" [value]="ogg.id">{{ ogg.descrizione }}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.get('idSistemaRaffreddamento')?.invalid && form.get('idSistemaRaffreddamento')?.touched">
+          Il sistema di raffreddamento è obbligatorio
+        </mat-error>
+    </mat-form-field>
+
+  </form>
+</div>
+
+<div mat-dialog-actions align="end">
+  <button mat-button (click)="onCancel()">Annulla</button>
+  <button mat-flat-button color="primary" (click)="onSubmit()" [disabled]="!form.valid">
+    Salva
+  </button>
+  <!--
+  <button 
+    *ngIf="form.get('idElem')?.value  && form.get('idElem')?.value!==0"
+    mat-flat-button 
+    style="background-color: red; color: white;" 
+    (click)="onDelete()"  >
+    elimina
+  </button>-->
+</div>

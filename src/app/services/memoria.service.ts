@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { MemoriaReq, ProdottoReq } from '../requests/general-req/general-req.component';
+import { MemoriaReq, ProdottoReq, RichiestaDTO } from '../requests/general-req/general-req.component';
+import { map, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -32,4 +33,9 @@ export class MemoriaService {
     console.log(body);
     return this.http.post(this.url + 'deleteMemProd', body);
   }
+  listAll(): Observable<RichiestaDTO[]> {
+        return this.http
+          .get<{ dati: RichiestaDTO[] }>(`${this.url}findAll`)
+          .pipe(map(response => response.dati || [])); // usa solo "dati"
+      }
 }

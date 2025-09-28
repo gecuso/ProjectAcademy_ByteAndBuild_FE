@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ProdottoReq, SistemaRaffreddamentoReq } from '../requests/general-req/general-req.component';
+import { ProdottoReq, RichiestaDTO, SistemaRaffreddamentoReq } from '../requests/general-req/general-req.component';
+import { map, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -32,4 +33,9 @@ export class SistemaRaffreddamentoService {
     console.log(body);
     return this.http.post(this.url + 'deleteSisRafProd', body);
   }
+  listAll(): Observable<RichiestaDTO[]> {
+        return this.http
+          .get<{ dati: RichiestaDTO[] }>(`${this.url}listAllSistemaRaffreddamento`)
+          .pipe(map(response => response.dati || [])); // usa solo "dati"
+      }
 }

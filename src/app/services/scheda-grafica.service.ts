@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ProdottoReq, SchedaGraficaReq } from '../requests/general-req/general-req.component';
+import { ProdottoReq, RichiestaDTO, SchedaGraficaReq } from '../requests/general-req/general-req.component';
+import { map, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -32,4 +33,9 @@ export class SchedaGraficaService {
     console.log(body);
     return this.http.post(this.url + 'deleteSchGrfProd', body);
   }
+  listAll(): Observable<RichiestaDTO[]> {
+        return this.http
+          .get<{ dati: RichiestaDTO[] }>(`${this.url}listAllSchedaGrafica`)
+          .pipe(map(response => response.dati || [])); // usa solo "dati"
+      }
 }

@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { CaseReq, ProdottoReq } from '../requests/general-req/general-req.component';
+import { CaseReq, ProdottoReq, RichiestaDTO } from '../requests/general-req/general-req.component';
+import { map, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -32,4 +33,9 @@ export class CaseService {
     console.log(body);
     return this.http.post(this.url + 'deleteCaseProd', body);
   }
+  listAll(): Observable<RichiestaDTO[]> {
+        return this.http
+          .get<{ dati: RichiestaDTO[] }>(`${this.url}listAllCase`)
+          .pipe(map(response => response.dati || [])); // usa solo "dati"
+      }
 }
