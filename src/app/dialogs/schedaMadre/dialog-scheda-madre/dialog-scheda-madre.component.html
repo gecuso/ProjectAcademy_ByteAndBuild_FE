@@ -44,8 +44,8 @@
       <mat-label>Compatibilità</mat-label>
       <mat-select formControlName="compatibilita">
         <mat-option value="">-- Seleziona Compatibilità --</mat-option>
-        <mat-option value="AMD">AMD</mat-option>
-        <mat-option value="INTEL">INTEL</mat-option>
+        <mat-option value="amd">AMD</mat-option>
+        <mat-option value="intel">INTEL</mat-option>
       </mat-select>
     </mat-form-field>
 
@@ -80,5 +80,13 @@
   <button mat-button (click)="onCancel()">Annulla</button>
   <button mat-flat-button color="primary" (click)="onSubmit()" [disabled]="!form.valid">
     Salva
+  </button>
+
+  <button 
+    *ngIf="form.get('idElem')?.value  && form.get('idElem')?.value!==0"
+    mat-flat-button 
+    style="background-color: red; color: white;" 
+    (click)="onDelete()"  >
+    elimina
   </button>
 </mat-dialog-actions>

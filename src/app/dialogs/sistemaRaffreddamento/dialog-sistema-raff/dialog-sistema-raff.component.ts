@@ -9,6 +9,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { Categoria, ProdottoReq, SistemaRaffreddamentoReq } from '../../../requests/general-req/general-req.component';
 import { SistemaRaffreddamentoService } from '../../../services/sistema-raffreddamento.service';
 import { MarcaService } from '../../../services/marca.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -28,12 +29,15 @@ export class DialogSistemaRaffComponent {
   form: FormGroup;
   cat=11;
   marche: any[] = [];
+  id:any;
   sisRafReq: SistemaRaffreddamentoReq = {
+    id: 0,
     descrizione: '',
     consumo: 0,
     idProdotto: 0
   };
   prodottoReq: ProdottoReq = {
+    id: 0,
     descrizione: '',
     costo: 0,
     prezzo: 0,
@@ -47,10 +51,13 @@ export class DialogSistemaRaffComponent {
     public dialogRef: MatDialogRef<DialogSistemaRaffComponent>,
     private marcaService : MarcaService,
     private sisRafservice : SistemaRaffreddamentoService,
+    private router: Router,
     @Inject(MAT_DIALOG_DATA) public dataSisRafReq: SistemaRaffreddamentoReq,
-    @Inject(MAT_DIALOG_DATA) private dataProd: ProdottoReq
+    @Inject(MAT_DIALOG_DATA) private dataProd: ProdottoReq,
+    @Inject(MAT_DIALOG_DATA) private dataElem: any
   ) {
     this.form = this.fb.group({
+      idProd: [dataProd?.id],
       id: [dataProd?.id],
       descrizione: [dataProd?.descrizione || '', Validators.required],
       costo: [dataProd?.costo || 0, Validators.required],
@@ -60,24 +67,45 @@ export class DialogSistemaRaffComponent {
       idCategoria: this.cat,
       idMarca: [dataProd?.idMarca || null, Validators.required],
       consumo: [dataSisRafReq?.consumo || 0, [Validators.required, Validators.min(1)]],
+      idElem:[dataSisRafReq?.id],
     });
   }
 
     ngOnInit() {
-          console.log(this.cat);
-          // Se è stata selezionata una categoria, carico le marche corrispondenti
-          this.marcaService.getMarcheByCategoria(this.cat).subscribe({
-            next: brands => {
-              // Filtra le marche che contengono la categoria selezionata
-              this.marche = brands.filter(marca => 
-                marca.categoria.some((cat: Categoria) => cat.id === this.cat)
-              );
-              // Resetta il campo marca, l’utente dovrà selezionarla di nuovo
-              this.form.patchValue({ idMarca: null });
-            },
-            error: err => console.error('Errore marche:', err) // Stampa eventuali errori
-          });
+      console.log(this.cat);
+      // Se è stata selezionata una categoria, carico le marche corrispondenti
+      this.marcaService.getMarcheByCategoria(this.cat).subscribe({
+        next: brands => {
+          // Filtra le marche che contengono la categoria selezionata
+          this.marche = brands.filter(marca => 
+            marca.categoria.some((cat: Categoria) => cat.id === this.cat)
+          );
+          // Resetta il campo marca, l’utente dovrà selezionarla di nuovo
+          if (!this.form.get('idMarca')?.value) {
+            this.form.patchValue({ idMarca: null });
+          }
+        },
+        error: err => console.error('Errore marche:', err) // Stampa eventuali errori
+      });
+
+      if (this.dataElem?.data) {
+        this.id=this.dataElem.data?.id
+        console.log(this.dataElem)
+        this.form.patchValue({
+          idElem: this.dataElem.data?.id,
+          idProd: this.dataElem.data.prodotto?.id,
+          descrizione: this.dataElem.data.descrizione,
+          consumo: this.dataElem.data.consumo,
+          costo: this.dataElem.data.prodotto?.costo,
+          prezzo: this.dataElem.data.prodotto?.prezzo,
+          quantita: this.dataElem.data.prodotto?.quantita,
+          img: this.dataElem.data.prodotto?.img,
+          idCategoria: this.dataElem.data.prodotto?.categoria?.id,
+          idMarca: this.dataElem.data.prodotto?.marca?.id,
+        });
+        console.log(this.form.value)
       }
+    }
 
   onSave(): void {
     if (this.form.valid) {
@@ -85,7 +113,11 @@ export class DialogSistemaRaffComponent {
     }
   }
 
-    onSubmit(): void {
+  onSubmit(): void {
+    if(this.dataElem?.data?.id){
+      this.sisRafReq.id = this.dataElem.data?.id;
+      this.prodottoReq.id = this.dataElem.data.prodotto?.id; 
+    }
     this.sisRafReq.consumo = this.form.value.consumo;
     this.sisRafReq.descrizione = this.form.value.descrizione;
 
@@ -98,8 +130,21 @@ export class DialogSistemaRaffComponent {
     this.prodottoReq.idMarca = this.form.value.idMarca;
 
     console.log(this.form.value);
-    this.sisRafservice.createSisRafProd(this.sisRafReq, this.prodottoReq).subscribe(data =>{ console.log(data)})
-    this.dialogRef.close(this.form.value);
+    if (this.dataElem?.data?.id){
+      this.sisRafservice.updateSisRafProd(this.sisRafReq, this.prodottoReq).subscribe(data =>{ console.log(data)})
+    }else{
+      this.sisRafservice.createSisRafProd(this.sisRafReq, this.prodottoReq).subscribe(data =>{ console.log(data)})
+    }this.dialogRef.close(this.form.value);
+  }
+
+  onDelete(): void {
+    if(this.dataElem.data.prodotto?.id){
+      this.sisRafReq.id = this.dataElem.data?.id;
+      this.prodottoReq.id = this.dataElem.data.prodotto?.id; 
+      this.sisRafservice.deleteSisRafProd(this.sisRafReq, this.prodottoReq).subscribe(data =>{ console.log(data)})
+      this.dialogRef.close(this.form.value);
+      this.router.navigate(['/listaProdotti',this.cat]);
+    } 
   }
 
   onCancel(): void {

@@ -9,6 +9,10 @@ export class ProdottoService {
   constructor(private http: HttpClient) {}
 
   create(body:{}){
-    return this.http.post(this.url + "create", body)
+    return this.http.post(this.url + "/create", body)
+  }
+  delete(body: number){ 
+    console.log(body);
+    return this.http.get(this.url + "/delete?idProd="+ body) 
   }
 }

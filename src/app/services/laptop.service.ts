@@ -15,9 +15,21 @@ export class LaptopService {
     return this.http.post(this.url + 'create', laptop);
   }
 
-    createLaptopProd(laptopReq: LaptopReq, prodReq:ProdottoReq) {
-      const body = { laptopReq, prodReq };
-      console.log(body);
-      return this.http.post(this.url + 'createLaptopProd', body);
-    }
+  createLaptopProd(laptopReq: LaptopReq, prodReq:ProdottoReq) {
+    const body = { laptopReq, prodReq };
+    console.log(body);
+    return this.http.post(this.url + 'createLaptopProd', body);
+  }
+
+  updateLaptopProd(laptopReq: LaptopReq, prodReq:ProdottoReq) {
+    const body = { laptopReq, prodReq };
+    console.log(body);
+    return this.http.put(this.url + 'updateLaptopProd', body);
+  }
+
+  deleteLaptopProd(laptopReq: LaptopReq, prodReq:ProdottoReq) {
+    const body = { laptopReq, prodReq };
+    console.log(body);
+    return this.http.post(this.url + 'deleteLaptopProd', body);
+  }
 }

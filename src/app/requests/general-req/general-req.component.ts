@@ -1,5 +1,10 @@
 import { Component } from '@angular/core';
 
+export interface RichiestaDTO {
+  id: number;
+  descrizione: string;
+  prodotto: {id:number, descrizione:string, costo:number, prezzo:number, quantita:number, img:string, categoria:{id:number, descrizione:string}, marca:{id:number, descrizione:string}};
+}
 export interface AlimentazioneReq {
   id?: number;
   descrizione: string;
@@ -15,6 +20,21 @@ export interface ProdottoReq {
   img: string;
   idCategoria: number;
   idMarca: number;
+}
+
+export interface PcReq {
+  id?: number ;
+  descrizione: string;
+  idProdotto: number ;
+
+  idAlimentazione: number ;
+  idCase: number ;
+  idCpu: number ;
+  idRam: number ;
+  idMemoria: number ;
+  idSchedaGrafica: number;
+  idSchedaMadre: number ;
+  idSistemaRaffreddamento: number;
 }
 
 export interface CaseReq {
@@ -108,6 +128,27 @@ export interface Categoria {
 export interface Formato {
   id: number;
   descrizione: string;
+}
+
+export interface Caratteristiche {
+  id: number;
+  descrizione: string;
+  tipologia: string;
+  collegamento: string;
+  idProdotto: number | null;
+  consumo: number | null;
+  compatibilita: string;
+  idFormato: number | null;
+  risoluzione: string;
+  latenza: string;
+  frequenza: string;
+  spazio: number | null;
+  potenza: number;  
+  idMarca: number;
+  costo: number;
+  prezzo: number;
+  quantita: number;
+  img: string;
 }
 
 @Component({

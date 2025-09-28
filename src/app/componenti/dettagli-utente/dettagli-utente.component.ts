@@ -10,6 +10,7 @@ import { ProdottoService } from '../../services/prodotto.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ProdottoDialogComponent } from '../../dialogs/prodotto/dialog-prod/dialog-prod.component';
 import { Categoria, ProdottoReq } from '../../requests/general-req/general-req.component';
+import { DialogPcComponent } from '../../dialogs/pc/dialog-pc/dialog-pc.component';
 
 
 @Component({
@@ -224,6 +225,7 @@ throw new Error('Method not implemented.');
     }
   });
 }
+
 openDialog() {
   const dialogRef = this.dialog.open(ProdottoDialogComponent, {
     width: '500px',
@@ -235,6 +237,17 @@ openDialog() {
     }
   });}
 
+
+openDialogPc() {
+  const dialogRef = this.dialog.open(DialogPcComponent, {
+    width: '500px',
+  });
+
+  dialogRef.afterClosed().subscribe(result => {
+    if (result) {
+      console.log('Prodotto salvato:', result);
+    }
+  });}
 
   /* UTENTE */
   showModalUpdateUtente = false;
@@ -267,15 +280,7 @@ openDialog() {
   closeModalDeleteUtente() {
     this.showModalDeleteUtente = false;
   }
-
-  /* PC */
-  openModalPC() {
-    this.showModalPC = true;
-  }
-
-  closeModalPC() {
-    this.showModalPC = false;
-  }
+  
 
   /* PRODOTTI */
   openModalAddProdotto() {

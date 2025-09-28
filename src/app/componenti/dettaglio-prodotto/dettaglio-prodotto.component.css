@@ -66,3 +66,28 @@ img {
 .secondary-btn:hover {
   background-color: #5a6268;
 }
+
+.custom-btn-update {
+  background-color: green;
+  color: white;
+  border: none;
+  border-radius: 0.25rem; /* arrotondamento simile a bootstrap */
+  padding: 0.375rem 0.75rem; /* se vuoi un padding simile ai btn bootstrap */
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.custom-btn-update:hover {
+  background-color: darkgreen;
+}
+a.plain-link, 
+a.plain-link:visited,
+a.plain-link:hover,
+a.plain-link:active,
+a.plain-link:focus {
+  all: unset;           /* rimuove TUTTI gli stili ereditati dal link */
+  color: inherit;       /* ripristina colore del testo circostante */
+  cursor: pointer;      /* opzionale, se vuoi sembri ancora cliccabile */
+  font-weight: inherit; /* mantiene il peso del testo */
+  text-decoration: none;
+}

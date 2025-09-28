@@ -17,11 +17,11 @@
         <mat-error *ngIf="form.get('idMarca')?.invalid && form.get('idMarca')?.touched">
           La marca è obbligatoria
         </mat-error>
-      </mat-form-field>
+    </mat-form-field>
 
     <mat-form-field appearance="fill">
       <mat-label>Costo</mat-label>
-      <input matInput type="number" formControlName="costo" />
+      <input matInput type="number" formControlName="costo"  placeholder=""/>
     </mat-form-field>
 
     <mat-form-field appearance="fill">
@@ -51,5 +51,12 @@
   <button mat-button (click)="onCancel()">Annulla</button>
   <button mat-flat-button color="primary" (click)="onSubmit()" [disabled]="!form.valid">
     Salva
+  </button>
+  <button 
+    *ngIf="form.get('idElem')?.value  && form.get('idElem')?.value!==0"
+    mat-flat-button 
+    style="background-color: red; color: white;" 
+    (click)="onDelete()"  >
+    elimina
   </button>
 </div>
