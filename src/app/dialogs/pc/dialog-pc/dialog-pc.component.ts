@@ -36,7 +36,7 @@ import { PcService } from '../../../services/pc.service';
 })
 export class DialogPcComponent {
 form: FormGroup;
-cat=1;
+cat=13;
 marche: any[] = [];
 alimentatori: any[] = [];
 cases: any[] = [];
@@ -99,7 +99,7 @@ prodottoReq: ProdottoReq = {
       idCategoria: this.cat,
       idMarca: [dataProd?.idMarca || null, Validators.required],
       idElem:[dataPc?.id],
-      idAlimentatore:[dataPc?.idAlimentazione, Validators.required],
+      idAlimentazione:[dataPc?.idAlimentazione, Validators.required],
       idSchedaMadre: [dataPc?.idSchedaMadre, Validators.required],
       idSchedaGrafica: [dataPc?.idSchedaGrafica, Validators.required],
       idCpu: [dataPc?.idCpu, Validators.required],
@@ -202,18 +202,25 @@ prodottoReq: ProdottoReq = {
 
     if (this.dataElem?.data) {
       this.id=this.dataElem.data?.id
-      console.log(this.dataElem)
+      console.log(this.dataElem.data.prodotto?.id)
       this.form.patchValue({
         idElem: this.dataElem.data?.id,
         idProd: this.dataElem.data.prodotto?.id,
         descrizione: this.dataElem.data.descrizione,
-        potenza: this.dataElem.data.potenza,
         costo: this.dataElem.data.prodotto?.costo,
         prezzo: this.dataElem.data.prodotto?.prezzo,
         quantita: this.dataElem.data.prodotto?.quantita,
         img: this.dataElem.data.prodotto?.img,
         idCategoria: this.dataElem.data.prodotto?.categoria?.id,
         idMarca: this.dataElem.data.prodotto?.marca?.id,
+        idAlimentazione: this.dataElem.data.alimentazione?.id,
+        idSchedaMadre: this.dataElem.data.schedaMadre?.id,
+        idSchedaGrafica: this.dataElem.data.schedaGrafica?.id,
+        idCpu: this.dataElem.data.cpu?.id,
+        idRam: this.dataElem.data.ram?.id,
+        idMemoria: this.dataElem.data.memoria?.id,
+        idCase: this.dataElem.data.casee?.id,
+        idSistemaRaffreddamento: this.dataElem.data.sistemaRaffreddamento?.id,
       });
       console.log(this.form.value)
     }
@@ -269,6 +276,25 @@ prodottoReq: ProdottoReq = {
 
   onCancel(): void {
     this.dialogRef.close();
+  }
+
+  onDelete(): void {
+    if(this.dataElem.data.prodotto?.id){
+      this.prodottoReq.id = this.dataElem.data.prodotto?.id;
+      this.pcReq.id = this.dataElem.data?.id;
+      this.pcReq.idAlimentazione = this.form.value.idAlimentazione;
+      this.pcReq.idCase = this.form.value.idCase;
+      this.pcReq.idCpu = this.form.value.idCpu;
+      this.pcReq.idRam = this.form.value.idRam;
+      this.pcReq.idMemoria = this.form.value.idMemoria;
+      this.pcReq.idSchedaGrafica = this.form.value.idSchedaGrafica;
+      this.pcReq.idSchedaMadre = this.form.value.idSchedaMadre;
+      this.pcReq.idSistemaRaffreddamento = this.form.value.idSistemaRaffreddamento;
+      console.log(this.pcReq)
+      this.pcService.deletePcProd(this.pcReq, this.prodottoReq).subscribe(data =>{ console.log(data)})
+      this.dialogRef.close(this.form.value);
+      this.router.navigate(['/listaProdotti',this.cat]);
+    } 
   }
 
 }

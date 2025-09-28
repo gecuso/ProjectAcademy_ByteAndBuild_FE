@@ -49,6 +49,9 @@ export class ElementoService {
       case 12:
         this.urltemp=this.url + 'tastiera/';
         break;
+      case 13:
+        this.urltemp=this.url + 'pc/';
+        break;
       default:
         alert('Categoria non trovata');
         break;

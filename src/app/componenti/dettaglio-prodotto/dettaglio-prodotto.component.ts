@@ -19,6 +19,7 @@ import { DialogSchedaMadreComponent } from '../../dialogs/schedaMadre/dialog-sch
 import { DialogSistemaRaffComponent } from '../../dialogs/sistemaRaffreddamento/dialog-sistema-raff/dialog-sistema-raff.component';
 import { DialogTastieraComponent } from '../../dialogs/tastiera/dialog-tastiera/dialog-tastiera.component';
 import { ProdottoDialogComponent } from '../../dialogs/prodotto/dialog-prod/dialog-prod.component';
+import { DialogPcComponent } from '../../dialogs/pc/dialog-pc/dialog-pc.component';
 
 
 @Component({
@@ -143,6 +144,9 @@ export class DettaglioProdottoComponent implements OnInit {
       case 12:  
         this.openDialogTastiera();
         break;
+      case 13:  
+        this.openDialogPc();
+        break;
       default:
         alert('Categoria non selezionata');
         break;
@@ -179,6 +183,13 @@ export class DettaglioProdottoComponent implements OnInit {
 
   openDialogMemoria(): void {
     const dialogRef =this.dialog.open(DialogMemoriaComponent, {
+      width: '500px',
+      data: {data : this.elemento} as any
+    });
+  }
+
+  openDialogPc() {
+    const dialogRef = this.dialog.open(DialogPcComponent, {
       width: '500px',
       data: {data : this.elemento} as any
     });
