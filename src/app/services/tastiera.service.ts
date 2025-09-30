@@ -24,6 +24,12 @@ export class TastieraService {
   updateTastProd(tastReq: TastieraReq, prodReq:ProdottoReq) {
     const body = { tastReq, prodReq };
     console.log(body);
-    return this.http.post(this.url + 'updateTastProd', body);
+    return this.http.put(this.url + 'updateTastProd', body);
+  }
+
+  deleteTastProd(tastReq: TastieraReq, prodReq:ProdottoReq) {
+    const body = { tastReq, prodReq };
+    console.log(body);
+    return this.http.post(this.url + 'deleteTastProd', body);
   }
 }

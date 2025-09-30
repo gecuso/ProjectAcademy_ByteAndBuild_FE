@@ -10,6 +10,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { SchedaMadreService } from '../../../services/scheda-madre.service';
 import { MarcaService } from '../../../services/marca.service';
 import { FormatoService } from '../../../services/formato.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dialog-scheda-madre',
@@ -54,6 +55,7 @@ export class DialogSchedaMadreComponent {
     private marcaService : MarcaService,
     private scherdaMadreService : SchedaMadreService,
     private formatoService : FormatoService,
+    private router: Router,
     @Inject(MAT_DIALOG_DATA) public dataSchMdr: SchedaMadreReq,
     @Inject(MAT_DIALOG_DATA) private dataProd: ProdottoReq,
     @Inject(MAT_DIALOG_DATA) private dataElem: any
@@ -84,7 +86,9 @@ export class DialogSchedaMadreComponent {
           marca.categoria.some((cat: Categoria) => cat.id === this.cat)
         );
         // Resetta il campo marca, l’utente dovrà selezionarla di nuovo
-        this.form.patchValue({ idMarca: null });
+        if (!this.form.get('idMarca')?.value) {
+          this.form.patchValue({ idMarca: null });
+        }
       },
       error: err => console.error('Errore marche:', err) // Stampa eventuali errori
     });
@@ -152,6 +156,16 @@ export class DialogSchedaMadreComponent {
     }this.dialogRef.close(this.form.value);
   }
 
+
+    onDelete(): void {
+    if(this.dataElem.data.prodotto?.id){
+      this.schMdrReq.id = this.dataElem.data?.id;
+      this.prodottoReq.id = this.dataElem.data.prodotto?.id; 
+      this.scherdaMadreService.deleteSchMdrProd(this.schMdrReq, this.prodottoReq).subscribe(data =>{ console.log(data)})
+      this.dialogRef.close(this.form.value);
+      this.router.navigate(['/listaProdotti',this.cat]);
+    } 
+  }
   onCancel(): void {
     this.dialogRef.close();
   }

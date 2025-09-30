@@ -9,6 +9,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { Categoria, LaptopReq, ProdottoReq } from '../../../requests/general-req/general-req.component';
 import { MarcaService } from '../../../services/marca.service';
 import { LaptopService } from '../../../services/laptop.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dialog-laptop',
@@ -50,6 +51,7 @@ export class DialogLaptopComponent {
     public dialogRef: MatDialogRef<DialogLaptopComponent>,
     public marcaService : MarcaService,
     public laptopService : LaptopService,
+    private router: Router,
     @Inject(MAT_DIALOG_DATA) public dataLt: LaptopReq,
     @Inject(MAT_DIALOG_DATA) private dataProd: ProdottoReq,
     @Inject(MAT_DIALOG_DATA) private dataElem: any
@@ -129,6 +131,16 @@ export class DialogLaptopComponent {
     }else{
       this.laptopService.createLaptopProd(this.laptopReq, this.prodottoReq).subscribe(data =>{ console.log(data)})
     }this.dialogRef.close(this.form.value);
+  }
+
+  onDelete(): void {
+    if(this.dataElem.data.prodotto?.id){
+      this.laptopReq.id = this.dataElem.data?.id;
+      this.prodottoReq.id = this.dataElem.data.prodotto?.id; 
+      this.laptopService.deleteLaptopProd(this.laptopReq, this.prodottoReq).subscribe(data =>{ console.log(data)})
+      this.dialogRef.close(this.form.value);
+      this.router.navigate(['/listaProdotti',this.cat]);
+    } 
   }
   onSave(): void {
     if (this.form.valid) {

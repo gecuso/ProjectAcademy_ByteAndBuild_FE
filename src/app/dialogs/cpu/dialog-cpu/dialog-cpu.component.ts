@@ -9,6 +9,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { Categoria, CpuReq, ProdottoReq } from '../../../requests/general-req/general-req.component';
 import { MarcaService } from '../../../services/marca.service';
 import { CpuService } from '../../../services/cpu.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dialog-cpu',
@@ -49,6 +50,7 @@ prodottoReq: ProdottoReq = {
     private fb: FormBuilder,
     public marcaService : MarcaService,
     public cpuService : CpuService,
+    private router : Router,
     public dialogRef: MatDialogRef<DialogCpuComponent>,
     @Inject(MAT_DIALOG_DATA) public dataCpu: CpuReq,
     @Inject(MAT_DIALOG_DATA) private dataProd: ProdottoReq,
@@ -142,5 +144,15 @@ prodottoReq: ProdottoReq = {
 
   onCancel(): void {
     this.dialogRef.close();
+  }
+
+  onDelete(): void {
+    if(this.dataElem.data.prodotto?.id){
+      this.cpuReq.id = this.dataElem.data?.id;
+      this.prodottoReq.id = this.dataElem.data.prodotto?.id; 
+      this.cpuService.deleteCpuProd(this.cpuReq, this.prodottoReq).subscribe(data =>{ console.log(data)})
+      this.dialogRef.close(this.form.value);
+      this.router.navigate(['/listaProdotti',this.cat]);
+    } 
   }
 }

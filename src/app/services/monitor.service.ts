@@ -24,6 +24,12 @@ export class MonitorService {
   upadateMonitorProd(monitorReq: MonitorReq, prodReq:ProdottoReq) {
     const body = { monitorReq, prodReq };
     console.log(body);
-    return this.http.post(this.url + 'upadateMonitorProd', body);
+    return this.http.put(this.url + 'upadateMonitorProd', body);
+  }
+
+  deleteMonitorProd(monitorReq: MonitorReq, prodReq:ProdottoReq) {
+    const body = { monitorReq, prodReq };
+    console.log(body);
+    return this.http.post(this.url + 'deleteMonitorProd', body);
   }
 }

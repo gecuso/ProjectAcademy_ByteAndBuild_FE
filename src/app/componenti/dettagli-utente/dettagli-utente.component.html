@@ -129,7 +129,7 @@
           <div class="vertical-line"></div>
           <div class="user-actions">
             <h4>Interfaccia Amministratore</h4>
-            <button class="custom-btn" (click)="openModalPC()">
+            <button class="custom-btn" (click)="openDialogPc()">
               Creazione PC
             </button>
             <button mat-raised-button class="custom-btn" (click)="openDialog()">
@@ -150,7 +150,8 @@
     </div>
   </div>
 </div>
-<!-- Modale per "Creazione PC" -->
+
+<!-- Modale per "Creazione PC" 
 <div class="modal" *ngIf="showModalPC">
   <div class="modal-content">
     <span class="close-btn" (click)="closeModalPC()">&times;</span>
@@ -227,7 +228,7 @@
     </div>
   </div>
 </div>
-
+-->
 <!-- Modale per "Aggiungi prodotto" -->
 <!--
 <div class="modal" *ngIf="showModalAddProdotto">

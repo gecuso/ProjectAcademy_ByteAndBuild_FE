@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { AlimentazioneReq, ProdottoReq } from '../requests/general-req/general-req.component';
+import { AlimentazioneReq, ProdottoReq, RichiestaDTO } from '../requests/general-req/general-req.component';
+import { map, Observable } from 'rxjs';
+
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +26,17 @@ export class AlimentazioneService {
   updateAlimProd(alimReq: AlimentazioneReq, prodReq:ProdottoReq) {
     const body = { alimReq, prodReq };
     console.log(body);
-    return this.http.post(this.url + 'updateAlimProd', body);
+    return this.http.put(this.url + 'updateAlimProd', body);
   }
+
+  deleteAlimProd(alimReq: AlimentazioneReq, prodReq:ProdottoReq){ 
+    const body = { alimReq, prodReq };
+    console.log(body);
+    return this.http.post(this.url + 'deleteAlimProd', body);
+  }
+  listAll(): Observable<RichiestaDTO[]> {
+      return this.http
+        .get<{ dati: RichiestaDTO[] }>(`${this.url}listAllAlimentazione`)
+        .pipe(map(response => response.dati || [])); // usa solo "dati"
+    }
 }

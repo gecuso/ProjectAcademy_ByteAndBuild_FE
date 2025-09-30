@@ -58,4 +58,12 @@
   <button mat-flat-button color="primary" (click)="onSubmit()" [disabled]="!form.valid">
     Salva
   </button>
+
+  <button 
+    *ngIf="form.get('idElem')?.value  && form.get('idElem')?.value!==0"
+    mat-flat-button 
+    style="background-color: red; color: white;" 
+    (click)="onDelete()"  >
+    elimina
+  </button>
 </mat-dialog-actions>

@@ -9,6 +9,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MarcaService } from '../../../services/marca.service';
 import { AlimentazioneService } from '../../../services/alimentazione.service';
 import { AlimentazioneReq, Categoria, ProdottoReq } from '../../../requests/general-req/general-req.component';
+import { ProdottoService } from '../../../services/prodotto.service';
+import { Router, RouterLink } from '@angular/router';
 
 
 @Component({
@@ -29,6 +31,7 @@ export class DialogAlimComponent {
 form: FormGroup;
 cat=1;
 marche: any[] = [];
+id:any;
 alimReq: AlimentazioneReq = {
   id: 0,
   descrizione: '',
@@ -46,11 +49,13 @@ prodottoReq: ProdottoReq = {
   idMarca: 0
 };
 
+
   constructor(
     private fb: FormBuilder,
     public dialogRef: MatDialogRef<DialogAlimComponent>,
     private marcaService : MarcaService,
     private alimservice : AlimentazioneService,
+    private router: Router,
     @Inject(MAT_DIALOG_DATA) private dataAlim: AlimentazioneReq,
     @Inject(MAT_DIALOG_DATA) private dataProd: ProdottoReq,
     @Inject(MAT_DIALOG_DATA) private dataElem: any
@@ -87,6 +92,7 @@ prodottoReq: ProdottoReq = {
     });
 
     if (this.dataElem?.data) {
+      this.id=this.dataElem.data?.id
       console.log(this.dataElem)
       this.form.patchValue({
         idElem: this.dataElem.data?.id,
@@ -103,7 +109,16 @@ prodottoReq: ProdottoReq = {
       console.log(this.form.value)
     }
   }
-  
+
+  onDelete(): void {
+    if(this.dataElem.data.prodotto?.id){
+      this.alimReq.id = this.dataElem.data?.id;
+      this.prodottoReq.id = this.dataElem.data.prodotto?.id; 
+      this.alimservice.deleteAlimProd(this.alimReq, this.prodottoReq).subscribe(data =>{ console.log(data)})
+      this.dialogRef.close(this.form.value);
+      this.router.navigate(['/listaProdotti',this.cat]);
+    } 
+  }
 
   onSave(): void {
     if (this.form.valid) {
@@ -136,10 +151,8 @@ prodottoReq: ProdottoReq = {
     this.dialogRef.close(this.form.value);
   }
 
-
   onCancel(): void {
     this.dialogRef.close();
   }
 
-  
 }

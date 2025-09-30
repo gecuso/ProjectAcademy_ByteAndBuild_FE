@@ -9,6 +9,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { Categoria, ProdottoReq, RamReq } from '../../../requests/general-req/general-req.component';
 import { MarcaService } from '../../../services/marca.service';
 import { RamService } from '../../../services/ram.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dialog-ram',
@@ -49,6 +50,7 @@ export class DialogRamComponent {
     public dialogRef: MatDialogRef<DialogRamComponent>,
     private marcaService : MarcaService,
     private ramService : RamService,
+    private router: Router,
     @Inject(MAT_DIALOG_DATA) public dataRam: RamReq,
     @Inject(MAT_DIALOG_DATA) private dataProd: ProdottoReq,
     @Inject(MAT_DIALOG_DATA) private dataElem: any
@@ -108,31 +110,41 @@ export class DialogRamComponent {
     }
   }
 
-    onSubmit(): void {
-      if(this.dataElem?.data?.id){
-        this.ramReq.id = this.dataElem.data?.id;
-        this.prodottoReq.id = this.dataElem.data.prodotto?.id; 
-      }
-      this.ramReq.descrizione = this.form.value.descrizione;
-      this.ramReq.consumo = this.form.value.consumo;
-
-      this.prodottoReq.descrizione = this.form.value.descrizione;
-      this.prodottoReq.costo = this.form.value.costo;
-      this.prodottoReq.prezzo = this.form.value.prezzo;
-      this.prodottoReq.quantita = this.form.value.quantita;
-      this.prodottoReq.img = this.form.value.img;
-      this.prodottoReq.idCategoria = this.cat;
-      this.prodottoReq.idMarca = this.form.value.idMarca;
-
-      console.log(this.form.value);
-      if (this.dataElem?.data?.id){
-        this.ramService.updateRamProd(this.ramReq, this.prodottoReq).subscribe(data =>{ console.log(data)})
-      }else{
-        this.ramService.createRamProd(this.ramReq, this.prodottoReq).subscribe(data =>{ console.log(data)})
-      }
-      this.dialogRef.close(this.form.value);
+  onSubmit(): void {
+    if(this.dataElem?.data?.id){
+      this.ramReq.id = this.dataElem.data?.id;
+      this.prodottoReq.id = this.dataElem.data.prodotto?.id; 
     }
+    this.ramReq.descrizione = this.form.value.descrizione;
+    this.ramReq.consumo = this.form.value.consumo;
 
+    this.prodottoReq.descrizione = this.form.value.descrizione;
+    this.prodottoReq.costo = this.form.value.costo;
+    this.prodottoReq.prezzo = this.form.value.prezzo;
+    this.prodottoReq.quantita = this.form.value.quantita;
+    this.prodottoReq.img = this.form.value.img;
+    this.prodottoReq.idCategoria = this.cat;
+    this.prodottoReq.idMarca = this.form.value.idMarca;
+
+    console.log(this.form.value);
+    if (this.dataElem?.data?.id){
+      this.ramService.updateRamProd(this.ramReq, this.prodottoReq).subscribe(data =>{ console.log(data)})
+    }else{
+      this.ramService.createRamProd(this.ramReq, this.prodottoReq).subscribe(data =>{ console.log(data)})
+    }
+    this.dialogRef.close(this.form.value);
+  }
+
+  onDelete(): void {
+    if(this.dataElem.data.prodotto?.id){
+      this.ramReq.id = this.dataElem.data?.id;
+      this.prodottoReq.id = this.dataElem.data.prodotto?.id; 
+      this.ramService.deleteRamProd(this.ramReq, this.prodottoReq).subscribe(data =>{ console.log(data)})
+      this.dialogRef.close(this.form.value);
+      this.router.navigate(['/listaProdotti',this.cat]);
+    } 
+  }
+  
   onCancel(): void {
     this.dialogRef.close();
   }

@@ -43,8 +43,8 @@
       <mat-label>Tipologia</mat-label>
       <mat-select formControlName="tipologia">
         <mat-option value="">-- Seleziona Tipologia --</mat-option>
-        <mat-option value="MECCANCA">MECCANCA</mat-option>
-        <mat-option value="MEMBRANA">MEMBRANA</mat-option>
+        <mat-option value="meccanica">MECCANICA</mat-option>
+        <mat-option value="membrana">MEMBRANA</mat-option>
       </mat-select>
     </mat-form-field>
 
@@ -52,8 +52,8 @@
       <mat-label>Collegamento</mat-label>
       <mat-select formControlName="collegamento">
         <mat-option value="">-- Seleziona Collegamento --</mat-option>
-        <mat-option value="CAVO">CAVO</mat-option>
-        <mat-option value="WIRELESS">WIRELESS</mat-option>
+        <mat-option value="cavo">CAVO</mat-option>
+        <mat-option value="wireless">WIRELESS</mat-option>
       </mat-select>
     </mat-form-field>
 
@@ -64,5 +64,14 @@
   <button mat-button (click)="onCancel()">Annulla</button>
   <button mat-flat-button color="primary" (click)="onSubmit()" [disabled]="!form.valid">
     Salva
+  </button>
+
+
+  <button 
+    *ngIf="form.get('idElem')?.value  && form.get('idElem')?.value!==0"
+    mat-flat-button 
+    style="background-color: red; color: white;" 
+    (click)="onDelete()"  >
+    elimina
   </button>
 </mat-dialog-actions>

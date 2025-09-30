@@ -9,6 +9,7 @@ import { Categoria, MouseReq, ProdottoReq } from '../../../requests/general-req/
 import { MarcaService } from '../../../services/marca.service';
 import { MouseService } from '../../../services/mouse.service';
 import { MatSelectModule } from '@angular/material/select';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dialog-mouse',
@@ -49,6 +50,7 @@ export class DialogMouseComponent {
     public dialogRef: MatDialogRef<DialogMouseComponent>,
     private marcaService : MarcaService,
     private mouseService : MouseService,
+    private router: Router,
     @Inject(MAT_DIALOG_DATA) public dataMouse: MouseReq,
     @Inject(MAT_DIALOG_DATA) private dataProd: ProdottoReq,
     @Inject(MAT_DIALOG_DATA) private dataElem: any
@@ -108,30 +110,40 @@ export class DialogMouseComponent {
     }
   }
 
-    onSubmit(): void {
-      if(this.dataElem?.data?.id){
-        this.mouseReq.id = this.dataElem.data?.id;
-        this.prodottoReq.id = this.dataElem.data.prodotto?.id; 
-      }
-      this.mouseReq.descrizione = this.form.value.descrizione;
-      this.mouseReq.collegamento = this.form.value.collegamento;
-
-      this.prodottoReq.descrizione = this.form.value.descrizione;
-      this.prodottoReq.costo = this.form.value.costo;
-      this.prodottoReq.prezzo = this.form.value.prezzo;
-      this.prodottoReq.quantita = this.form.value.quantita;
-      this.prodottoReq.img = this.form.value.img;
-      this.prodottoReq.idCategoria = this.cat;
-      this.prodottoReq.idMarca = this.form.value.idMarca;
-
-      console.log(this.form.value);
-      if (this.dataElem?.data?.id){
-        this.mouseService.updateMouseProd(this.mouseReq, this.prodottoReq).subscribe(data =>{ console.log(data)})
-      }else{
-        this.mouseService.createMouseProd(this.mouseReq, this.prodottoReq).subscribe(data =>{ console.log(data)})
-      }this.dialogRef.close(this.form.value);
+  onSubmit(): void {
+    if(this.dataElem?.data?.id){
+      this.mouseReq.id = this.dataElem.data?.id;
+      this.prodottoReq.id = this.dataElem.data.prodotto?.id; 
     }
+    this.mouseReq.descrizione = this.form.value.descrizione;
+    this.mouseReq.collegamento = this.form.value.collegamento;
 
+    this.prodottoReq.descrizione = this.form.value.descrizione;
+    this.prodottoReq.costo = this.form.value.costo;
+    this.prodottoReq.prezzo = this.form.value.prezzo;
+    this.prodottoReq.quantita = this.form.value.quantita;
+    this.prodottoReq.img = this.form.value.img;
+    this.prodottoReq.idCategoria = this.cat;
+    this.prodottoReq.idMarca = this.form.value.idMarca;
+
+    console.log(this.form.value);
+    if (this.dataElem?.data?.id){
+      this.mouseService.updateMouseProd(this.mouseReq, this.prodottoReq).subscribe(data =>{ console.log(data)})
+    }else{
+      this.mouseService.createMouseProd(this.mouseReq, this.prodottoReq).subscribe(data =>{ console.log(data)})
+    }this.dialogRef.close(this.form.value);
+  }
+
+  onDelete(): void {
+    if(this.dataElem.data.prodotto?.id){
+      this.mouseReq.id = this.dataElem.data?.id;
+      this.prodottoReq.id = this.dataElem.data.prodotto?.id; 
+      this.mouseService.deleteMouseProd(this.mouseReq, this.prodottoReq).subscribe(data =>{ console.log(data)})
+      this.dialogRef.close(this.form.value);
+      this.router.navigate(['/listaProdotti',this.cat]);
+    } 
+  }
+  
   onCancel(): void {
     this.dialogRef.close();
   }

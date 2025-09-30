@@ -80,3 +80,14 @@ img {
 .custom-btn-update:hover {
   background-color: darkgreen;
 }
+a.plain-link, 
+a.plain-link:visited,
+a.plain-link:hover,
+a.plain-link:active,
+a.plain-link:focus {
+  all: unset;           /* rimuove TUTTI gli stili ereditati dal link */
+  color: inherit;       /* ripristina colore del testo circostante */
+  cursor: pointer;      /* opzionale, se vuoi sembri ancora cliccabile */
+  font-weight: inherit; /* mantiene il peso del testo */
+  text-decoration: none;
+}
