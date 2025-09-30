@@ -100,6 +100,13 @@ export interface TastieraReq {
   idProdotto: number | null;
 }
 
+export interface OggettoNelCarrelloReq {
+  id : number | null;
+  quantita : number;
+  idProdotto: number | null;
+  idCarrello: number | null; 
+}
+
 export interface Categoria {
   id: number | null;
   descrizione: string;
