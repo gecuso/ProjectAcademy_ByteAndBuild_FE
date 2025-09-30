@@ -211,8 +211,6 @@ throw new Error('Method not implemented.');
           idCategoria: null,
           idMarca: null
         });
-        // Chiude il modal
-        this.closeModalAddProdotto();
       } else {
         // Errore gestito dal backend
         alert('Errore: ' + resp.msg);
@@ -252,13 +250,7 @@ openDialogPc() {
   /* UTENTE */
   showModalUpdateUtente = false;
   showModalDeleteUtente = false;
-  /* PC */
-  showModalPC = false;
-  /* PRODOTTI */
-  showModalAddProdotto = false;
-  showModalUpdateProdotto = false;
-  showModalDeleteProdotto = false;
-  opzioneSelezionata: string = '';
+
 
   /* UTENTE */
   openModalUpdateUtente() {
@@ -280,32 +272,6 @@ openDialogPc() {
   closeModalDeleteUtente() {
     this.showModalDeleteUtente = false;
   }
-  
-
-  /* PRODOTTI */
-  openModalAddProdotto() {
-    this.showModalAddProdotto = true;
-  }
 
 
-
-  closeModalAddProdotto() {
-    this.showModalAddProdotto = false;
-  }
-
-  openModalUpdateProdotto() {
-    this.showModalUpdateProdotto = true;
-  }
-
-  closeModalUpdateProdotto() {
-    this.showModalUpdateProdotto = false;
-  }
-
-  openModalDeleteProdotto() {
-    this.showModalDeleteProdotto = true;
-  }
-
-  closeModalDeleteProdotto() {
-    this.showModalDeleteProdotto = false;
-  }
 }

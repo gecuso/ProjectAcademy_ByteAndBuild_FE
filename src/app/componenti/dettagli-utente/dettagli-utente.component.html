@@ -135,15 +135,6 @@
             <button mat-raised-button class="custom-btn" (click)="openDialog()">
                 Aggiungi Prodotto
             </button>
-            <button class="custom-btn" (click)="openModalUpdateProdotto()">
-              Modifica prodotto
-            </button>
-            <button
-              class="custom-btn-danger"
-              (click)="openModalDeleteProdotto()"
-            >
-              Elimina prodotto
-            </button>
           </div>
         </div>
       </div>
@@ -254,55 +245,3 @@
   </div>
 </div>
 -->
-
-
-
-
-<!-- Modale per "Modifica prodotto" -->
-<div class="modal" *ngIf="showModalUpdateProdotto">
-  <div class="modal-content">
-    <span class="close-btn" (click)="closeModalUpdateProdotto()">&times;</span>
-    <h4>Modifica Prodotto</h4>
-
-    <h6>Id Prodotto</h6>
-    <mat-form-field>
-      <mat-label>Id Prodotto</mat-label>
-      <input matInput />
-    </mat-form-field>
-    <h6>Placeholder</h6>
-    <mat-form-field appearance="fill">
-      <mat-label>Seleziona placeholder</mat-label>
-      <mat-select>
-        <mat-option value="1">Opzione 1</mat-option>
-        <mat-option value="2">Opzione 2</mat-option>
-      </mat-select>
-    </mat-form-field>
-
-    <div class="user-actions">
-      <button class="custom-btn">Salva modifiche</button>
-      <button class="custom-btn-danger" (click)="closeModalUpdateProdotto()">
-        Annulla
-      </button>
-    </div>
-  </div>
-</div>
-
-<!-- Modale per "Elimina prodotto" -->
-<div class="modal" *ngIf="showModalDeleteProdotto">
-  <div class="modal-content">
-    <span class="close-btn" (click)="closeModalDeleteProdotto()">&times;</span>
-    <h4>Elimina Prodotto</h4>
-
-    <h6>Id Prodotto</h6>
-    <mat-form-field>
-      <mat-label>Id Prodotto</mat-label>
-      <input matInput />
-    </mat-form-field>
-    <div class="user-actions">
-      <button class="custom-btn">Conferma</button>
-      <button class="custom-btn-danger" (click)="closeModalDeleteProdotto()">
-        Annulla
-      </button>
-    </div>
-  </div>
-</div>

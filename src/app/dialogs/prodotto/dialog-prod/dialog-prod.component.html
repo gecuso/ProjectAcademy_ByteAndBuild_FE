@@ -16,13 +16,9 @@
       La categoria è obbligatoria
     </mat-error>
     </mat-form-field>
-    
-    <!---->
-      <div class="user-actions">
-        <button class="custom-btn" type="button" (click)="openDialog()" [disabled]="form.invalid">Aggiungi prodotto</button>
-        <button class="custom-btn-danger" type="button" (click)="onCancel()">
-          Annulla
-        </button>
+      <div mat-dialog-actions align="end">
+        <button mat-button (click)="onCancel()">Annulla</button>
+        <button mat-flat-button color="primary" type="button" (click)="openDialog()" [disabled]="form.invalid">Aggiungi prodotto</button>
       </div>
   </form>
 </div>
