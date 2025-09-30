@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
-import { OggettoNelCarrelloReq } from '../requests/general-req/general-req.component';
+import { CarrelloDTO, OggettoNelCarrelloDTO, OggettoNelCarrelloReq } from '../requests/general-req/general-req.component';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +10,7 @@ export class CarrelloService {
 
   //uso questo link perche di perse i metodi essenziali sono li dentro
   //solo svuota carrello viene usato in questa pagina (fra tutti i metodi di carrelloImpl)
-  private url = "localhost:9090/rest/onc/"
+  private url = "http://localhost:9090/rest/onc/"
 
   constructor(private http:HttpClient) {}
 
@@ -20,29 +20,19 @@ export class CarrelloService {
   //FATTO
   //metodo per recuperare gli onc
   listByIdCarrello (id : number) : Observable<OggettoNelCarrelloReq[]> {
-    return this.http.get<{ oggettiNelCarrello : OggettoNelCarrelloReq[] }>(this.url + 'getByIdCarrello?id=' + id).pipe(
-      map(response => response.oggettiNelCarrello || [])
-    );
+    return this.http.get<any>(this.url + 'getByIdCarrello?id=' + id);
   }
 
   //meotodo per recuperare il singolo ONC
-  getByIdONC (id : number) : Observable<OggettoNelCarrelloReq> {
-    return this.http.get<{ oggettoNelCarrello : OggettoNelCarrelloReq }>(this.url + 'getById?id=' + id).pipe(
-      map(response => response.oggettoNelCarrello)
-    );
-
+  getByIdONC (id : number) {
+    return this.http.get<any>(this.url + 'getById?id=' + id);
   }
 
   //metodo per rimuovere un onc
-  deleteByIdONC (id : number) : void {
-    //recupero l'oggettoNelCarrelloReq con getByIdONC 
-    //per usarlo poi nell'eliminazione nella chiamata remove
-
-    this.getByIdONC(id).subscribe({
-      next: (oggettoDaEliminare) => {
-        this.http.delete(this.url + 'delete', {body : oggettoDaEliminare}).subscribe(); //chiamo delete
-      } //devo sottolineare che il delete ricieve un body, perche nel back-end voglio il req completo per aggiornare poi i dati di carrello
-    });
+  deleteByIdONC (req : OggettoNelCarrelloReq) : void {
+   
+    this.http.delete(this.url + 'delete', {body : req}).subscribe(); //chiamo delete
+ 
   }
 
   //metodo per modificare la quantità
@@ -79,15 +69,15 @@ export class CarrelloService {
 
       complete : () => {
         //dopo che non ci sono più gli onc, posso svuotare il carrello (resettare i suoi campi)
-        this.http.delete("localhost:9090/rest/carrello/" + 'delete' + id).subscribe();
+        this.http.delete("localhost:9090/rest/carrello/" + 'svuotaCarrello' + id).subscribe();
       }
     });
+
   }
-
-
-
-
-
-
+  
+  
+  getByIdUtente(idUtente: number) {
+  return this.http.get<any>("http://localhost:9090/rest/carrello/getByIdUtente?id=" + idUtente);
+}
 
 }

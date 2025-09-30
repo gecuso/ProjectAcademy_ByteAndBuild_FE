@@ -13,9 +13,9 @@
   <!-- SINISTRA: lista prodotti -->
   <div class="colonna-sinistra">
     <div *ngFor="let item of oggettoNelCarrello" class="carrello-item">
-      <img [src]="item.immagine" alt="{{item.nome}}" class="carrello-img">
+      <img [src]="item.prodotto.img" alt="{{item.prodotto.descrizione}}" class="carrello-img">
       <div class="carrello-info">
-        <h3>{{ item.nome }}</h3>
+        <h3>{{ item.prodotto.descrizione }}</h3>
         <p>Quantità: {{ item.quantita }}</p>
         <button (click)="rimuoviDalCarrello(item.id)">Rimuovi</button>
       </div>
@@ -31,13 +31,13 @@
     <hr class="linea-sottile" />
 
   <div class="lista-prezzi">
-    <div *ngFor="let prodotto of prodotti" class="prezzo-riga">
-      <span>{{ prodotto.nome }}</span>
+    <div *ngFor="let item of oggettoNelCarrello" class="prezzo-riga">
+      <span>{{ item.prodotto.descrizione }}</span>
       <span>
-        <ng-container *ngIf="getQuantitaProdotto(prodotto.nome) > 1">
-          {{ getQuantitaProdotto(prodotto.nome) }} x 
+        <ng-container *ngIf="item.quantita > 1">
+          {{ item.quantita }} x 
         </ng-container>
-        {{ prodotto.prezzo | currency:'EUR' }}
+        {{ item.prodotto.prezzo | currency:'EUR' }}
       </span>
     </div>
   </div>
@@ -47,7 +47,7 @@
 
     <div class="totale-finale">
       <strong>Totale:</strong>
-      <span>{{ getTotalePrezzo() | currency:'EUR' }}</span>
+      <span>{{ carrello.prezzoTotale | currency:'EUR' }}</span>
     </div>
   </div>
 
