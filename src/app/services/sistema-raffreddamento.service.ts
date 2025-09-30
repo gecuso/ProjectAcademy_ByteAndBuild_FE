@@ -38,10 +38,4 @@ export class SistemaRaffreddamentoService {
           .get<{ dati: RichiestaDTO[] }>(`${this.url}listAllSistemaRaffreddamento`)
           .pipe(map(response => response.dati || [])); // usa solo "dati"
       }
-
-  updateSisRafProd(sisRafReq: SistemaRaffreddamentoReq, prodReq:ProdottoReq) {
-    const body = { sisRafReq, prodReq };
-    console.log(body);
-    return this.http.post(this.url + 'updateSisRafProd', body);
-  }
 }

@@ -31,14 +31,12 @@ export class DialogTastieraComponent {
   id:any;
   tastReq: TastieraReq = {
     id: 0,
-    id: 0,
     descrizione: '',
     tipologia: '',
     collegamento: '',
     idProdotto: 0
   };
   prodottoReq: ProdottoReq = {
-    id: 0,
     id: 0,
     descrizione: '',
     costo: 0,
@@ -58,11 +56,8 @@ export class DialogTastieraComponent {
     @Inject(MAT_DIALOG_DATA) public dataTast: TastieraReq,
     @Inject(MAT_DIALOG_DATA) private dataProd: ProdottoReq,
     @Inject(MAT_DIALOG_DATA) private dataElem: any
-    @Inject(MAT_DIALOG_DATA) private dataProd: ProdottoReq,
-    @Inject(MAT_DIALOG_DATA) private dataElem: any
   ) {
     this.form = this.fb.group({
-      idProd: [dataProd?.id],
       idProd: [dataProd?.id],
       descrizione: [dataProd?.descrizione || '', Validators.required],
       costo: [dataProd?.costo || 0, Validators.required],
