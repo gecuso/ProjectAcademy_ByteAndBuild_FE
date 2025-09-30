@@ -15,9 +15,21 @@ export class MonitorService {
     return this.http.post(this.url + 'create', monitor);
   }
 
-    createMonitorProd(monitorReq: MonitorReq, prodReq:ProdottoReq) {
-      const body = { monitorReq, prodReq };
-      console.log(body);
-      return this.http.post(this.url + 'createMonitorProd', body);
-    }
+  createMonitorProd(monitorReq: MonitorReq, prodReq:ProdottoReq) {
+    const body = { monitorReq, prodReq };
+    console.log(body);
+    return this.http.post(this.url + 'createMonitorProd', body);
+  }
+
+  upadateMonitorProd(monitorReq: MonitorReq, prodReq:ProdottoReq) {
+    const body = { monitorReq, prodReq };
+    console.log(body);
+    return this.http.put(this.url + 'upadateMonitorProd', body);
+  }
+
+  deleteMonitorProd(monitorReq: MonitorReq, prodReq:ProdottoReq) {
+    const body = { monitorReq, prodReq };
+    console.log(body);
+    return this.http.post(this.url + 'deleteMonitorProd', body);
+  }
 }

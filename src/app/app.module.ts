@@ -64,7 +64,7 @@ import { GeneralReqComponent } from './requests/general-req/general-req.componen
     DettagliUtenteComponent,
     ListaProdottiComponent,
     RicercaComponent,
-    GeneralReqComponent
+    GeneralReqComponent,
   ],
   imports: [
     BrowserModule,

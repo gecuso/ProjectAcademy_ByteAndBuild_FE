@@ -9,6 +9,7 @@ import { Categoria, ProdottoReq, SchedaGraficaReq } from '../../../requests/gene
 import { MarcaService } from '../../../services/marca.service';
 import { SchedaGraficaService } from '../../../services/scheda-grafica.service';
 import { MatSelectModule } from '@angular/material/select';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dialog-scheda-grafica',
@@ -28,19 +29,21 @@ export class DialogSchedaGraficaComponent {
   cat=9;
   marche: any[] = [];
   schGrfReq: SchedaGraficaReq = {
+    id: 0,
     descrizione: '',
     consumo: 0,
     idProdotto: 0
   };
   prodottoReq: ProdottoReq = {
-  descrizione: '',
-  costo: 0,
-  prezzo: 0,
-  quantita: 0,
-  img: '',
-  idCategoria: this.cat,
-  idMarca: 0
-};
+    id: 0,
+    descrizione: '',
+    costo: 0,
+    prezzo: 0,
+    quantita: 0,
+    img: '',
+    idCategoria: this.cat,
+    idMarca: 0
+  };
 
 
   constructor(
@@ -48,11 +51,13 @@ export class DialogSchedaGraficaComponent {
     public dialogRef: MatDialogRef<DialogSchedaGraficaComponent>,
     private marcaService : MarcaService,
     private schGraficaService : SchedaGraficaService,
+    private router: Router,
     @Inject(MAT_DIALOG_DATA) public dataschGrf: SchedaGraficaReq,
-    @Inject(MAT_DIALOG_DATA) private dataProd: ProdottoReq
+    @Inject(MAT_DIALOG_DATA) private dataProd: ProdottoReq,
+    @Inject(MAT_DIALOG_DATA) private dataElem: any
   ) {
     this.form = this.fb.group({
-      id: [dataProd?.id],
+      idProd: [dataProd?.id],
       descrizione: [dataProd?.descrizione || '', Validators.required],
       costo: [dataProd?.costo || 0, Validators.required],
       prezzo: [dataProd?.prezzo || 0, Validators.required],
@@ -60,25 +65,45 @@ export class DialogSchedaGraficaComponent {
       img: [dataProd?.img || ''],
       idCategoria: this.cat,
       idMarca: [dataProd?.idMarca || null, Validators.required],
-    consumo: [dataschGrf?.consumo || 0, [Validators.required, Validators.min(1)]],
+      consumo: [dataschGrf?.consumo || 0, [Validators.required, Validators.min(1)]],
+      idElem:[dataschGrf?.id],
     });
   }
 
   ngOnInit() {
-        console.log(this.cat);
-        // Se è stata selezionata una categoria, carico le marche corrispondenti
-        this.marcaService.getMarcheByCategoria(this.cat).subscribe({
-          next: brands => {
-            // Filtra le marche che contengono la categoria selezionata
-            this.marche = brands.filter(marca => 
-              marca.categoria.some((cat: Categoria) => cat.id === this.cat)
-            );
-            // Resetta il campo marca, l’utente dovrà selezionarla di nuovo
-            this.form.patchValue({ idMarca: null });
-          },
-          error: err => console.error('Errore marche:', err) // Stampa eventuali errori
-        });
+    console.log(this.cat);
+    // Se è stata selezionata una categoria, carico le marche corrispondenti
+    this.marcaService.getMarcheByCategoria(this.cat).subscribe({
+      next: brands => {
+        // Filtra le marche che contengono la categoria selezionata
+        this.marche = brands.filter(marca => 
+          marca.categoria.some((cat: Categoria) => cat.id === this.cat)
+        );
+        // Resetta il campo marca, l’utente dovrà selezionarla di nuovo
+        if (!this.form.get('idMarca')?.value) {
+          this.form.patchValue({ idMarca: null });
+        }
+      },
+      error: err => console.error('Errore marche:', err) // Stampa eventuali errori
+    });
+
+    if (this.dataElem?.data) {
+      console.log(this.dataElem)
+      this.form.patchValue({
+        idElem: this.dataElem.data?.id,
+        idProd: this.dataElem.data.prodotto?.id,
+        descrizione: this.dataElem.data.descrizione,
+        costo: this.dataElem.data.prodotto?.costo,
+        prezzo: this.dataElem.data.prodotto?.prezzo,
+        quantita: this.dataElem.data.prodotto?.quantita,
+        img: this.dataElem.data.prodotto?.img,
+        idCategoria: this.dataElem.data.prodotto?.categoria?.id,
+        idMarca: this.dataElem.data.prodotto?.marca?.id,
+        consumo: this.dataElem.data.consumo,
+      });
+      console.log(this.form.value)
     }
+  }
 
   onSave(): void {
     if (this.form.valid) {
@@ -88,6 +113,11 @@ export class DialogSchedaGraficaComponent {
 
 
   onSubmit(): void {
+    if(this.dataElem?.data?.id){
+      this.schGrfReq.id = this.dataElem.data?.id;
+      this.prodottoReq.id = this.dataElem.data.prodotto?.id; 
+    }
+
     this.schGrfReq.consumo = this.form.value.consumo;
 
     this.prodottoReq.descrizione = this.form.value.descrizione;
@@ -99,8 +129,21 @@ export class DialogSchedaGraficaComponent {
     this.prodottoReq.idMarca = this.form.value.idMarca;
 
     console.log(this.form.value);
-    this.schGraficaService.createSchGrfProd(this.schGrfReq, this.prodottoReq).subscribe(data =>{ console.log(data)})
-    this.dialogRef.close(this.form.value);
+    if (this.dataElem?.data?.id){
+      this.schGraficaService.updateSchGrfProd(this.schGrfReq, this.prodottoReq).subscribe(data =>{ console.log(data)})
+    }else{
+      this.schGraficaService.createSchGrfProd(this.schGrfReq, this.prodottoReq).subscribe(data =>{ console.log(data)})
+    }this.dialogRef.close(this.form.value);
+  }
+
+  onDelete(): void {
+    if(this.dataElem.data.prodotto?.id){
+      this.schGrfReq.id = this.dataElem.data?.id;
+      this.prodottoReq.id = this.dataElem.data.prodotto?.id; 
+      this.schGraficaService.deleteSchGrfProd(this.schGrfReq, this.prodottoReq).subscribe(data =>{ console.log(data)})
+      this.dialogRef.close(this.form.value);
+      this.router.navigate(['/listaProdotti',this.cat]);
+    } 
   }
 
   onCancel(): void {

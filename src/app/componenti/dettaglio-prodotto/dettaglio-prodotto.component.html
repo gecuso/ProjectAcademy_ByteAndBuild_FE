@@ -14,10 +14,125 @@
     <div class="col-md-7 ps-md-5">
       <h2 class="mb-3">{{ prodotto.descrizione }}</h2>
       <p>
-        <strong>Marca:</strong> {{ capitalize(prodotto.marca.descrizione) }}<br />
-        <strong>Categoria:</strong> {{ capitalize(prodotto.categoria?.descrizione) }}<br />
-        <strong>Specifiche:</strong> {{ prodotto.descrizione }}
+        <ng-container *ngIf="prodotto?.marca?.descrizione">
+          <strong>Marca:</strong> {{ capitalize(prodotto.marca.descrizione) }}<br />
+        </ng-container>
+
+        <ng-container *ngIf="prodotto?.categoria?.descrizione">
+          <strong>Categoria:</strong> {{ capitalize(prodotto.categoria.descrizione) }}<br />
+        </ng-container>
+
+        <ng-container *ngIf="elemento?.tipologia">
+          <strong>Tipologia:</strong> {{ capitalize(elemento.tipologia) }}<br />
+        </ng-container>
+
+        <ng-container *ngIf="elemento?.collegamento">
+          <strong>Collegamento:</strong> {{ capitalize(elemento.collegamento) }}<br />
+        </ng-container>
+
+        <ng-container *ngIf="elemento?.consumo">
+          <strong>Consumo:</strong> {{ elemento.consumo }}<br />
+        </ng-container>
+
+        <ng-container *ngIf="elemento?.compatibilita">
+          <strong>Compatibilità:</strong> {{ capitalize(elemento.compatibilita) }}<br />
+        </ng-container>
+
+        <ng-container *ngIf="elemento?.formato">
+          <strong>Formato:</strong> {{ capitalize(elemento.formato.descrizione) }}<br />
+        </ng-container>
+
+        <ng-container *ngIf="elemento?.dimensioni">
+          <strong>Dimensioni:</strong> {{ capitalize(elemento.dimensioni) }}<br />
+        </ng-container>
+
+        <ng-container *ngIf="elemento?.risoluzione">
+          <strong>Risoluzione:</strong> {{ capitalize(elemento.risoluzione) }}<br />
+        </ng-container>
+
+        <ng-container *ngIf="elemento?.latenza">
+          <strong>Latenza:</strong> {{ capitalize(elemento.latenza) }}<br />
+        </ng-container>
+
+        <ng-container *ngIf="elemento?.frequenza">
+          <strong>Frequenza:</strong> {{ capitalize(elemento.frequenza) }}<br />
+        </ng-container>
+
+        <ng-container *ngIf="elemento?.spazio">
+          <strong>Spazio:</strong> {{ elemento.spazio }}<br />
+        </ng-container>
+
+        <ng-container *ngIf="elemento?.potenza">
+          <strong>Potenza:</strong> {{ elemento.potenza }}<br />
+        </ng-container>
+
+        <ng-container *ngIf="elemento?.alimentazione?.descrizione">
+          <a [routerLink]="['/dettaglio', elemento.alimentazione.prodotto.id]"
+            target="_blank"
+            class="plain-link">
+            <strong>Alimentazione:</strong> {{ elemento.alimentazione.descrizione }}<br />
+          </a>
+        </ng-container>
+
+        <ng-container *ngIf="elemento?.casee?.descrizione">
+          <a [routerLink]="['/dettaglio', elemento.casee.prodotto.id]"
+            target="_blank"
+            class="plain-link">
+            <strong>Case:</strong> {{ elemento.casee.descrizione }}<br />
+          </a>
+        </ng-container>
+
+        <ng-container *ngIf="elemento?.cpu?.descrizione">
+          <a [routerLink]="['/dettaglio', elemento.cpu.prodotto.id]"
+            target="_blank"
+            class="plain-link">
+            <strong>Cpu:</strong> {{ elemento.cpu.descrizione }}<br />
+          </a>
+        </ng-container>
+
+        <ng-container *ngIf="elemento?.memoria?.descrizione">
+          <a [routerLink]="['/dettaglio', elemento.memoria.prodotto.id]"
+            target="_blank"
+            class="plain-link">
+            <strong>Memoria:</strong> {{ elemento.memoria.descrizione }}<br />
+          </a>
+        </ng-container>
+
+        <ng-container *ngIf="elemento?.ram?.descrizione">
+          <a [routerLink]="['/dettaglio', elemento.ram.prodotto.id]"
+            target="_blank"
+            class="plain-link">
+            <strong>Ram:</strong> {{ elemento.ram.descrizione }}<br />
+          </a>
+        </ng-container>
+
+        <ng-container *ngIf="elemento?.schedaGrafica?.descrizione">
+          <a [routerLink]="['/dettaglio', elemento.schedaGrafica.prodotto.id]"
+            target="_blank"
+            class="plain-link">
+            <strong>Scheda Grafica:</strong> {{ elemento.schedaGrafica.descrizione }}<br />
+          </a>
+        </ng-container>
+
+        <ng-container *ngIf="elemento?.schedaMadre?.descrizione">
+          <a [routerLink]="['/dettaglio', elemento.schedaMadre.prodotto.id]"
+            target="_blank"
+            class="plain-link">
+            <strong>Scheda Madre:</strong> {{ elemento.schedaMadre.descrizione }}<br />
+          </a>
+        </ng-container>
+
+        <ng-container *ngIf="elemento?.sistemaRaffreddamento?.descrizione">
+          <a [routerLink]="['/dettaglio', elemento.sistemaRaffreddamento.prodotto.id]"
+            target="_blank"
+            class="plain-link">
+            <strong>Sistema di Raffreddamento:</strong> {{ elemento.sistemaRaffreddamento.descrizione }}<br />
+          </a>
+        </ng-container>
+
+
       </p>
+
       <p>Disponibilità: {{ prodotto.quantita ?? prodotto.disponibilita }}</p>
 
       <h4 class="fw-bold prezzo-custom">
@@ -46,6 +161,10 @@
               ? 'Non disponibile'
               : 'Aggiungi al carrello'
           }}
+        </button>
+
+        <button class="btn custom-btn-update" (click)="openUpdateDialog()" *ngIf="isAdmin">
+          Modifica
         </button>
       </div>
     </div>
