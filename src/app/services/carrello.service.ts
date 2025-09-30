@@ -11,7 +11,6 @@ export class CarrelloService {
   //uso questo link perche di perse i metodi essenziali sono li dentro
   //solo svuota carrello viene usato in questa pagina (fra tutti i metodi di carrelloImpl)
   private url = "http://localhost:9090/rest/onc/"
-
   constructor(private http:HttpClient) {}
 
 
@@ -80,4 +79,9 @@ export class CarrelloService {
   return this.http.get<any>("http://localhost:9090/rest/carrello/getByIdUtente?id=" + idUtente);
 }
 
+  createONC (req : OggettoNelCarrelloReq) {
+      console.log("dentro il createONC ",req);
+      console.log(this.url+'create');
+      return this.http.post(this.url + 'create', req).subscribe();
+    }   
 }

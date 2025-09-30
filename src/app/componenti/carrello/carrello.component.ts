@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CarrelloService } from '../../services/carrello.service';
 import { Subscription } from 'rxjs';
 import { CarrelloDTO, OggettoNelCarrelloDTO, OggettoNelCarrelloReq } from '../../requests/general-req/general-req.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-carrello',
@@ -20,6 +21,7 @@ export class CarrelloComponent {
   //costruttore per usare il service
   constructor (
     private carrelloService: CarrelloService,
+    private router: Router,
   ) {}
   
   ngOnInit(): void {
@@ -40,14 +42,6 @@ export class CarrelloComponent {
     
    
   }
-
-  
-
-
-
-
-
-
   // metodi_______________________________________________________________________
 
   rimuoviDalCarrello(id: number): void {
@@ -57,9 +51,12 @@ export class CarrelloComponent {
         this.ONCReq.quantita = oggettoDaEliminare.dati.quantita;
         this.ONCReq.idProdotto = oggettoDaEliminare.dati.prodotto.id;
         this.ONCReq.idCarrello = oggettoDaEliminare.dati.carrello.id;
+        console.log("da rimuovi carrello :"+this.ONCReq);
         this.carrelloService.deleteByIdONC(this.ONCReq); //chiamo delete
       }
-  });}
+      });
+      this.router.navigate(['/carrello']);
+    }
   /*
   getTotalePrezzo(): number {
     return this.oggettoNelCarrello.reduce((tot, item) => {

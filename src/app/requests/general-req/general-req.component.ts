@@ -121,7 +121,7 @@ export interface TastieraReq {
 }
 
 export interface OggettoNelCarrelloReq {
-  id : number | null;
+  id?: number ;
   quantita : number;
   idProdotto: number | null;
   idCarrello: number | null; 

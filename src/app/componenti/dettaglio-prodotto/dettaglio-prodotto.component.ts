@@ -20,6 +20,8 @@ import { DialogSistemaRaffComponent } from '../../dialogs/sistemaRaffreddamento/
 import { DialogTastieraComponent } from '../../dialogs/tastiera/dialog-tastiera/dialog-tastiera.component';
 import { ProdottoDialogComponent } from '../../dialogs/prodotto/dialog-prod/dialog-prod.component';
 import { DialogPcComponent } from '../../dialogs/pc/dialog-pc/dialog-pc.component';
+import { CarrelloDTO, OggettoNelCarrelloReq } from '../../requests/general-req/general-req.component';
+import { CarrelloService } from '../../services/carrello.service';
 
 
 @Component({
@@ -35,12 +37,14 @@ export class DettaglioProdottoComponent implements OnInit {
   elemento:any;
   quantita: number = 1;
   showModal = false;
-
+  carrello: CarrelloDTO= {id:0,numeroProdotti:0,prezzoTotale:0, utente:{id:0,userName:'',pwd:'',currentpwd:'',email:'',indirizzo:'',telefono:'',role:''}};
+  req: OggettoNelCarrelloReq = {id: 0, idCarrello: 0, idProdotto: 0, quantita: 0};
   constructor(
     private authService: AuthService,
     private route: ActivatedRoute,
     private prodottoService: ListaProdottiService,
     private elementoService: ElementoService,
+    private carrelloService: CarrelloService,
     private router: Router,
     private indietro: Location,
     private dialog: MatDialog,
@@ -82,10 +86,6 @@ export class DettaglioProdottoComponent implements OnInit {
         },
       });
     }
-  }
-
-  aggiungiAlCarrello() {
-    this.showModal = true;
   }
 
   continuaAcquisti() {
@@ -244,4 +244,25 @@ export class DettaglioProdottoComponent implements OnInit {
     });
   }
   
+aggiungiAlCarrello() {
+    this.showModal = true;
+    const userId = localStorage.getItem('userId');
+    console.log(userId);
+    this.carrelloService.getByIdUtente(Number(userId)).subscribe({
+      next: cane => {
+        console.log("ciao ",cane);
+        this.carrello = cane.dati;
+        console.log("ciao pt2",this.carrello)
+        this.req.idCarrello = this.carrello.id;
+        this.req.idProdotto = this.prodotto.id;
+        this.req.quantita = this.quantita; 
+        console.log(this.req);
+        this.carrelloService.createONC(this.req) 
+         
+      }});
+      
+      
+      
+    }
+
 }
