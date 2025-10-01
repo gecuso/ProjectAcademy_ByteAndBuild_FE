@@ -66,11 +66,11 @@
               <input matInput formControlName="indirizzo" />
             </mat-form-field>
 
-            <h6>Telefono</h6>
-            <mat-form-field appearance="fill" class="full-width">
-              <mat-label>Inserire nuovo numero di telefono</mat-label>
-              <input matInput formControlName="telefono" />
-            </mat-form-field>
+              <h6>Telefono</h6>
+              <mat-form-field appearance="fill" class="full-width">
+                <mat-label>Inserire nuovo numero di telefono</mat-label>
+                <input matInput formControlName="telefono" maxlength="14"/>
+              </mat-form-field>
 
             <h6>Email</h6>
             <mat-form-field appearance="fill" class="full-width">
@@ -84,9 +84,32 @@
               <input matInput formControlName="pwd" />
             </mat-form-field>
 
-            <div class="user-actions">
-              <button class="custom-btn">Salva modifiche</button>
-              <button
+              <h6>Conferma Password</h6>
+              <mat-form-field appearance="fill" class="full-width">
+                <mat-label>Conferma nuova password</mat-label>
+                <input matInput formControlName="confirmPwd" type="password" />
+              </mat-form-field>
+
+              <h6>Password</h6>
+              <mat-form-field appearance="fill" class="full-width">
+                <mat-label>Inserisci la password corrente</mat-label>
+                <input matInput formControlName="currentpwd" type="password" />
+              </mat-form-field>
+
+              <!-- Mostra errore se non corrispondono -->
+              <div
+                *ngIf="
+                  updateUserForm.hasError('passwordMismatch') &&
+                  updateUserForm.touched
+                "
+                class="text-danger"
+              >
+                Le password non corrispondono.
+              </div>
+
+              <div class="user-actions">
+                <button class="custom-btn">Salva modifiche</button>
+                <button
                   class="custom-btn-danger"
                   type="button"
                 (click)="closeModalUpdateUtente()"

@@ -120,6 +120,37 @@ export interface TastieraReq {
   idProdotto: number | null;
 }
 
+export interface OggettoNelCarrelloReq {
+  id?: number ;
+  quantita : number;
+  idProdotto: number | null;
+  idCarrello: number | null; 
+}
+
+export interface OggettoNelCarrelloDTO {
+  id : number ;
+  quantita : number;
+  prodotto: {id:number, descrizione:string, costo:number, prezzo:number, quantita:number, img:string, categoria:{id:number, descrizione:string}, marca:{id:number, descrizione:string}};
+  carrello: {id:number, idUtente:number,quantita:number,prezzoTotale:number}; 
+}
+
+export interface CarrelloDTO {
+  id:number;  
+  numeroProdotti :number;
+  prezzoTotale:number;
+  utente: {
+      id: number;
+      userName: string;
+      pwd: string;
+      currentpwd: string;
+      email: string;
+      indirizzo: string;
+      telefono: string;
+      role: string;
+    };
+
+}
+
 export interface Categoria {
   id: number | null;
   descrizione: string;

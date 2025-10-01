@@ -58,10 +58,11 @@ throw new Error('Method not implemented.');
             this.updateUserForm = this.fb.group({
               userName: [this.utente.userName, Validators.required],
               indirizzo: [this.utente.indirizzo],
-              telefono: [this.utente.telefono],
+              telefono: [this.utente.telefono] ,
               email: [this.utente.email],
               pwd: [''], // nuova password (opzionale)
               confirmPwd: [''], // conferma (opzionale)
+              currentpwd: ['', Validators.required],
             });
           } else {
             console.error('Errore API:', resp.msg);
@@ -155,8 +156,8 @@ throw new Error('Method not implemented.');
       email: values.email,
       pwd: values.pwd || null, // oppure lascia vuoto se non è cambiata
       role: this.utente.role,
+      currentpwd: values.currentpwd,
     };
-
     this.utenteService.updateUser(updatedUser).subscribe({
       next: (resp: any) => {
         if (resp.rc) {
@@ -168,7 +169,7 @@ throw new Error('Method not implemented.');
         }
       },
       error: (err: HttpErrorResponse) => {
-        alert("Errore durante l'aggiornamento: " + err.message);
+        alert('Errore nella modifica');
       },
     });
   }
@@ -245,8 +246,13 @@ openDialogPc() {
   openModalUpdateUtente() {
     this.showModalUpdateUtente = true;
     this.updateUserForm.patchValue({
+      userName: this.utente.userName,
+      indirizzo: this.utente.indirizzo,
+      telefono: this.utente.telefono,
+      email: this.utente.email,
       pwd: '',
       confirmPwd: '',
+      currentpwd: '',
     });
   }
 
