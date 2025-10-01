@@ -38,9 +38,6 @@ export class CarrelloComponent {
       },
       error: err => console.error('Errore nel recupero del carrello', err)
     });
-
-    
-   
   }
   // metodi_______________________________________________________________________
 
@@ -53,23 +50,20 @@ export class CarrelloComponent {
         this.ONCReq.idCarrello = oggettoDaEliminare.dati.carrello.id;
         console.log("da rimuovi carrello :"+this.ONCReq);
         this.carrelloService.deleteByIdONC(this.ONCReq); //chiamo delete
+        location.reload();
+        //this.router.navigate(['/carrello']);
       }
       });
-      this.router.navigate(['/carrello']);
     }
-  /*
-  getTotalePrezzo(): number {
-    return this.oggettoNelCarrello.reduce((tot, item) => {
-      const prodotto = this.prodotti.find(p => p.nome === item.nome);
-      return tot + (prodotto ? prodotto.prezzo * item.quantita : 0);
-    }, 0);
+
+  svuotaCarrello(){
+    console.log("svuota carrello: ",this.carrello.id)
+    this.carrelloService.svuotaCarrello(Number(this.carrello.id));
+    location.reload;
   }
 
-  getQuantitaProdotto(nomeProdotto: string): number {
-    const item = this.oggettoNelCarrello.find(p => p.nome === nomeProdotto);
-    return item ? item.quantita : 1;  // se non trovato, ritorna 1 per mostrare solo il prezzo senza quantità
+  acquista(){
+
   }
-  */
-  // metodi_______________________________________________________________________
 
 }

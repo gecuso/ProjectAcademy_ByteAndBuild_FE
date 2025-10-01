@@ -49,6 +49,10 @@
       <strong>Totale:</strong>
       <span>{{ carrello.prezzoTotale | currency:'EUR' }}</span>
     </div>
+    <div>
+      <button (click)="acquista()">Acquista</button>
+      <button (click)="svuotaCarrello()">Svuota carrello</button>
+    </div>
   </div>
 
 </div>
