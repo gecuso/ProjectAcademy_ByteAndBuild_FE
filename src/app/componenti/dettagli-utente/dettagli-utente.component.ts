@@ -75,17 +75,6 @@ throw new Error('Method not implemented.');
     } else {
       console.warn('Nessun ID utente trovato nel localStorage');
     }
-    
-    // Inizializzo il form del prodotto
-    this.prodottoForm = this.fb.group({
-      descrizione: ['', Validators.required],  // Campo descrizione, obbligatorio
-      costo: [0, Validators.required],         // Campo costo, inizializzato a 0, obbligatorio
-      prezzo: [0, Validators.required],        // Campo prezzo, inizializzato a 0, obbligatorio
-      quantita: [0, Validators.required],      // Campo quantità, inizializzato a 0, obbligatorio
-      img: ['', Validators.required],          // Campo immagine, obbligatorio
-      idCategoria: [null, Validators.required],// Campo categoria, inizializzato a null, obbligatorio
-      idMarca: [null, Validators.required]     // Campo marca, inizializzato a null, obbligatorio
-    });
 
     // Carico le categorie dal backend
     this.categoriaService.getCategorie().subscribe({
