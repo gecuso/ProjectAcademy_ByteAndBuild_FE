@@ -1,5 +1,70 @@
 <div class="container text-center mt-5">
+
+  <!--
   <h2>Carrello</h2>
   <p class="mt-3">Il tuo carrello è vuoto.</p>
   <a routerLink="/home" class="btn-custom"> Torna alla Home </a>
+
+  con ng if ci da questa quando il carrello è vuoto
+  -->
+
+<div class="carrello-container">
+
+  <!-- SINISTRA: lista prodotti -->
+  <div class="colonna-sinistra">
+    <div *ngFor="let item of oggettoNelCarrello" class="carrello-item">
+      <img [src]="item.prodotto.img" alt="{{item.prodotto.descrizione}}" class="carrello-img">
+      <div class="carrello-info">
+        <h3>{{ item.prodotto.descrizione }}</h3>
+        <p>Quantità: {{ item.quantita }}</p>
+        <button (click)="rimuoviDalCarrello(item.id)">Rimuovi</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- DIVISORE VERTICALE -->
+  <div class="vertical-line"></div>
+
+  <!-- DESTRA: riepilogo e totale -->
+  <div class="colonna-destra">
+    <h2 class="totale-title">Totale</h2>
+    <hr class="linea-sottile" />
+
+  <div class="lista-prezzi">
+    <div *ngFor="let item of oggettoNelCarrello" class="prezzo-riga">
+      <span>{{ item.prodotto.descrizione }}</span>
+      <span>
+        <ng-container *ngIf="item.quantita > 1">
+          {{ item.quantita }} x 
+        </ng-container>
+        {{ item.prodotto.prezzo | currency:'EUR' }}
+      </span>
+    </div>
+  </div>
+
+
+    <hr class="linea-sottile" />
+
+    <div class="totale-finale">
+      <strong>Totale:</strong>
+      <span>{{ carrello.prezzoTotale | currency:'EUR' }}</span>
+    </div>
+    <div>
+      <button (click)="acquista()">Acquista</button>
+      <button (click)="svuotaCarrello()">Svuota carrello</button>
+    </div>
+  </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
 </div>
