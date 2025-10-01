@@ -51,19 +51,20 @@ export class CarrelloComponent {
         console.log("da rimuovi carrello :"+this.ONCReq);
         this.carrelloService.deleteByIdONC(this.ONCReq); //chiamo delete
         location.reload();
-        //this.router.navigate(['/carrello']);
       }
       });
     }
 
   svuotaCarrello(){
-    console.log("svuota carrello: ",this.carrello.id)
+    console.log("svuota carrello: ",this.carrello.id);
     this.carrelloService.svuotaCarrello(Number(this.carrello.id));
-    location.reload;
+    location.reload();
   }
 
   acquista(){
-
+    console.log("svuota carrello: ",this.carrello.id);
+    this.carrelloService.acquista(Number(this.carrello.id));
+    location.reload();
   }
 
 }

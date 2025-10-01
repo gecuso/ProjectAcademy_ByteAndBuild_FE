@@ -59,22 +59,14 @@ export class CarrelloService {
 
   //svuota carrello
   svuotaCarrello (id : number) {
-    this.listByIdCarrello(id).subscribe({ //recupero la lista di onc del carrello usando il suo id
-      next : (listaONCdelCarrello) => {
-          for(var onc in listaONCdelCarrello){
-            this.http.delete(this.url + 'delete' + onc).subscribe();//faccio le chiamate per eliminarli
-          }
-           
-        })}
-      },
+      this.http.delete("http://localhost:9090/rest/carrello/svuotaCarrello?id=" + id).subscribe();
+    }
+    
+  acquista (id : number) {
+      this.http.get("http://localhost:9090/rest/carrello/acquista?id=" + id).subscribe();
+    }
 
-      complete : () => {
-        //dopo che non ci sono più gli onc, posso svuotare il carrello (resettare i suoi campi)
-        this.http.delete("http://localhost:9090/rest/carrello/svuotaCarrello?id=" + id).subscribe();
-      }
-    });
-
-  }
+  
   
   
   getByIdUtente(idUtente: number) {
