@@ -35,6 +35,7 @@ import { PcService } from '../../../services/pc.service';
   ],
 })
 export class DialogPcComponent {
+errorMessage: string | null = null;
 form: FormGroup;
 cat=13;
 marche: any[] = [];
@@ -266,12 +267,36 @@ prodottoReq: ProdottoReq = {
     this.prodottoReq.idMarca = this.form.value.idMarca;
 
     console.log(this.form.value);
-    if (this.dataElem?.data?.id){
-      this.pcService.updatePcProd(this.pcReq, this.prodottoReq).subscribe(data =>{ console.log(data)})
-    }else{
-      this.pcService.createPcProd(this.pcReq, this.prodottoReq).subscribe(data =>{ console.log(data)})
+    if (this.dataElem?.data?.id) {
+  this.pcService.updatePcProd(this.pcReq, this.prodottoReq).subscribe({
+    next: (res :any) => {
+      if (res.rc === false) {
+        // Errore dal backend
+        this.errorMessage = res.msg;
+      } else {
+        // Successo → chiudi dialog
+        this.dialogRef.close(this.form.value);
+      }
+    },
+    error: () => {
+      this.errorMessage = "Errore di comunicazione con il server.";
     }
-    this.dialogRef.close(this.form.value);
+  });
+} else {
+  this.pcService.createPcProd(this.pcReq, this.prodottoReq).subscribe({
+    next: (res :any) => {
+      if (res.rc === false) {
+        this.errorMessage = res.msg;
+      } else {
+        this.dialogRef.close(this.form.value);
+      }
+    },
+    error: () => {
+      this.errorMessage = "Errore di comunicazione con il server.";
+    }
+  });
+}
+
   }
 
   onCancel(): void {

@@ -130,12 +130,17 @@
   </form>
 </div>
 
-<div mat-dialog-actions align="end">
+<mat-dialog-content>
+  <div *ngIf="errorMessage" class="error-box">
+    {{ errorMessage }}
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
   <button mat-button (click)="onCancel()">Annulla</button>
   <button mat-flat-button color="primary" (click)="onSubmit()" [disabled]="!form.valid">
     Salva
   </button>
-
   <button 
     *ngIf="form.get('idElem')?.value  && form.get('idElem')?.value!==0"
     mat-flat-button 
@@ -143,4 +148,5 @@
     (click)="onDelete()"  >
     elimina
   </button>
-</div>
+</mat-dialog-actions>
+
