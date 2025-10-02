@@ -113,6 +113,7 @@ prodottoReq: ProdottoReq = {
 
   ngOnInit() {
     console.log(this.cat);
+    console.log("prova :",this.dataElem?.data?.id);
     // Se è stata selezionata una categoria, carico le marche corrispondenti
     this.marcaService.getMarcheByCategoria(this.cat).subscribe({
       next: brands => {
@@ -245,6 +246,7 @@ prodottoReq: ProdottoReq = {
 
   onSubmit(): void {
     if(this.dataElem?.data?.id){
+      console.log("prova :",this.dataElem?.data?.id);
       this.pcReq.id = this.dataElem.data?.id;
       this.prodottoReq.id = this.dataElem.data.prodotto?.id; 
     }
@@ -268,7 +270,7 @@ prodottoReq: ProdottoReq = {
 
     console.log(this.form.value);
     if (this.dataElem?.data?.id) {
-  this.pcService.updatePcProd(this.pcReq, this.prodottoReq).subscribe({
+      this.pcService.updatePcProd(this.pcReq, this.prodottoReq).subscribe({
     next: (res :any) => {
       if (res.rc === false) {
         // Errore dal backend
@@ -295,8 +297,10 @@ prodottoReq: ProdottoReq = {
       this.errorMessage = "Errore di comunicazione con il server.";
     }
   });
+   
 }
 
+  location.reload();
   }
 
   onCancel(): void {
